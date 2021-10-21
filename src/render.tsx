@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {AddPosts, ChangeNewPostText, stateTypeRoot} from "./Redux/state";
+import {AddPosts, ChangeNewPostText} from "./Redux/state";
+import {state} from "./Redux/state";
 
-export let renderTree=(state:stateTypeRoot)=>{
+export let renderTree=()=>{
     ReactDOM.render(
         <React.StrictMode>
             <App state={state} addPost={AddPosts} ChangeNewPostText={ChangeNewPostText}/>

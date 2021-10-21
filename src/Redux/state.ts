@@ -1,5 +1,10 @@
-import {renderTree} from "../render";
+let renderTree =()=>{
+    console.log("ff")
+}
 
+export const  sub =(call: ()=>void)=>{
+    renderTree = call;
+}
 
 export type postType =
     {
@@ -105,11 +110,11 @@ export let AddPosts = () => {
     }
     state.profilePage.posts.push(newPosts);
     state.profilePage.newPostText="";
-    renderTree(state);
+    renderTree();
 
 }
 export let ChangeNewPostText = (NewText: string) => {
     state.profilePage.newPostText=NewText;
-    renderTree(state);
+    renderTree();
 
 }

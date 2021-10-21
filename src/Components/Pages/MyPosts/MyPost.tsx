@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react';
+import React from 'react';
 import {MyPostPageType} from '../../../Redux/state';
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
@@ -12,7 +12,6 @@ export const MyPost = (props: MyPostPageType) => {
     const AddPost = () => {
        {
             props.addPost(props.newPostText)
-
         }
     }
 
