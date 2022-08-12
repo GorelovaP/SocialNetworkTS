@@ -1,16 +1,58 @@
-let onChange = () => {
-    console.log("ff")
-}
-
-export const subscribe = (call: () => void) => {
-    onChange = call;
+export let store = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, value: "Post 1", like: 21},
+                {id: 2, value: "This is 2 post", like: 44}
+            ],
+            newPostText: "it-camasutra"
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: "Polina"},
+                {id: 2, name: "Lena"},
+                {id: 3, name: "Nik"},
+                {id: 4, name: "Tim"},
+                {id: 5, name: "Gena"}
+            ],
+            messages: [
+                {id: 1, text: "Hi"},
+                {id: 2, text: "How are you?"},
+                {id: 3, text: "Bye"}
+            ]
+        },
+    },
+    getSate() {
+        return this._state
+    },
+    onChange() {
+        console.log("State changed")
+    },
+    AddPosts() {
+        debugger
+        let newPosts: postType = {
+            id: new Date().getTime(),
+            value: this._state.profilePage.newPostText,
+            like: 33
+        }
+        this._state.profilePage.posts.push(newPosts);
+        this._state.profilePage.newPostText = "";
+        this.onChange();
+    },
+    subscribe(call: () => void) {
+        this.onChange = call;
+    },
+    ChangeNewPostText(NewText: string) {
+        this._state.profilePage.newPostText = NewText;
+        this.onChange();
+    }
 }
 
 export type postType =
     {
         id: number
         value: string
-        like: Number
+        like: number
     }
 export type profilePageType =
     {
@@ -74,44 +116,6 @@ export type stateType = {
 }
 
 
-export let state: stateTypeRoot =
-    {
-        profilePage: {
-            posts: [
-                {id: 1, value: "Post 1", like: 21},
-                {id: 2, value: "This is 2 post", like: 44}
-            ],
-            newPostText: "it-camasutra"
-        },
-        dialogsPage: {
-            dialogs: [
-                {id: 1, name: "Polina"},
-                {id: 2, name: "Lena"},
-                {id: 3, name: "Nik"},
-                {id: 4, name: "Tim"},
-                {id: 5, name: "Gena"}
-            ],
-            messages: [
-                {id: 1, text: "Hi"},
-                {id: 2, text: "How are you?"},
-                {id: 3, text: "Bye"}
-            ]
-        },
 
-    }
-export let AddPosts = () => {
-    debugger
-    let newPosts: postType = {
-        id: new Date().getTime(),
-        value: state.profilePage.newPostText,
-        like: 33
-    }
-    state.profilePage.posts.push(newPosts);
-    state.profilePage.newPostText = "";
-    onChange();
-}
 
-export let ChangeNewPostText = (NewText: string) => {
-    state.profilePage.newPostText = NewText;
-    onChange();
-}
+

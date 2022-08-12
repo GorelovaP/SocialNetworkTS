@@ -1,8 +1,8 @@
 import './index.css';
 import React from "react";
-import {AddPosts, ChangeNewPostText, stateTypeRoot, subscribe} from "./Redux/state";
+import {stateTypeRoot} from "./Redux/state";
 import reportWebVitals from './reportWebVitals';
-import {state} from "./Redux/state";
+import {store} from "./Redux/state";
 import App from "./App";
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
@@ -14,13 +14,15 @@ import {BrowserRouter} from 'react-router-dom';
 const renderTree = (state: stateTypeRoot) => {
 
     ReactDOM.render(<BrowserRouter>
-        <App state={state} addPost={AddPosts}
-             ChangeNewPostText={ChangeNewPostText}/>
+        <App state={store.getSate()} addPost={store.AddPosts.bind(store)}
+             ChangeNewPostText={store.ChangeNewPostText.bind(store)}/>
     </BrowserRouter>, document.getElementById('root'));
 
 }
-renderTree(state)
-subscribe(() => renderTree(state));
+renderTree(store.getSate())
+store.subscribe(() => renderTree(store.getSate()));
+
+
 reportWebVitals()
 
 
