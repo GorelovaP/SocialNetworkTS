@@ -10,18 +10,19 @@ import {Music} from "./Components/Music/Music";
 import {stateTypeRootPage} from "./Redux/state";
 
 function App(props: stateTypeRootPage) {
+    debugger
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path={"/dialogs"} render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path={"/dialogs"} element={ <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                     <Route path={"/pages"}
-                           render={() => <Pages profilePage={props.state.profilePage} addPost={props.addPost}
-                                                ChangeNewPostText={props.ChangeNewPostText}/>}/>
-                    <Route path={"/music"} render={() => <Music/>}/>
-                    <Route path={"/settings"} render={() => <Settings/>}/>
+                           element={<Pages profilePage={props.state.profilePage} addPost={props.addPost}
+                                           ChangeNewPostText={props.ChangeNewPostText}/>}/>
+                    <Route path={"/music"} element={<Music/>}/>
+                    <Route path={"/settings"} element={<Settings/>}/>
                 </div>
             </div>
         </BrowserRouter>

@@ -1,11 +1,9 @@
-
 import './index.css';
-import reportWebVitals from './reportWebVitals';
-import {renderTree} from "./render";
-import {sub} from "./Redux/state";
 
-sub(renderTree);
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import {subscribe} from "./Redux/state";
+import {renderTree} from "./render";
+import reportWebVitals from './reportWebVitals';
+
+debugger
+subscribe(renderTree);
+reportWebVitals()

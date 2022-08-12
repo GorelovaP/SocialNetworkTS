@@ -1,9 +1,9 @@
-let renderTree =()=>{
+let onChange = () => {
     console.log("ff")
 }
 
-export const  sub =(call: ()=>void)=>{
-    renderTree = call;
+export const subscribe = (call: () => void) => {
+    onChange = call;
 }
 
 export type postType =
@@ -12,7 +12,6 @@ export type postType =
         value: string
         like: Number
     }
-
 export type profilePageType =
     {
         posts: Array<postType>
@@ -24,8 +23,8 @@ export type MyPostPageType =
     {
         posts: Array<postType>
         addPost: (postMessage: string) => void
-        newPostText:string
-        ChangeNewPostText:(NewText: string)=>void
+        newPostText: string
+        ChangeNewPostText: (NewText: string) => void
     }
 export type dialogType =
     {
@@ -44,7 +43,6 @@ export type dialogPageType =
         messages: Array<messageType>
     }
 
-
 export type DialogSPagesType = {
     dialogsPage: dialogPageType
 
@@ -52,7 +50,7 @@ export type DialogSPagesType = {
 export type PageSPagesType = {
     profilePage: profilePageType
     addPost: (postMessage: string) => void
-    ChangeNewPostText:(NewText: string)=>void
+    ChangeNewPostText: (NewText: string) => void
 
 }
 export type stateTypeRoot =
@@ -63,7 +61,7 @@ export type stateTypeRoot =
 export type stateTypeRootPage = {
     state: stateTypeRoot
     addPost: (postMessage: string) => void
-    ChangeNewPostText:(NewText: string)=>void
+    ChangeNewPostText: (NewText: string) => void
 }
 export type RootStatePageType = {
     profilePage?: profilePageType
@@ -109,12 +107,11 @@ export let AddPosts = () => {
         like: 33
     }
     state.profilePage.posts.push(newPosts);
-    state.profilePage.newPostText="";
-    renderTree();
-
+    state.profilePage.newPostText = "";
+    onChange();
 }
-export let ChangeNewPostText = (NewText: string) => {
-    state.profilePage.newPostText=NewText;
-    renderTree();
 
+export let ChangeNewPostText = (NewText: string) => {
+    state.profilePage.newPostText = NewText;
+    onChange();
 }
