@@ -11,9 +11,8 @@ export const Pages = (props:PageSPagesType) => {
         <div >
             <ProfileInfo/>
             <MyPost posts={props.profilePage?.posts || []}
-                    addPost={props.addPost}
                     newPostText={props.profilePage.newPostText}
-                    ChangeNewPostText={props.ChangeNewPostText}
+                    dispatch={props.dispatch}
             />
         </div>
     );

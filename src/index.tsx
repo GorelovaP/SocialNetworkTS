@@ -14,8 +14,7 @@ import {BrowserRouter} from 'react-router-dom';
 const renderTree = (state: stateTypeRoot) => {
 
     ReactDOM.render(<BrowserRouter>
-        <App state={store.getSate()} addPost={store.AddPosts.bind(store)}
-             ChangeNewPostText={store.ChangeNewPostText.bind(store)}/>
+        <App state={store.getSate()} dispatch={store.dispatch.bind(store)}/>
     </BrowserRouter>, document.getElementById('root'));
 
 }

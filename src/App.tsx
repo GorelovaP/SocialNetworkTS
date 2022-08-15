@@ -19,8 +19,7 @@ function App(props: stateTypeRootPage) {
                 <Routes>
                     <Route path={"/dialogs"} element={<Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                     <Route path={"/pages"}
-                           element={<Pages profilePage={props.state.profilePage} addPost={props.addPost}
-                                           ChangeNewPostText={props.ChangeNewPostText}/>}/>
+                           element={<Pages profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
                 </Routes>

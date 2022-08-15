@@ -22,31 +22,53 @@ export let store = {
             ]
         },
     },
+    _onChange() {
+        console.log("State changed")
+    },
+
     getSate() {
         return this._state
     },
-    onChange() {
-        console.log("State changed")
-    },
-    AddPosts() {
-        debugger
-        let newPosts: postType = {
-            id: new Date().getTime(),
-            value: this._state.profilePage.newPostText,
-            like: 33
-        }
-        this._state.profilePage.posts.push(newPosts);
-        this._state.profilePage.newPostText = "";
-        this.onChange();
-    },
     subscribe(call: () => void) {
-        this.onChange = call;
+        this._onChange = call;
     },
-    ChangeNewPostText(NewText: string) {
-        this._state.profilePage.newPostText = NewText;
-        this.onChange();
+
+    dispatch(action: ActionType) {
+        switch (action.type) {
+            case "ADD-POST": {
+                let newPosts: postType = {
+                    id: new Date().getTime(),
+                    value: this._state.profilePage.newPostText,
+                    like: 33
+                }
+                this._state.profilePage.posts.push(newPosts);
+                this._state.profilePage.newPostText = "";
+                this._onChange();
+                return
+            }
+            case "CHANGE-NEW-POST-TEXT": {
+                this._state.profilePage.newPostText = action.newText;
+                this._onChange();
+                return
+            }
+            default:
+                throw new Error("I don't understand this type")
+
+        }
     }
 }
+
+
+type ActionType = AddPostActionType | ChangeNewPostActionType
+
+export type AddPostActionType = {
+    type: "ADD-POST"
+}
+export type ChangeNewPostActionType = {
+    type: "CHANGE-NEW-POST-TEXT"
+    newText: string;
+}
+
 
 export type postType =
     {
@@ -64,9 +86,8 @@ export type profilePageType =
 export type MyPostPageType =
     {
         posts: Array<postType>
-        addPost: (postMessage: string) => void
+        dispatch: (action: ActionType) => void
         newPostText: string
-        ChangeNewPostText: (NewText: string) => void
     }
 export type dialogType =
     {
@@ -91,8 +112,9 @@ export type DialogSPagesType = {
 }
 export type PageSPagesType = {
     profilePage: profilePageType
-    addPost: (postMessage: string) => void
-    ChangeNewPostText: (NewText: string) => void
+    dispatch: (action: ActionType) => void
+    // addPost: (postMessage: string) => void
+    // ChangeNewPostText: (NewText: string) => void
 
 }
 export type stateTypeRoot =
@@ -102,8 +124,9 @@ export type stateTypeRoot =
     }
 export type stateTypeRootPage = {
     state: stateTypeRoot
-    addPost: (postMessage: string) => void
-    ChangeNewPostText: (NewText: string) => void
+    dispatch: (action: ActionType) => void
+    // addPost: (postMessage: string) => void
+    // ChangeNewPostText: (NewText: string) => void
 }
 export type RootStatePageType = {
     profilePage?: profilePageType
@@ -114,6 +137,8 @@ export type stateType = {
     state: RootStatePageType
 
 }
+
+
 
 
 
