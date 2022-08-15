@@ -1,20 +1,17 @@
 import React from 'react';
-import {MyPostPageType} from '../../../Redux/state';
+import {AddPostActionCreator, ChangeNewPostActionCreator, MyPostPageType} from '../../../Redux/state';
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
 
 
 export const MyPost = (props: MyPostPageType) => {
 
-
     debugger
     const AddPost = () => {
-        {
-            props.dispatch({type: "ADD-POST"})
-        }
+        props.dispatch(AddPostActionCreator())
     }
     const onPostChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "CHANGE-NEW-POST-TEXT", newText: e.currentTarget.value})
+        props.dispatch(ChangeNewPostActionCreator(e.currentTarget.value))
     }
 
     let postElements = props.posts.map(p => <Post id={p.id} value={p.value} like={p.like}/>)

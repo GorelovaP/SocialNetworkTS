@@ -1,3 +1,6 @@
+const ADD_POST = "ADD-POST"
+const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
+
 export let store = {
     _state: {
         profilePage: {
@@ -35,7 +38,7 @@ export let store = {
 
     dispatch(action: ActionType) {
         switch (action.type) {
-            case "ADD-POST": {
+            case ADD_POST: {
                 let newPosts: postType = {
                     id: new Date().getTime(),
                     value: this._state.profilePage.newPostText,
@@ -46,7 +49,7 @@ export let store = {
                 this._onChange();
                 return
             }
-            case "CHANGE-NEW-POST-TEXT": {
+            case CHANGE_NEW_POST_TEXT: {
                 this._state.profilePage.newPostText = action.newText;
                 this._onChange();
                 return
@@ -57,17 +60,18 @@ export let store = {
         }
     }
 }
-
-
-type ActionType = AddPostActionType | ChangeNewPostActionType
-
-export type AddPostActionType = {
-    type: "ADD-POST"
+export const AddPostActionCreator = () => {
+    return {type: ADD_POST} as const
 }
-export type ChangeNewPostActionType = {
-    type: "CHANGE-NEW-POST-TEXT"
-    newText: string;
+export const ChangeNewPostActionCreator = (newText: string) => {
+    return {type: CHANGE_NEW_POST_TEXT, newText: newText} as const
 }
+type ActionType = ReturnType<typeof AddPostActionCreator> | ReturnType<typeof ChangeNewPostActionCreator>
+
+
+
+
+
 
 
 export type postType =
@@ -113,9 +117,6 @@ export type DialogSPagesType = {
 export type PageSPagesType = {
     profilePage: profilePageType
     dispatch: (action: ActionType) => void
-    // addPost: (postMessage: string) => void
-    // ChangeNewPostText: (NewText: string) => void
-
 }
 export type stateTypeRoot =
     {
@@ -125,8 +126,6 @@ export type stateTypeRoot =
 export type stateTypeRootPage = {
     state: stateTypeRoot
     dispatch: (action: ActionType) => void
-    // addPost: (postMessage: string) => void
-    // ChangeNewPostText: (NewText: string) => void
 }
 export type RootStatePageType = {
     profilePage?: profilePageType
