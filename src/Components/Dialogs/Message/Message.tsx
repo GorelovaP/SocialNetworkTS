@@ -1,22 +1,14 @@
 import s from "./Message.module.css";
-import React, {RefObject} from "react";
-
-type MessageType={
-    text:string;
-}
+import React from "react";
+import {MessageType} from "../../../Redux/state";
 
 
-export const Message=(props:MessageType)=>{
-    let newSMS: RefObject<HTMLTextAreaElement> = React.createRef();
+export const Message = (props: MessageType) => {
 
 
-    return(
-   <div> <div className={s.message}>{props.text}</div>
-    <textarea ref={newSMS}></textarea>
-    <button onClick={()=>{ let text = newSMS.current?.value;
-        return alert(text)
-    }
-    }>Отправить смс</button>
-   </div>
+    return (
+        <div>
+            <div className={s.message}>{props.text}</div>
+        </div>
     );
 }

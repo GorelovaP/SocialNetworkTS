@@ -17,7 +17,7 @@ function App(props: stateTypeRootPage) {
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path={"/dialogs"} element={<Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path={"/dialogs"} element={<Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
                     <Route path={"/pages"}
                            element={<Pages profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
                     <Route path={"/music"} element={<Music/>}/>

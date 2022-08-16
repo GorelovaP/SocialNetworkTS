@@ -1,9 +1,13 @@
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
 
+const SEND_MESSAGE = "SEND-MESSAGE"
+const CHANGE_MESSAGE_TEXT = "CHANGE_MESSAGE_TEXT"
+
 export let store = {
     _state: {
         profilePage: {
+
             posts: [
                 {id: 1, value: "Post 1", like: 21},
                 {id: 2, value: "This is 2 post", like: 44}
@@ -22,7 +26,8 @@ export let store = {
                 {id: 1, text: "Hi"},
                 {id: 2, text: "How are you?"},
                 {id: 3, text: "Bye"}
-            ]
+            ],
+            newMassageText: ""
         },
     },
     _onChange() {
@@ -54,6 +59,23 @@ export let store = {
                 this._onChange();
                 return
             }
+            case SEND_MESSAGE: {
+                this._state.dialogsPage.newMassageText = action.newMassageText;
+                this._onChange();
+                return
+            }
+            case CHANGE_MESSAGE_TEXT: {
+                let newMessage: messageType = {
+                    id: new Date().getTime(),
+                    text: this._state.dialogsPage.newMassageText,
+                }
+                this._state.dialogsPage.messages.push(newMessage);
+                this._state.dialogsPage.newMassageText = "";
+                this._onChange();
+                return
+            }
+
+
             default:
                 throw new Error("I don't understand this type")
 
@@ -66,12 +88,18 @@ export const AddPostActionCreator = () => {
 export const ChangeNewPostActionCreator = (newText: string) => {
     return {type: CHANGE_NEW_POST_TEXT, newText: newText} as const
 }
-type ActionType = ReturnType<typeof AddPostActionCreator> | ReturnType<typeof ChangeNewPostActionCreator>
+export const AddNewMessageActionCreator = () => {
+    return {type: CHANGE_MESSAGE_TEXT} as const
+}
+export const SendNewMassageActionCreator = (newMassageText: string) => {
+    return {type: SEND_MESSAGE, newMassageText: newMassageText} as const
+}
 
-
-
-
-
+type ActionType =
+    ReturnType<typeof AddPostActionCreator>
+    | ReturnType<typeof ChangeNewPostActionCreator>
+    | ReturnType<typeof SendNewMassageActionCreator>
+    | ReturnType<typeof AddNewMessageActionCreator>
 
 
 export type postType =
@@ -101,19 +129,25 @@ export type dialogType =
 
 export type messageType =
     {
-        id: Number
+        id: number
         text: string
     }
+
+export type MessageType = {
+    text: string;
+}
 export type dialogPageType =
     {
         dialogs: Array<dialogType>
         messages: Array<messageType>
+        newMassageText: string
     }
 
 export type DialogSPagesType = {
     dialogsPage: dialogPageType
-
+    dispatch: (action: ActionType) => void
 }
+
 export type PageSPagesType = {
     profilePage: profilePageType
     dispatch: (action: ActionType) => void
@@ -130,11 +164,9 @@ export type stateTypeRootPage = {
 export type RootStatePageType = {
     profilePage?: profilePageType
     dialogsPage?: dialogPageType
-
 }
 export type stateType = {
     state: RootStatePageType
-
 }
 
 
