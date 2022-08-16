@@ -1,5 +1,5 @@
 import React from 'react';
-import { DialogSPagesType} from '../../Redux/state';
+import { DialogSPagesType} from '../../Redux/store';
 import {DialogItem} from './Dialog/DialogItem';
 import s from './Dialogs.module.css';
 import {Message} from './Message/Message';

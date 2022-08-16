@@ -1,25 +1,24 @@
 import './index.css';
 import React from "react";
-import {stateTypeRoot} from "./Redux/state";
 import reportWebVitals from './reportWebVitals';
-import {store} from "./Redux/state";
 import App from "./App";
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
+import {store} from "./Redux/redax-store";
 
 
 // After
 
 
-const renderTree = (state: stateTypeRoot) => {
+const renderTree = () => {
 
     ReactDOM.render(<BrowserRouter>
-        <App state={store.getSate()} dispatch={store.dispatch.bind(store)}/>
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
     </BrowserRouter>, document.getElementById('root'));
 
 }
-renderTree(store.getSate())
-store.subscribe(() => renderTree(store.getSate()));
+renderTree()
+store.subscribe(() => renderTree());
 
 
 reportWebVitals()

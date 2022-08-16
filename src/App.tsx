@@ -7,7 +7,7 @@ import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from 'react-router-dom'
 import {Settings} from "./Components/Settings/Settings";
 import {Music} from "./Components/Music/Music";
-import {stateTypeRootPage} from "./Redux/state";
+import {stateTypeRootPage} from "./Redux/store";
 
 function App(props: stateTypeRootPage) {
     return (

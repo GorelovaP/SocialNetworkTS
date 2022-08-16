@@ -31,7 +31,7 @@ export let store = {
         console.log("State changed")
     },
 
-    getSate() {
+    getState() {
         return this._state
     },
     subscribe(call: () => void) {

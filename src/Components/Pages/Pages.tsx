@@ -1,7 +1,7 @@
 import React from 'react';
 import {MyPost} from "./MyPosts/MyPost";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PageSPagesType} from '../../Redux/state';
+import {PageSPagesType} from '../../Redux/store';
 
 
 export const Pages = (props:PageSPagesType) => {
