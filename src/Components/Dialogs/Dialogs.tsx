@@ -1,8 +1,9 @@
 import React from 'react';
-import {AddNewMessageActionCreator, DialogSPagesType, SendNewMassageActionCreator} from '../../Redux/state';
+import { DialogSPagesType} from '../../Redux/state';
 import {DialogItem} from './Dialog/DialogItem';
 import s from './Dialogs.module.css';
 import {Message} from './Message/Message';
+import {AddNewMessageActionCreator, SendNewMassageActionCreator} from "../../Redux/dialogsPage-reducer";
 
 
 export const Dialogs = (props: DialogSPagesType) => {

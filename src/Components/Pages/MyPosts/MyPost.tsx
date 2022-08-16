@@ -1,7 +1,8 @@
 import React from 'react';
-import {AddPostActionCreator, ChangeNewPostActionCreator, MyPostPageType} from '../../../Redux/state';
+import {  MyPostPageType} from '../../../Redux/state';
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
+import {AddPostActionCreator, ChangeNewPostActionCreator} from "../../../Redux/profilePage-reducer";
 
 
 export const MyPost = (props: MyPostPageType) => {

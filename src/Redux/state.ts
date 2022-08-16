@@ -1,13 +1,10 @@
-const ADD_POST = "ADD-POST"
-const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
+import {AddPostActionCreator, ChangeNewPostActionCreator, profilePageReducer} from "./profilePage-reducer";
+import {AddNewMessageActionCreator, dialogsPageReducer, SendNewMassageActionCreator} from "./dialogsPage-reducer";
 
-const SEND_MESSAGE = "SEND-MESSAGE"
-const CHANGE_MESSAGE_TEXT = "CHANGE_MESSAGE_TEXT"
 
 export let store = {
     _state: {
         profilePage: {
-
             posts: [
                 {id: 1, value: "Post 1", like: 21},
                 {id: 2, value: "This is 2 post", like: 44}
@@ -42,60 +39,13 @@ export let store = {
     },
 
     dispatch(action: ActionType) {
-        switch (action.type) {
-            case ADD_POST: {
-                let newPosts: postType = {
-                    id: new Date().getTime(),
-                    value: this._state.profilePage.newPostText,
-                    like: 33
-                }
-                this._state.profilePage.posts.push(newPosts);
-                this._state.profilePage.newPostText = "";
-                this._onChange();
-                return
-            }
-            case CHANGE_NEW_POST_TEXT: {
-                this._state.profilePage.newPostText = action.newText;
-                this._onChange();
-                return
-            }
-            case SEND_MESSAGE: {
-                this._state.dialogsPage.newMassageText = action.newMassageText;
-                this._onChange();
-                return
-            }
-            case CHANGE_MESSAGE_TEXT: {
-                let newMessage: messageType = {
-                    id: new Date().getTime(),
-                    text: this._state.dialogsPage.newMassageText,
-                }
-                this._state.dialogsPage.messages.push(newMessage);
-                this._state.dialogsPage.newMassageText = "";
-                this._onChange();
-                return
-            }
-
-
-            default:
-                throw new Error("I don't understand this type")
-
-        }
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action);
+        this._onChange()
     }
 }
-export const AddPostActionCreator = () => {
-    return {type: ADD_POST} as const
-}
-export const ChangeNewPostActionCreator = (newText: string) => {
-    return {type: CHANGE_NEW_POST_TEXT, newText: newText} as const
-}
-export const AddNewMessageActionCreator = () => {
-    return {type: CHANGE_MESSAGE_TEXT} as const
-}
-export const SendNewMassageActionCreator = (newMassageText: string) => {
-    return {type: SEND_MESSAGE, newMassageText: newMassageText} as const
-}
 
-type ActionType =
+export type ActionType =
     ReturnType<typeof AddPostActionCreator>
     | ReturnType<typeof ChangeNewPostActionCreator>
     | ReturnType<typeof SendNewMassageActionCreator>
@@ -111,8 +61,9 @@ export type postType =
 export type profilePageType =
     {
         posts: Array<postType>
-        newPostText: string
-
+        newPostText
+            :
+            string
     }
 
 export type MyPostPageType =
@@ -123,7 +74,7 @@ export type MyPostPageType =
     }
 export type dialogType =
     {
-        id: Number
+        id: number
         name: string
     }
 
