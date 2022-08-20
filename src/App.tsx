@@ -3,11 +3,12 @@ import React from 'react';
 import {Header} from "./Components/Header/Header";
 import {Nav} from "./Components/Nav/Nav";
 import {Pages} from "./Components/Pages/Pages";
-import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from 'react-router-dom'
 import {Settings} from "./Components/Settings/Settings";
 import {Music} from "./Components/Music/Music";
 import {stateTypeRootPage} from "./Redux/store";
+import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+
 
 function App(props: stateTypeRootPage) {
     return (
@@ -17,9 +18,9 @@ function App(props: stateTypeRootPage) {
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path={"/dialogs"} element={<Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
+                    <Route path={"/dialogs"} element={<DialogsContainer store={props.store}/>}/>
                     <Route path={"/pages"}
-                           element={<Pages profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
+                           element={<Pages store={props.store}/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
                 </Routes>

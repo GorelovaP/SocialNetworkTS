@@ -13,7 +13,7 @@ import {store} from "./Redux/redax-store";
 const renderTree = () => {
 
     ReactDOM.render(<BrowserRouter>
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+        <App store={store} dispatch={store.dispatch.bind(store)}/>
     </BrowserRouter>, document.getElementById('root'));
 
 }

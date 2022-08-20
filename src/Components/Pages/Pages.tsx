@@ -1,19 +1,18 @@
 import React from 'react';
-import {MyPost} from "./MyPosts/MyPost";
+
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PageSPagesType} from '../../Redux/store';
+import {MyPostContainer} from "./MyPosts/MyPostContainer";
 
 
-export const Pages = (props:PageSPagesType) => {
+export const Pages = (props: PageSPagesType) => {
 
 
     return (
-        <div >
+        <div>
             <ProfileInfo/>
-            <MyPost posts={props.profilePage?.posts || []}
-                    newPostText={props.profilePage.newPostText}
-                    dispatch={props.dispatch}
-            />
+            <MyPostContainer store={props.store}/>
+
         </div>
     );
 }
