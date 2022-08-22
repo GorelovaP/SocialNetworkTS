@@ -18,9 +18,9 @@ function App(props: stateTypeRootPage) {
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path={"/dialogs"} element={<DialogsContainer store={props.store}/>}/>
+                    <Route path={"/dialogs"} element={<DialogsContainer/>}/>
                     <Route path={"/pages"}
-                           element={<Pages store={props.store}/>}/>
+                           element={<Pages/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
                 </Routes>

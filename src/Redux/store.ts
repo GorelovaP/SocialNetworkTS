@@ -1,6 +1,5 @@
 import {AddPostActionCreator, ChangeNewPostActionCreator, profilePageReducer} from "./profilePage-reducer";
 import {AddNewMessageActionCreator, dialogsPageReducer, SendNewMassageActionCreator} from "./dialogsPage-reducer";
-import {StoreType} from "./redax-store";
 
 
 export let store = {
@@ -97,25 +96,20 @@ export type dialogPageType =
     }
 
 export type DialogSPagesType = {
-    AddMessageCallback: ()=> void;
-    onChangeNewMessage: (text:string)=> void
+    AddMessageCallback: () => void;
+    onChangeNewMessage: (text: string) => void
     dialogs: Array<dialogType>
     messages: Array<messageType>
     newMassageText: string
 }
 
-export type PageSPagesType = {
-    store: StoreType
-}
+export type PageSPagesType = {}
 export type stateTypeRoot =
     {
         profilePage: profilePageType
         dialogsPage: dialogPageType
     }
-export type stateTypeRootPage = {
-    store: StoreType
-    dispatch: (action: ActionType) => void
-}
+export type stateTypeRootPage = {}
 export type RootStatePageType = {
     profilePage?: profilePageType
     dialogsPage?: dialogPageType

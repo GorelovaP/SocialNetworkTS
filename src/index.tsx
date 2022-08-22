@@ -1,10 +1,12 @@
 import './index.css';
 import React from "react";
 import reportWebVitals from './reportWebVitals';
-import App from "./App";
+
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {store} from "./Redux/redax-store";
+import {Provider} from "./StoreContext";
+import App from "./App";
 
 
 // After
@@ -13,7 +15,10 @@ import {store} from "./Redux/redax-store";
 const renderTree = () => {
 
     ReactDOM.render(<BrowserRouter>
-        <App store={store} dispatch={store.dispatch.bind(store)}/>
+        <Provider value={store}>
+            <App/>
+        </Provider>
+
     </BrowserRouter>, document.getElementById('root'));
 
 }

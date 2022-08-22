@@ -11,7 +11,7 @@ export const Pages = (props: PageSPagesType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostContainer store={props.store}/>
+            <MyPostContainer/>
 
         </div>
     );
