@@ -3,7 +3,7 @@ import {AddNewMessageActionCreator, SendNewMassageActionCreator} from "./dialogs
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
 
-let initialState:profilePageType = {
+let initialState: profilePageType = {
     posts: [
         {id: 1, value: "Post 1", like: 21},
         {id: 2, value: "This is 2 post", like: 44}
@@ -34,13 +34,15 @@ export const profilePageReducer = (state: profilePageType = initialState, action
                 value: state.newPostText,
                 like: 33
             }
-            state.posts.push(newPosts);
-            state.newPostText = "";
-            return state
+            let StateCopy = {...state, posts: [...state.posts]}
+            StateCopy.posts.push(newPosts);
+            StateCopy.newPostText = "";
+            return StateCopy
         }
         case CHANGE_NEW_POST_TEXT: {
-            state.newPostText = action.newText;
-            return state
+            let StateCopy = {...state} //не делаем глубокую копию, т к не меняем посты
+            StateCopy.newPostText = action.newText;
+            return StateCopy
         }
         default:
             return state
