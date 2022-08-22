@@ -1,3 +1,6 @@
+//памятка, как работает стор
+
+
 import {AddPostActionCreator, ChangeNewPostActionCreator, profilePageReducer} from "./profilePage-reducer";
 import {AddNewMessageActionCreator, dialogsPageReducer, SendNewMassageActionCreator} from "./dialogsPage-reducer";
 
@@ -45,25 +48,23 @@ export let store = {
     }
 }
 
-export type ActionType =
+type ActionType =
     ReturnType<typeof AddPostActionCreator>
     | ReturnType<typeof ChangeNewPostActionCreator>
     | ReturnType<typeof SendNewMassageActionCreator>
     | ReturnType<typeof AddNewMessageActionCreator>
 
 
-export type postType =
+type postType =
     {
         id: number
         value: string
         like: number
     }
-export type profilePageType =
+type profilePageType =
     {
         posts: Array<postType>
-        newPostText
-            :
-            string
+        newPostText: string
     }
 
 export type MyPostPageType =
@@ -73,13 +74,13 @@ export type MyPostPageType =
         addPost: () => void;
         newPostText: string
     }
-export type dialogType =
+type dialogType =
     {
         id: number
         name: string
     }
 
-export type messageType =
+type messageType =
     {
         id: number
         text: string
@@ -88,7 +89,7 @@ export type messageType =
 export type MessageType = {
     text: string;
 }
-export type dialogPageType =
+type dialogPageType =
     {
         dialogs: Array<dialogType>
         messages: Array<messageType>

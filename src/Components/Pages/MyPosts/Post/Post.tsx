@@ -1,6 +1,7 @@
 import React from 'react';
-import {postType} from '../../../../Redux/store';
+
 import s from './Post.module.css';
+import {postType} from "../../../../Redux/profilePage-reducer";
 
 
 export const Post = (props: postType) => {

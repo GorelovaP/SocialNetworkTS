@@ -5,8 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {store} from "./Redux/redax-store";
-import {Provider} from "./StoreContext";
 import App from "./App";
+import {Provider} from 'react-redux';
 
 
 // After
@@ -15,7 +15,7 @@ import App from "./App";
 const renderTree = () => {
 
     ReactDOM.render(<BrowserRouter>
-        <Provider value={store}>
+        <Provider store={store}>
             <App/>
         </Provider>
 

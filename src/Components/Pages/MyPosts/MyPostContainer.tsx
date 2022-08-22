@@ -1,32 +1,32 @@
 import React from 'react';
-import {AddPostActionCreator, ChangeNewPostActionCreator} from "../../../Redux/profilePage-reducer";
+import {AddPostActionCreator, ChangeNewPostActionCreator, profilePageType} from "../../../Redux/profilePage-reducer";
 import {MyPost} from "./MyPost";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
+import {reduxStateType} from "../../../Redux/redax-store";
+import {Dispatch} from "redux";
 
-export const MyPostContainer = () => {
+let mapStateToProps = (state: reduxStateType): profilePageType => {
+    return {
+        newPostText: state.profilePage.newPostText,
+        posts: state.profilePage.posts
+    }
 
-
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let state = store.getState()
-                    const AddPost = () => {
-                        store.dispatch(AddPostActionCreator())
-                    }
-                    const onPostChange = (text: string) => {
-                        store.dispatch(ChangeNewPostActionCreator(text))
-                    }
-
-                    return (
-                        <MyPost updatePostText={onPostChange}
-                                addPost={AddPost}
-                                posts={state.profilePage.posts}
-                                newPostText={state.profilePage.newPostText}/>
-                    )
-                }
-
-            }
-        </StoreContext.Consumer>
-    );
 }
+type  mapDispatchToPropsType = {
+    updatePostText: (text: string) => void
+    addPost: () => void
+}
+
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        updatePostText: (text: string) => {
+            dispatch(ChangeNewPostActionCreator(text))
+        },
+        addPost: () => {
+            dispatch(AddPostActionCreator())
+        }
+    }
+
+}
+let MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)
+export default MyPostContainer

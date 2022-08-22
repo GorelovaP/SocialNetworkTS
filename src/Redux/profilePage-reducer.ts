@@ -1,15 +1,30 @@
-import {ActionType, postType, profilePageType} from "./store";
+import {AddNewMessageActionCreator, SendNewMassageActionCreator} from "./dialogsPage-reducer";
 
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
 
-let initialState =  {
+let initialState:profilePageType = {
     posts: [
         {id: 1, value: "Post 1", like: 21},
         {id: 2, value: "This is 2 post", like: 44}
     ],
-        newPostText: "it-camasutra"
+    newPostText: "it-camasutra"
 }
+
+
+export type profilePageType = {
+    posts: Array<postType>
+    newPostText: string
+}
+export type postType = {
+    id: number
+    value: string
+    like: number
+}
+export type ActionType = ReturnType<typeof AddPostActionCreator>
+    | ReturnType<typeof ChangeNewPostActionCreator>
+    | ReturnType<typeof SendNewMassageActionCreator>
+    | ReturnType<typeof AddNewMessageActionCreator>
 
 export const profilePageReducer = (state: profilePageType = initialState, action: ActionType) => {
     switch (action.type) {
