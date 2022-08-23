@@ -9,6 +9,10 @@ export const Nav = () => {
             <div className={s.item}><NavLink className={s.active} to={"/dialogs"}>Massages</NavLink></div>
             <div className={`${s.item} ${s.active}`}><NavLink className={s.active} to={"/music"}>Music</NavLink></div>
             <div className={s.item}><NavLink className={s.active} to={"/settings"}>Settings</NavLink></div>
+            <div className={s.item}><br/></div>
+            <div className={s.item}><NavLink className={s.active} to={"/users"}>add Users</NavLink>
+
+            </div>
         </nav>
     );
 }
