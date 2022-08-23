@@ -11,7 +11,7 @@ export const MyPost = (props: MyPostPageType) => {
     let onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.updatePostText(event.currentTarget.value)
     }
-    let postElements = props.posts.map(p => <Post id={p.id} value={p.value} like={p.like}/>)
+    let postElements = props.posts.map(p => <Post key={p.id} id={p.id} value={p.value} like={p.like}/>)
 
     return (
 

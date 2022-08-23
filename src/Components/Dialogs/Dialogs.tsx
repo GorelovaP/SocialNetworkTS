@@ -5,7 +5,6 @@ import s from './Dialogs.module.css';
 import {Message} from './Message/Message';
 
 
-
 export const Dialogs = (props: DialogSPagesType) => {
 
 
@@ -17,8 +16,8 @@ export const Dialogs = (props: DialogSPagesType) => {
     }
 
 
-    let dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.messages.map(m => <Message text={m.text}/>)
+    let dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElements = props.messages.map(m => <Message key={m.id} text={m.text}/>)
 
 
     return (<div className={s.dialogs}>
