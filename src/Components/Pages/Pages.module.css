@@ -1,0 +1,10 @@
+.pagesContainer {
+    padding: 90px 60px;
+    height: 100%;
+}
+
+.pagesContainer__logo {
+    font-family: 'Titan One', cursive;
+    font-size: 2rem;
+    color: #464646;
+}

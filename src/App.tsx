@@ -1,6 +1,7 @@
 import './App.css';
+
 import React from 'react';
-import {Header} from "./Components/Header/Header";
+
 import {Nav} from "./Components/Nav/Nav";
 import {Pages} from "./Components/Pages/Pages";
 import {Route, Routes} from 'react-router-dom'
@@ -12,12 +13,10 @@ import {UsersContainer} from "./Components/Users/UsersContainer";
 
 
 
-
 function App(props: stateTypeRootPage) {
     return (
 
         <div className='app-wrapper'>
-            <Header/>
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
@@ -29,6 +28,7 @@ function App(props: stateTypeRootPage) {
                     <Route path={"/settings"} element={<Settings/>}/>
                 </Routes>
             </div>
+            {/*<Mass/>*/}
         </div>
 
 

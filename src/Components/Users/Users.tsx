@@ -8,7 +8,7 @@ export const Users = (props: UsersPagePropsType) => {
         props.setUsers([
             {
                 id: 1,
-                photoUrl: "https://get.pxhere.com/photo/man-sun-photography-male-guy-portrait-ceremony-photograph-portrait-photography-1409817.jpg",
+                photoUrl: "https://catherineasquithgallery.com/uploads/posts/2021-02/1612568356_99-p-emodzhi-na-zelenom-fone-143.png",
                 followed: false,
                 fullName: "Polina",
                 status: "Hi",
@@ -16,7 +16,7 @@ export const Users = (props: UsersPagePropsType) => {
             },
             {
                 id: 2,
-                photoUrl: "https://get.pxhere.com/photo/man-sun-photography-male-guy-portrait-ceremony-photograph-portrait-photography-1409817.jpg",
+                photoUrl: "https://static.tildacdn.com/tild6266-6562-4139-b665-396165333662/___9.png",
                 followed: true,
                 fullName: "Alina",
                 status: "jfjf",
@@ -64,26 +64,28 @@ export const Users = (props: UsersPagePropsType) => {
         props.unfollow(userId)
 
     }
-    return (<div>
-            <div>d</div>
-            <div>
+    return (<div className={s.usersContainer}>
+            <h2 className={s.usersContainer__logo}>Users</h2>
+            <div className={s.actionBlock}> поиск, по региону и т д</div>
+            <div className={s.usersBlock}>
                 {
                     props.users.map(
                         (u) =>
-                            <div key={u.id}>
-                                <div>
+                            <div className={s.usersBlock__user} key={u.id}>
+                                <div className={s.usersBlock__user__avatar}>
                                     <img alt="ava" src={u.photoUrl} className={s.img}/>
                                 </div>
+
+                                <div className={s.usersBlock__user__name}>{u.fullName}</div>
+                                <div>{u.status}</div>
+                                <div>{u.location.country}</div>
+                                <div>{u.location.city}</div>
                                 <div>
                                     {u.followed ? <button onClick={() => Unfollow(u.id)}> Unfollow</button> :
                                         <button onClick={() => Follow(u.id)}>Follow</button>
                                     }
 
                                 </div>
-                                <div>{u.fullName}</div>
-                                <div>{u.status}</div>
-                                <div>{u.location.country}</div>
-                                <div>{u.location.city}</div>
                             </div>
                     )
                 }

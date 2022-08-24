@@ -1,4 +1,4 @@
-import {AddNewMessageActionCreator, dialogPageType, SendNewMassageActionCreator} from "../../Redux/dialogsPage-reducer";
+import {AddNewMessageActionCreator, dialogPageType , SendNewMassageActionCreator} from "../../Redux/dialogsPage-reducer";
 import {Dialogs} from "./Dialogs";
 import {reduxStateType} from "../../Redux/redax-store";
 import {connect} from "react-redux";

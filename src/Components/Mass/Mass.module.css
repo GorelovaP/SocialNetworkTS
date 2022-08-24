@@ -1,14 +1,18 @@
-.nav_area {
-    grid-area: n;
+.mass__area {
+    grid-area: m;
     background: #EEE0FF;
 }
 
-.nav_container {
+.mass__container {
     position: sticky;
     top: 0;
-    background: #ffffff;
+    /* Created with https://www.css-gradient.com */
+    background: rgba(225, 186, 236, 0.77);
+    background: -webkit-linear-gradient(right, rgba(238, 224, 255, 0.77), rgba(255, 255, 255, 0.8));
+    background: -moz-linear-gradient(right, rgba(238, 224, 255, 0.77), rgba(255, 255, 255, 0.8));
+    background: linear-gradient(to left, rgba(238, 224, 255, 0.77), rgba(255, 255, 255, 0.8));
     min-height: 100vh;
-    border-radius: 0 50px 50px 0;
+    border-radius: 50px 0 0 50px;
     padding: 90px 60px;
 }
 
@@ -46,8 +50,8 @@
 .active {
     /* Created with https://www.css-gradient.com */
     background: rgba(225, 186, 236, 1.0);
-    background: -webkit-linear-gradient(right, rgb(224, 235, 255), rgba(168, 209, 245, 1.0));
-    background: -moz-linear-gradient(right, rgb(225, 186, 236), rgba(168, 209, 245, 1.0));
+    background: -webkit-linear-gradient(right, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
+    background: -moz-linear-gradient(right, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
     background: linear-gradient(to left, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
     border-radius: 5px;
 }
