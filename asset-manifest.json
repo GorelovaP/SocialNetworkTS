@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/putsamyrai/static/css/main.019da3dd.css",
+    "main.js": "/putsamyrai/static/js/main.94131e9d.js",
+    "static/js/787.ceddc868.chunk.js": "/putsamyrai/static/js/787.ceddc868.chunk.js",
+    "index.html": "/putsamyrai/index.html",
+    "main.019da3dd.css.map": "/putsamyrai/static/css/main.019da3dd.css.map",
+    "main.94131e9d.js.map": "/putsamyrai/static/js/main.94131e9d.js.map",
+    "787.ceddc868.chunk.js.map": "/putsamyrai/static/js/787.ceddc868.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.019da3dd.css",
+    "static/js/main.94131e9d.js"
+  ]
+}
