@@ -8,20 +8,21 @@ export class Users extends React.Component<UsersPagePropsType> {
 
     constructor(props: UsersPagePropsType) {
         super(props);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
-            this.props.setUsers(response.data.items)
-        })
-
-
     }
-
 
     Follow = (userId: number) => {
         this.props.follow(userId)
     }
     Unfollow = (userId: number) => {
         this.props.unfollow(userId)
+    }
 
+    componentDidMount() {
+        if (this.props.users.length === 0) {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
+                this.props.setUsers(response.data.items)
+            })
+        }
     }
 
     render() {
