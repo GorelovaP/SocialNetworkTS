@@ -4,17 +4,17 @@ import s from './Users.module.css';
 import axios from "axios";
 import standardIcon from "../assets/images/standardIcon.png"
 
+
 export const Users = (props: UsersPagePropsType) => {
-
-    if (props.users.length === 0) {
-        debugger
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
-            props.setUsers(response.data.items)
-        })
-        debugger
+    let GetUsers = () => {
+        if (props.users.length === 0) {
+            debugger
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
+                props.setUsers(response.data.items)
+            })
+            debugger
+        }
     }
-
-
     let Follow = (userId: number) => {
         props.follow(userId)
     }
@@ -25,6 +25,7 @@ export const Users = (props: UsersPagePropsType) => {
     return (<div className={s.usersContainer}>
             <h2 className={s.usersContainer__logo}>Users</h2>
             <div className={s.actionBlock}> поиск, по региону и т д</div>
+            <button onClick={GetUsers}>Get users</button>
             <div className={s.usersBlock}>
                 {
                     props.users.map(
