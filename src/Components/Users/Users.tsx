@@ -1,61 +1,19 @@
 import React from "react";
 import {UsersPagePropsType} from "./UsersContainer";
 import s from './Users.module.css';
+import axios from "axios";
+import standardIcon from "../assets/images/standardIcon.png"
 
 export const Users = (props: UsersPagePropsType) => {
-    console.log(props.users)
+
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photoUrl: "https://catherineasquithgallery.com/uploads/posts/2021-02/1612568356_99-p-emodzhi-na-zelenom-fone-143.png",
-                followed: false,
-                fullName: "Polina",
-                status: "Hi",
-                location: {city: "Minsk", country: "Belarus"}
-            },
-            {
-                id: 2,
-                photoUrl: "https://static.tildacdn.com/tild6266-6562-4139-b665-396165333662/___9.png",
-                followed: true,
-                fullName: "Alina",
-                status: "jfjf",
-                location: {city: "NNN", country: "Belarus"}
-            },
-            {
-                id: 3,
-                photoUrl: "https://get.pxhere.com/photo/man-sun-photography-male-guy-portrait-ceremony-photograph-portrait-photography-1409817.jpg",
-                followed: false,
-                fullName: "Masha",
-                status: "f,fkf",
-                location: {city: "DDD", country: "Belarus"}
-            },
-            {
-                id: 4,
-                photoUrl: "https://get.pxhere.com/photo/man-sun-photography-male-guy-portrait-ceremony-photograph-portrait-photography-1409817.jpg",
-                followed: false,
-                fullName: "Sasha",
-                status: "asas",
-                location: {city: "SSS", country: "Belarus"}
-            },
-            {
-                id: 5,
-                photoUrl: "https://get.pxhere.com/photo/man-sun-photography-male-guy-portrait-ceremony-photograph-portrait-photography-1409817.jpg",
-                followed: false,
-                fullName: "Andrey",
-                status: "asssss",
-                location: {city: "LLL", country: "Belarus"}
-            },
-            {
-                id: 6,
-                photoUrl: "https://get.pxhere.com/photo/man-sun-photography-male-guy-portrait-ceremony-photograph-portrait-photography-1409817.jpg",
-                followed: false,
-                fullName: "Vika",
-                status: "asassas",
-                location: {city: "NNN", country: "Belarus"}
-            }
-        ])
+        debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
+            props.setUsers(response.data.items)
+        })
+        debugger
     }
+
 
     let Follow = (userId: number) => {
         props.follow(userId)
@@ -73,18 +31,17 @@ export const Users = (props: UsersPagePropsType) => {
                         (u) =>
                             <div className={s.usersBlock__user} key={u.id}>
                                 <div className={s.usersBlock__user__avatar}>
-                                    <img alt="ava" src={u.photoUrl} className={s.img}/>
+                                    <img alt="ava" src={u.photos.small != null ? u.photos.small : standardIcon}
+                                         className={s.img}/>
                                 </div>
 
-                                <div className={s.usersBlock__user__name}>{u.fullName}</div>
+                                <div className={s.usersBlock__user__name}>{u.name}</div>
                                 <div>{u.status}</div>
-                                <div>{u.location.country}</div>
-                                <div>{u.location.city}</div>
+
                                 <div>
                                     {u.followed ? <button onClick={() => Unfollow(u.id)}> Unfollow</button> :
                                         <button onClick={() => Follow(u.id)}>Follow</button>
                                     }
-
                                 </div>
                             </div>
                     )

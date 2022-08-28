@@ -15,7 +15,6 @@ let mapStateToProps = (state: reduxStateType): dialogPageType => {
 type mapDispatchToPropsType = {
     AddMessageCallback: () => void,
     onChangeNewMessage: (text: string) => void
-
 }
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
