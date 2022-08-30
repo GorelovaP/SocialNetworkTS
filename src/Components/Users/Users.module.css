@@ -54,3 +54,12 @@
     border-radius: 50%;
     background-color: #F7F1FF;
 }
+
+.page {
+    font-size: 1em;
+}
+
+.selectedPage {
+    font-weight: bold;
+    color: #a33c3c;
+}
