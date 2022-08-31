@@ -12,10 +12,10 @@ type ActionType = ReturnType<typeof followAC>
 
 export type UsersPageType = {
     users: Array<userType>
-    pageSize: number,
+    pageSize: number
     totalUsersCount: number
-    currentPage: number;
-
+    currentPage: number
+    paginatorPortion: number
 }
 export type userType = {
     name: string,
@@ -34,7 +34,8 @@ let initialState: UsersPageType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    paginatorPortion: 10
 
 }
 export const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {

@@ -18,7 +18,8 @@ let mapStateToProps = (state: reduxStateType): UsersPageType => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        paginatorPortion: state.usersPage.paginatorPortion
     }
 }
 type mapDispatchToPropsType = {
