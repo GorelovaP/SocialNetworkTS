@@ -17,6 +17,8 @@ export type UsersPageType = {
     currentPage: number
     paginatorPortion: number
 }
+
+
 export type userType = {
     name: string,
     id: number,
