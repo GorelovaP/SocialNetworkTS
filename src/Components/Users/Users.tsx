@@ -33,7 +33,7 @@ export const Users = (props: UsersType) => {
                         u =>
                             <div className={s.usersBlock__user} key={u.id}>
                                 <div className={s.usersBlock__user__avatar}>
-                                    <NavLink to={"/pages/" + u.id}>
+                                    <NavLink to={"/profile/" + u.id}>
                                         <img alt="ava" src={u.photos.small != null ? u.photos.small : standardIcon}
                                              className={s.img}/>
                                     </NavLink>

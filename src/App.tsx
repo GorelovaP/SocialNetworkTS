@@ -12,6 +12,7 @@ import {UsersContainer} from "./Components/Users/UsersContainer";
 import {PagesContainer} from "./Components/Pages/PagesContainer";
 
 
+
 function App(props: stateTypeRootPage) {
     return (
 
@@ -20,8 +21,11 @@ function App(props: stateTypeRootPage) {
             <div className='app-wrapper-content'>
                 <Routes>
                     <Route path={"/dialogs"} element={<DialogsContainer/>}/>
-                    <Route path={"/pages/*"}
-                           element={<PagesContainer/>}/>
+
+                    <Route path="/profile" element={<PagesContainer/>}>
+                        <Route path=":userId" element={<PagesContainer/>}/>
+                    </Route>
+
                     <Route path={"/users"} element={<UsersContainer/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>

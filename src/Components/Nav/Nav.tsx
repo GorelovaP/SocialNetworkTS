@@ -3,7 +3,6 @@ import {NavLink, useMatch} from 'react-router-dom';
 import s from './Nav.module.css';
 
 
-
 export const Nav = () => {
     const match = useMatch('/:routeKey');
 
@@ -13,7 +12,7 @@ export const Nav = () => {
                 <div className={`${s.item} ${match?.params.routeKey === "pages" ? s.active : undefined}`}>
                     <img alt="item icon" className={s.item__icon}
                          src="https://cdn-icons-png.flaticon.com/512/3334/3334385.png"/>
-                    <NavLink to={"/pages"}>Profile</NavLink>
+                    <NavLink to={"/profile"}>Profile</NavLink>
                 </div>
 
                 <div className={`${s.item} ${match?.params.routeKey === "users" ? s.active : undefined}`}>
