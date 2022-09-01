@@ -2,19 +2,44 @@ import {AddNewMessageActionCreator, SendNewMassageActionCreator} from "./dialogs
 
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
+const SET_USER_PAGE = "SET-USER-PAGE"
 
 let initialState: profilePageType = {
     posts: [
         {id: 1, value: "Post 1", like: 21},
         {id: 2, value: "This is 2 post", like: 44}
     ],
-    newPostText: "it-camasutra"
+    newPostText: "it-camasutra",
+    profile: null
+}
+
+export type profileType = null | {
+    "aboutMe": string,
+    "contacts": {
+        "facebook": string,
+        "website": string,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": string,
+        "github": string,
+        "mainLink": string
+    },
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+        "small": string,
+        "large": string
+    }
 }
 
 
 export type profilePageType = {
     posts: Array<postType>
     newPostText: string
+    profile: profileType
 }
 export type postType = {
     id: number
@@ -25,6 +50,7 @@ export type ActionType = ReturnType<typeof AddPostActionCreator>
     | ReturnType<typeof ChangeNewPostActionCreator>
     | ReturnType<typeof SendNewMassageActionCreator>
     | ReturnType<typeof AddNewMessageActionCreator>
+    | ReturnType<typeof setUserProfileAC>
 
 export const profilePageReducer = (state: profilePageType = initialState, action: ActionType) => {
     switch (action.type) {
@@ -44,6 +70,10 @@ export const profilePageReducer = (state: profilePageType = initialState, action
             StateCopy.newPostText = action.newText;
             return StateCopy
         }
+        case SET_USER_PAGE: {
+            debugger
+            return {...state, profile: action.page}
+        }
         default:
             return state
     }
@@ -54,4 +84,7 @@ export const AddPostActionCreator = () => {
 }
 export const ChangeNewPostActionCreator = (newText: string) => {
     return {type: CHANGE_NEW_POST_TEXT, newText: newText} as const
+}
+export const setUserProfileAC = (page: any) => {
+    return {type: SET_USER_PAGE, page: page} as const
 }

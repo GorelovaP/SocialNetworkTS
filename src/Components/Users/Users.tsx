@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import standardIcon from "../assets/images/standardIcon.png";
 import {userType} from "../../Redux/users-reducer";
 import {Paginator} from "../common/paginator/Paginator";
+import {NavLink} from "react-router-dom";
 
 type UsersType = {
     totalUsersCount: number;
@@ -32,8 +33,10 @@ export const Users = (props: UsersType) => {
                         u =>
                             <div className={s.usersBlock__user} key={u.id}>
                                 <div className={s.usersBlock__user__avatar}>
-                                    <img alt="ava" src={u.photos.small != null ? u.photos.small : standardIcon}
-                                         className={s.img}/>
+                                    <NavLink to={"/pages/" + u.id}>
+                                        <img alt="ava" src={u.photos.small != null ? u.photos.small : standardIcon}
+                                             className={s.img}/>
+                                    </NavLink>
                                 </div>
 
                                 <div className={s.usersBlock__user__name}>{u.name}</div>

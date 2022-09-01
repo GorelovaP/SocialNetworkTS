@@ -82,7 +82,6 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
             }
         }
         case TOGGLE_IS_FETCHING : {
-            debugger
             return {
                 ...state, isFetching: action.isFetching
             }

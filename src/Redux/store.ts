@@ -12,7 +12,8 @@ export let store = {
                 {id: 1, value: "Post 1", like: 21},
                 {id: 2, value: "This is 2 post", like: 44}
             ],
-            newPostText: "it-camasutra"
+            newPostText: "it-camasutra",
+            profile: null
         },
         dialogsPage: {
             dialogs: [
@@ -104,7 +105,7 @@ export type DialogSPagesType = {
     newMassageText: string
 }
 
-export type PageSPagesType = {}
+
 export type stateTypeRoot =
     {
         profilePage: profilePageType

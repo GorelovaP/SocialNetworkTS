@@ -25,6 +25,8 @@ let reducers = combineReducers({
 })
 export let store: StoreType = createStore(reducers);
 
+// @ts-ignore
+window.store = store
 
 
 

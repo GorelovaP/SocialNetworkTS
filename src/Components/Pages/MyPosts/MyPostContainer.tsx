@@ -7,7 +7,8 @@ import {Dispatch} from "redux";
 let mapStateToProps = (state: reduxStateType): profilePageType => {
     return {
         newPostText: state.profilePage.newPostText,
-        posts: state.profilePage.posts
+        posts: state.profilePage.posts,
+        profile : state.profilePage.profile
     }
 
 }
@@ -27,5 +28,4 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 
 }
-let MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)
-export default MyPostContainer
+export let MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)
