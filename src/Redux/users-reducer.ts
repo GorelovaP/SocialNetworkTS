@@ -37,7 +37,7 @@ export type userType = {
 
 let initialState: UsersPageType = {
     users: [],
-    pageSize: 10,
+    pageSize: 8,
     totalUsersCount: 0,
     currentPage: 1,
     paginatorPortion: 10,

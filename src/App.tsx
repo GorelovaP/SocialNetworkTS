@@ -10,13 +10,14 @@ import {stateTypeRootPage} from "./Redux/store";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./Components/Users/UsersContainer";
 import {PagesContainer} from "./Components/Pages/PagesContainer";
-
+import {HeaderContainer} from "./Components/Header/HeaderContainer";
 
 
 function App(props: stateTypeRootPage) {
     return (
 
         <div className='app-wrapper'>
+            <HeaderContainer/>
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
