@@ -5,7 +5,7 @@ import {
     followAC,
     setCurrentPageAC, setToggleIsFetchingAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleFollowingProgressAC,
     unfollowAC,
     UsersPageType,
     userType
@@ -65,7 +65,10 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
                 users={this.props.users}
                 Unfollow={this.Unfollow}
                 Follow={this.Follow}
-            />
+
+
+                followingInProgress={this.props.followingInProgress}
+                setToggleFollowingProgress={this.props.setToggleFollowingProgress}/>
         </>
     }
 }
@@ -77,7 +80,8 @@ let mapStateToProps = (state: reduxStateType): UsersPageType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         paginatorPortion: state.usersPage.paginatorPortion,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -89,6 +93,7 @@ type  mapDispatchToPropsType =
         setCurrentPage: (currentPage: number) => void,
         setTotalUsersCount: (totalUsersCount: number) => void,
         setToggleIsFetching: (isFetching: boolean) => void
+        setToggleFollowingProgress: (userId: number, isFetching: boolean) => void
     }
 
 // let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
@@ -109,6 +114,7 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalUsersCountAC,
-    setToggleIsFetching: setToggleIsFetchingAC //автоматическое обертывание колбэками!!! == mapDispatchToProps
+    setToggleIsFetching: setToggleIsFetchingAC,
+    setToggleFollowingProgress: toggleFollowingProgressAC//автоматическое обертывание колбэками!!! == mapDispatchToProps
 })(UsersContainerClassComp)
 export type UsersPagePropsType = UsersPageType & mapDispatchToPropsType

@@ -4,6 +4,7 @@ const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_COUNT = "SET-TOTAL-COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS"
 
 type ActionType = ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
@@ -11,6 +12,7 @@ type ActionType = ReturnType<typeof followAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
     | ReturnType<typeof setToggleIsFetchingAC>
+    | ReturnType<typeof toggleFollowingProgressAC>
 
 export type UsersPageType = {
     users: Array<userType>
@@ -18,7 +20,8 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     paginatorPortion: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: number[]
 }
 
 
@@ -41,7 +44,8 @@ let initialState: UsersPageType = {
     totalUsersCount: 0,
     currentPage: 1,
     paginatorPortion: 10,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 
 }
 export const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
@@ -86,6 +90,16 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
                 ...state, isFetching: action.isFetching
             }
         }
+        case TOGGLE_IS_FOLLOWING_PROGRESS : {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)// filter - возвращает копию нового массива
+            }
+        }
+
+
         default :
             return state
     }
@@ -108,4 +122,7 @@ export const setTotalUsersCountAC = (totalUsersCount: number) => {
 }
 export const setToggleIsFetchingAC = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching: isFetching} as const
+}
+export const toggleFollowingProgressAC = (userId: number, isFetching: boolean) => {
+    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, userId: userId, isFetching: isFetching} as const
 }
