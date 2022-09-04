@@ -26,7 +26,9 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
         this.props.setToggleIsFetching(true)
         console.log(this.props.isFetching)
         if (this.props.users.length === 0) {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            }).then(response => {
                 this.props.setToggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -46,7 +48,10 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
         this.props.setCurrentPage(currentPage)
         this.props.setToggleIsFetching(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            }).then(response => {
             this.props.setToggleIsFetching(false)
             this.props.setUsers(response.data.items)
             console.log(this.props.isFetching)
@@ -103,8 +108,7 @@ type  mapDispatchToPropsType =
 // }
 
 
-
-export const UsersContainer = connect(mapStateToProps,  {
+export const UsersContainer = connect(mapStateToProps, {
     follow: followAC,
     unfollow: unfollowAC,
     setUsers: setUsersAC,
