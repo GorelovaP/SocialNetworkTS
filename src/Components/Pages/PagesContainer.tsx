@@ -2,7 +2,6 @@ import {reduxStateType} from "../../Redux/redax-store";
 import {connect} from "react-redux";
 
 import React, {ComponentType} from "react";
-import axios from "axios";
 import {Pages} from "./Pages";
 import {profileType, setUserProfileAC} from "../../Redux/profilePage-reducer";
 
@@ -11,6 +10,7 @@ import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "re
 
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
+import {ProfileAPI} from "../../api/api";
 
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
 
@@ -39,8 +39,8 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
         if (!userId) {
             userId = 2
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
-            this.props.setUserProfile(response.data)
+        ProfileAPI.getUsersProfileGET(userId).then(data => {
+            this.props.setUserProfile(data)
         })
     }
 
