@@ -18,8 +18,8 @@ export type authInitialType = {
     isAuth: boolean
 }
 
-export type ActionType = ReturnType<typeof setUserDataAC>
-export const authReduсer = (state: authInitialType = initialState, action: ActionType): authInitialType => {
+export type ActionTypeAuth = ReturnType<typeof setUserDataAC>
+export const authReduсer = (state: authInitialType = initialState, action: ActionTypeAuth): authInitialType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {

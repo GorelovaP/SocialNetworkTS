@@ -46,13 +46,13 @@ export type postType = {
     value: string
     like: number
 }
-export type ActionType = ReturnType<typeof AddPostActionCreator>
+export type ActionTypeProfilePage = ReturnType<typeof AddPostActionCreator>
     | ReturnType<typeof ChangeNewPostActionCreator>
     | ReturnType<typeof SendNewMassageActionCreator>
     | ReturnType<typeof AddNewMessageActionCreator>
     | ReturnType<typeof setUserProfileAC>
 
-export const profilePageReducer = (state: profilePageType = initialState, action: ActionType) => {
+export const profilePageReducer = (state: profilePageType = initialState, action: ActionTypeProfilePage) => {
     switch (action.type) {
         case ADD_POST: {
             let newPosts: postType = {

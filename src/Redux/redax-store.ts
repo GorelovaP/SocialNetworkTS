@@ -1,24 +1,15 @@
-import {combineReducers, createStore, Store} from "redux";
-import {AddNewMessageActionCreator, dialogsPageReducer, SendNewMassageActionCreator} from "./dialogsPage-reducer";
-import {AddPostActionCreator, ChangeNewPostActionCreator, profilePageReducer} from "./profilePage-reducer";
-import {followAC, setUsersAC, unfollowAC, usersReducer} from "./users-reducer";
-import {authReduсer, setUserDataAC} from "./auth-reduсer";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
+import { dialogsPageReducer} from "./dialogsPage-reducer";
+import { profilePageReducer} from "./profilePage-reducer";
 
-
-export type ActionType =
-    ReturnType<typeof AddPostActionCreator>
-    | ReturnType<typeof ChangeNewPostActionCreator>
-    | ReturnType<typeof SendNewMassageActionCreator>
-    | ReturnType<typeof AddNewMessageActionCreator>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setUserDataAC>
+import thunkMiddleware from "redux-thunk"
+import {  usersReducer} from "./users-reducer";
+import { authReduсer} from "./auth-reduсer";
 
 
 export type RootState = typeof reducers
 export type reduxStateType = ReturnType<RootState>
-export type StoreType = Store<reduxStateType, ActionType>
+export type StoreType = Store<reduxStateType>
 
 let reducers = combineReducers({
     profilePage: profilePageReducer,
@@ -26,7 +17,7 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReduсer
 })
-export let store: StoreType = createStore(reducers);
+export let store: StoreType = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 // @ts-ignore
 window.store = store

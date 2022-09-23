@@ -1,3 +1,7 @@
+import {UsersAPI} from "../api/api";
+import {Dispatch} from "redux";
+import {reduxStateType, RootState} from "./redax-store";
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
@@ -6,13 +10,14 @@ const SET_TOTAL_COUNT = "SET-TOTAL-COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS"
 
-type ActionType = ReturnType<typeof followAC>
+export type ActionTypeUser = ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
     | ReturnType<typeof setToggleIsFetchingAC>
     | ReturnType<typeof toggleFollowingProgressAC>
+
 
 export type UsersPageType = {
     users: Array<userType>
@@ -48,7 +53,7 @@ let initialState: UsersPageType = {
     followingInProgress: []
 
 }
-export const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
+export const usersReducer = (state: UsersPageType = initialState, action: ActionTypeUser): UsersPageType => {
     switch (action.type) {
         case FOLLOW : {
             return {
@@ -105,6 +110,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
     }
 }
 
+
 export const followAC = (userId: number) => {
     return {type: FOLLOW, userId: userId} as const
 }
@@ -125,4 +131,21 @@ export const setToggleIsFetchingAC = (isFetching: boolean) => {
 }
 export const toggleFollowingProgressAC = (userId: number, isFetching: boolean) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, userId: userId, isFetching: isFetching} as const
+}
+
+//type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+
+    return (dispatch: Dispatch<ActionTypeUser>) => {
+
+        dispatch(setToggleIsFetchingAC(true))
+
+        UsersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setToggleIsFetchingAC(false))
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalUsersCountAC(data.totalCount))
+        })
+        setTimeout(() => dispatch(setToggleIsFetchingAC(false)), 400)
+    }
 }

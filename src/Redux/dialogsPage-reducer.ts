@@ -3,7 +3,7 @@ import {AddPostActionCreator, ChangeNewPostActionCreator} from "./profilePage-re
 const SEND_MESSAGE = "SEND-MESSAGE"
 const CHANGE_MESSAGE_TEXT = "CHANGE_MESSAGE_TEXT"
 
-type ActionType = ReturnType<typeof AddPostActionCreator>
+export type ActionTypeDialog = ReturnType<typeof AddPostActionCreator>
     | ReturnType<typeof ChangeNewPostActionCreator>
     | ReturnType<typeof SendNewMassageActionCreator>
     | ReturnType<typeof AddNewMessageActionCreator>
@@ -37,7 +37,7 @@ let initialState: dialogPageType = {
     ],
     newMassageText: ""
 }
-export const dialogsPageReducer = (state: dialogPageType = initialState, action: ActionType) => {
+export const dialogsPageReducer = (state: dialogPageType = initialState, action: ActionTypeDialog) => {
     switch (action.type) {
         case SEND_MESSAGE: {
             let StateCopy = {...state}
