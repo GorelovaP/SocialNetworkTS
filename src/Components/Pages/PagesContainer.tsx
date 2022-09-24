@@ -11,6 +11,7 @@ import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "re
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
@@ -67,9 +68,12 @@ type mapStateToPropsType = {
 }
 
 
-export const PagesContainer = withAuthRedirect(connect(mapStateToProps, {
+export const PagesContainer = compose<ComponentType>(
+    connect(mapStateToProps, {
         getUsersProfile: getUsersProfileTC
-    })(withRouter(PagesContainerCC))
-)
+    }),
+    withRouter,
+    withAuthRedirect
+)(PagesContainerCC)
 
 export type PagesPagePropsType = mapStateToPropsType & mapDispatchToPropsType
