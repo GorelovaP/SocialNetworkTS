@@ -69,9 +69,7 @@ type mapStateToPropsType = {
 
 
 export const PagesContainer = compose<ComponentType>(
-    connect(mapStateToProps, {
-        getUsersProfile: getUsersProfileTC
-    }),
+    connect(mapStateToProps, {getUsersProfile: getUsersProfileTC}),
     withRouter,
     withAuthRedirect
 )(PagesContainerCC)

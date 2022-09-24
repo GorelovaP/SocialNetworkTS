@@ -1,6 +1,8 @@
 import React from 'react';
 import {profileType} from "../../../Redux/profilePage-reducer";
 import {Preloader} from "../../common/preloader/Preloader";
+import {ProfileStatus} from "../profileStatus/ProfileStatus";
+
 
 type ProfileInfoType = {
     profile: profileType
@@ -20,6 +22,10 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                         : "https://static4.depositphotos.com/1001944/371/i/600/depositphotos_3717756-stock-photo-fire-isolated-over-black-background.jpg"}
                     alt="Картинка"/>
             </div>
+            <div><ProfileStatus status={"fghjk"}/>
+                <br/>
+            </div>
+
             <div>
                 <span>fullName:</span>
                 <span>{props.profile.fullName}</span>
@@ -28,6 +34,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 <span>aboutMe:</span>
                 <span>{props.profile.aboutMe}</span>
             </div>
+
             <div>
                 <span>lookingForAJob:</span>
                 <span>{props.profile.lookingForAJob ? "+" : "-"}</span>
