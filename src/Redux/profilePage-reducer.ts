@@ -1,4 +1,7 @@
 import {AddNewMessageActionCreator, SendNewMassageActionCreator} from "./dialogsPage-reducer";
+import {Dispatch} from "redux";
+import {ProfileAPI} from "../api/api";
+
 
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
@@ -87,4 +90,16 @@ export const ChangeNewPostActionCreator = (newText: string) => {
 }
 export const setUserProfileAC = (page: any) => {
     return {type: SET_USER_PAGE, page: page} as const
+}
+
+
+export const getUsersProfileTC = (userId: number) => {
+
+    return (dispatch: Dispatch<ActionTypeProfilePage>) => {
+
+        ProfileAPI.getUsersProfileGET(userId).then(data => {
+            dispatch(setUserProfileAC(data))
+        })
+
+    }
 }

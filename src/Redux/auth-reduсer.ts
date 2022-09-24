@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {AuthAPI} from "../api/api";
+
+
 const SET_USER_DATA = "SET-USER-DATA"
 
 let initialState: authInitialType = {
@@ -32,6 +36,8 @@ export const authReduсer = (state: authInitialType = initialState, action: Acti
             return state
     }
 }
+
+
 export const setUserDataAC = (userId: string | null, email: string | null,
                               login: string | null) => ({
     type: SET_USER_DATA, data: {
@@ -40,4 +46,20 @@ export const setUserDataAC = (userId: string | null, email: string | null,
         login: login
     }
 } as const)
+
+
+export const getUserDataTC = () => {
+
+    return (dispatch: Dispatch<ActionTypeAuth>) => {
+
+        AuthAPI.isAuthGET()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data
+                    dispatch(setUserDataAC(id, email, login))
+                }
+            })
+
+    }
+}
 

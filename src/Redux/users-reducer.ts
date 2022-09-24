@@ -164,6 +164,7 @@ export const followTC = (userId: number) => {
             })
     }
 }
+
 export const unfollowTC = (userId: number) => {
 
     return (dispatch: Dispatch<ActionTypeUser>) => {

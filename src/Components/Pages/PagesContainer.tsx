@@ -3,14 +3,15 @@ import {connect} from "react-redux";
 
 import React, {ComponentType} from "react";
 import {Pages} from "./Pages";
-import {profileType, setUserProfileAC} from "../../Redux/profilePage-reducer";
+import {getUsersProfileTC, profileType} from "../../Redux/profilePage-reducer";
 
 
 import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
 
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
-import {ProfileAPI} from "../../api/api";
+
+
 
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
 
@@ -31,17 +32,13 @@ type PathParamsType = { useId: number; }
 type CommonPropsType = RouteComponentProps<PathParamsType> & PagesPagePropsType // типизация для withRouter
 
 export class PagesContainerCC extends React.Component<CommonPropsType> {
-
-
     componentDidMount() {
-        debugger
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = 2
         }
-        ProfileAPI.getUsersProfileGET(userId).then(data => {
-            this.props.setUserProfile(data)
-        })
+        this.props.getUsersProfile(userId)
+
     }
 
     render() {
@@ -51,17 +48,23 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
     }
 }
 
+
 let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile
     }
 }
 
-type  mapDispatchToPropsType = { setUserProfile: (profile: profileType) => void }
+type  mapDispatchToPropsType = {
+    getUsersProfile: (userId: number) => void
+}
 
 type mapStateToPropsType = { profile: profileType }
 
 
-export const PagesContainer = connect(mapStateToProps, {setUserProfile: setUserProfileAC})(withRouter(PagesContainerCC));
+export const PagesContainer = connect(mapStateToProps, {
+    getUsersProfile: getUsersProfileTC
+
+})(withRouter(PagesContainerCC));
 
 export type PagesPagePropsType = mapStateToPropsType & mapDispatchToPropsType
