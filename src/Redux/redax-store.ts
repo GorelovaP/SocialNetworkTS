@@ -7,17 +7,17 @@ import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reduсer";
 
 
-export type RootState = typeof reducers
-export type reduxStateType = ReturnType<RootState>
+export type RootReducerType = typeof reducer
+export type reduxStateType = ReturnType<RootReducerType>
 export type StoreType = Store<reduxStateType>
 
-let reducers = combineReducers({
+let reducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
     usersPage: usersReducer,
     auth: authReducer
 })
-export let store: StoreType = createStore(reducers, applyMiddleware(thunkMiddleware));
+export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 // @ts-ignore
 window.store = store

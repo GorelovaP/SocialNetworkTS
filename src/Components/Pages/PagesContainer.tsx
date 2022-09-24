@@ -6,10 +6,11 @@ import {Pages} from "./Pages";
 import {getUsersProfileTC, profileType} from "../../Redux/profilePage-reducer";
 
 
-import {Navigate, NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
+import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
 
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
@@ -41,7 +42,7 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Navigate to={"/login"}/>
+
         return <>
             <Pages {...this.props} profile={this.props.profile}/>
         </>
@@ -66,9 +67,9 @@ type mapStateToPropsType = {
 }
 
 
-export const PagesContainer = connect(mapStateToProps, {
-    getUsersProfile: getUsersProfileTC
-
-})(withRouter(PagesContainerCC));
+export const PagesContainer = withAuthRedirect(connect(mapStateToProps, {
+        getUsersProfile: getUsersProfileTC
+    })(withRouter(PagesContainerCC))
+)
 
 export type PagesPagePropsType = mapStateToPropsType & mapDispatchToPropsType

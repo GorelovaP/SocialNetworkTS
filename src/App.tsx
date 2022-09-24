@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 
 import {Nav} from "./Components/Nav/Nav";
-import {Route, Routes} from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import {Settings} from "./Components/Settings/Settings";
 import {Music} from "./Components/Music/Music";
 
@@ -22,6 +22,7 @@ function App() {
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
+                    <Route path={'/'} element={<Navigate to="/login"/>}/>
                     <Route path={"/dialogs"} element={<DialogsContainer/>}/>
 
                     <Route path="/profile" element={<PagesContainer/>}>
