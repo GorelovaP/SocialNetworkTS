@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from 'react';
-import {MyPostPageType} from '../../../Redux/store';
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
+import {MyPostPagePropsType} from "./MyPostContainer";
 
 
-export const MyPost = (props: MyPostPageType) => {
+export const MyPost = (props: MyPostPagePropsType) => {
 
     debugger
 

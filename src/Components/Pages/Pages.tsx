@@ -12,7 +12,6 @@ export type PageSPagesType = {
 }
 export const Pages = (props: PageSPagesType) => {
 
-
     return (
         <div className={s.pagesContainer}>
             <h2 className={s.pagesContainer__logo}>Profile</h2>

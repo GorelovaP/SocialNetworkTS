@@ -6,14 +6,15 @@ import {Nav} from "./Components/Nav/Nav";
 import {Route, Routes} from 'react-router-dom'
 import {Settings} from "./Components/Settings/Settings";
 import {Music} from "./Components/Music/Music";
-import {stateTypeRootPage} from "./Redux/store";
+
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./Components/Users/UsersContainer";
 import {PagesContainer} from "./Components/Pages/PagesContainer";
 import {HeaderContainer} from "./Components/Header/HeaderContainer";
+import {LoginPage} from "./Components/login/Login";
 
 
-function App(props: stateTypeRootPage) {
+function App() {
     return (
 
         <div className='app-wrapper'>
@@ -30,6 +31,7 @@ function App(props: stateTypeRootPage) {
                     <Route path={"/users"} element={<UsersContainer/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
+                    <Route path={"/login"} element={<LoginPage/>}/>
                 </Routes>
             </div>
             {/*<Mass/>*/}

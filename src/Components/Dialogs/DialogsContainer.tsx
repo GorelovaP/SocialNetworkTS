@@ -4,14 +4,22 @@ import {reduxStateType} from "../../Redux/redax-store";
 import {connect} from "react-redux";
 
 
-let mapStateToProps = (state: reduxStateType): dialogPageType => {
+type mapStateToPropsType = dialogPageType & { isAuth: boolean }
+type mapDispatchPropsType = {
+    AddMessageCallback: () => void,
+    onChangeNewMessage: (newMassageText: string) => void
+}
+let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMassageText: state.dialogsPage.newMassageText
+        newMassageText: state.dialogsPage.newMassageText,
+        isAuth: state.auth.isAuth
     }
 }
 export const DialogsContainer = connect(mapStateToProps, {
     AddMessageCallback: AddNewMessageActionCreator,
     onChangeNewMessage: SendNewMassageActionCreator
 })(Dialogs)
+
+export type DialogPagePropsType = mapStateToPropsType & mapDispatchPropsType
