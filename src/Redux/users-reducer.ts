@@ -1,6 +1,6 @@
-import {UsersAPI} from "../api/api";
+import {FollowAPI, UsersAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {reduxStateType, RootState} from "./redax-store";
+
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -147,5 +147,34 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
             dispatch(setTotalUsersCountAC(data.totalCount))
         })
         setTimeout(() => dispatch(setToggleIsFetchingAC(false)), 400)
+    }
+}
+
+export const followTC = (userId: number) => {
+
+    return (dispatch: Dispatch<ActionTypeUser>) => {
+        dispatch(toggleFollowingProgressAC(userId, true))
+
+        FollowAPI.followUsersPOST(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followAC(userId))
+                }
+                dispatch(toggleFollowingProgressAC(userId, false))
+            })
+    }
+}
+export const unfollowTC = (userId: number) => {
+
+    return (dispatch: Dispatch<ActionTypeUser>) => {
+        dispatch(toggleFollowingProgressAC(userId, true))
+
+        FollowAPI.unfollowUsersDELETE(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowAC(userId))
+                }
+                dispatch(toggleFollowingProgressAC(userId, false))
+            })
     }
 }

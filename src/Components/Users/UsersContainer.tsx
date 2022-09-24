@@ -2,18 +2,17 @@ import {reduxStateType} from "../../Redux/redax-store";
 import {connect} from "react-redux";
 
 import {
-    followAC, getUsersThunkCreator,
+    followAC, followTC, getUsersThunkCreator,
     setCurrentPageAC, setToggleIsFetchingAC,
     setTotalUsersCountAC,
     setUsersAC, toggleFollowingProgressAC,
-    unfollowAC,
+    unfollowAC, unfollowTC,
     UsersPageType,
     userType
 } from "../../Redux/users-reducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
-
 
 
 class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
@@ -48,12 +47,11 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
                 setCurrentPage={this.setCurrentPage}
                 currentPage={this.props.currentPage}
                 users={this.props.users}
-                Unfollow={this.Unfollow}
-                Follow={this.Follow}
 
-
+                followThunk={this.props.followThunk}
+                unfollowThunk={this.props.unfollowThunk}
                 followingInProgress={this.props.followingInProgress}
-                setToggleFollowingProgress={this.props.setToggleFollowingProgress}/>
+            />
         </>
     }
 }
@@ -77,9 +75,10 @@ type  mapDispatchToPropsType =
         setUsers: (users: userType[]) => void,
         setCurrentPage: (currentPage: number) => void,
         setTotalUsersCount: (totalUsersCount: number) => void,
-        setToggleIsFetching: (isFetching: boolean) => void
-        setToggleFollowingProgress: (userId: number, isFetching: boolean) => void,
+        setToggleIsFetching: (isFetching: boolean) => void,
         getUsersThunk: (currentPage: number, pageSize: number) => void
+        followThunk: (userId: number) => void
+        unfollowThunk: (userId: number) => void
     }
 
 export const UsersContainer = connect(mapStateToProps, {
@@ -90,6 +89,9 @@ export const UsersContainer = connect(mapStateToProps, {
     setTotalUsersCount: setTotalUsersCountAC,
     setToggleIsFetching: setToggleIsFetchingAC,
     setToggleFollowingProgress: toggleFollowingProgressAC,
-    getUsersThunk: getUsersThunkCreator//автоматическое обертывание колбэками!!! == mapDispatchToProps
+    getUsersThunk: getUsersThunkCreator,
+    followThunk: followTC,
+    unfollowThunk: unfollowTC
+    //автоматическое обертывание колбэками!!! == mapDispatchToProps
 })(UsersContainerClassComp)
 export type UsersPagePropsType = UsersPageType & mapDispatchToPropsType
