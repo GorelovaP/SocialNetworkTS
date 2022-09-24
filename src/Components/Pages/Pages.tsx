@@ -8,14 +8,16 @@ import {profileType} from "../../Redux/profilePage-reducer";
 
 
 export type PageSPagesType = {
-    profile: profileType
+    profile: profileType,
+    status: string,
+    updateStatus: (status: string) => void
 }
 export const Pages = (props: PageSPagesType) => {
 
     return (
         <div className={s.pagesContainer}>
             <h2 className={s.pagesContainer__logo}>Profile</h2>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostContainer/>
         </div>
     );

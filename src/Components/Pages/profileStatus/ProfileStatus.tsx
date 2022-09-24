@@ -1,18 +1,21 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 
 type ProfileStatusPropsType = {
     status: string;
+    updateStatus: (status: string) => void
 }
 
 type StateType = {
     editMode: boolean
+    status: string
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
 
 
     state: StateType = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode() {
@@ -25,7 +28,17 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     deactivateEditMode() {
         this.setState({
             editMode: false
-        })//setState - асинхронный
+        })
+        this.props.updateStatus(this.state.status)
+
+        //setState - асинхронный
+    }
+
+    onChangeStatus(value: string) {
+
+        this.setState({
+            status: value
+        })
     }
 
     render() {
@@ -37,16 +50,18 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                             console.log("fghj")
                             this.activateEditMode()
                         }}>
-                            {this.props.status}
+                            {this.props.status || "----"}
                         </span>
                 </div>
                 }
                 {this.state.editMode &&
                 <div>
-                    <input autoFocus={true}
-                           onBlur={() => this.deactivateEditMode()}
-                           value={this.props.status}
-                           type="text"/>
+                    <input
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeStatus(e.currentTarget.value)}
+                        autoFocus={true}
+                        onBlur={() => this.deactivateEditMode()}
+                        value={this.state.status}
+                        type="text"/>
                 </div>
                 }
 

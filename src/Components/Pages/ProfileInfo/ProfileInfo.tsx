@@ -6,6 +6,8 @@ import {ProfileStatus} from "../profileStatus/ProfileStatus";
 
 type ProfileInfoType = {
     profile: profileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -22,7 +24,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                         : "https://static4.depositphotos.com/1001944/371/i/600/depositphotos_3717756-stock-photo-fire-isolated-over-black-background.jpg"}
                     alt="Картинка"/>
             </div>
-            <div><ProfileStatus status={"fghjk"}/>
+            <div><ProfileStatus status={props.status} updateStatus={props.updateStatus} />
                 <br/>
             </div>
 

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import React, {ComponentType} from "react";
 import {Pages} from "./Pages";
-import {getUsersProfileTC, profileType} from "../../Redux/profilePage-reducer";
+import {getStatusTC, getUsersProfileTC, profileType, updateStatusTC} from "../../Redux/profilePage-reducer";
 
 
 import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
@@ -36,16 +36,18 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
-            userId = 2
+            userId = 25315
         }
         this.props.getUsersProfile(userId)
+        this.props.getStatus(userId)
 
     }
 
     render() {
 
         return <>
-            <Pages {...this.props} profile={this.props.profile}/>
+            <Pages {...this.props} profile={this.props.profile} status={this.props.status}
+                   updateStatus={this.props.updateStatus}/>
         </>
     }
 }
@@ -54,22 +56,28 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
 let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        status: state.profilePage.status
     }
 }
 
 type  mapDispatchToPropsType = {
     getUsersProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string) => void
 }
 
 type mapStateToPropsType = {
     profile: profileType,
-    isAuth?: boolean
+    isAuth?: boolean,
+    status: string
 }
 
 
 export const PagesContainer = compose<ComponentType>(
-    connect(mapStateToProps, {getUsersProfile: getUsersProfileTC}),
+    connect(mapStateToProps, {
+        getUsersProfile: getUsersProfileTC, getStatus: getStatusTC, updateStatus: updateStatusTC
+    }),
     withRouter,
     withAuthRedirect
 )(PagesContainerCC)
