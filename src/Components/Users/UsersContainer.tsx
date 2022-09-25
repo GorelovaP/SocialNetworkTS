@@ -17,9 +17,6 @@ import {Preloader} from "../common/preloader/Preloader";
 
 class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
 
-    constructor(props: UsersPagePropsType) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)

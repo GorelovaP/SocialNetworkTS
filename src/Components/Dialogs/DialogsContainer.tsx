@@ -1,4 +1,4 @@
-import {AddNewMessageActionCreator, dialogPageType, SendNewMassageActionCreator} from "../../Redux/dialogsPage-reducer";
+import {SendMessageAC, dialogPageType} from "../../Redux/dialogsPage-reducer";
 import {Dialogs} from "./Dialogs";
 import {reduxStateType} from "../../Redux/redax-store";
 import {connect} from "react-redux";
@@ -9,14 +9,13 @@ import {ComponentType} from "react";
 
 type mapStateToPropsType = dialogPageType & { isAuth: boolean }
 type mapDispatchPropsType = {
-    AddMessageCallback: () => void,
+    SendMessage: (newMessageBody:string) => void,
     onChangeNewMessage: (newMassageText: string) => void
 }
 let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMassageText: state.dialogsPage.newMassageText,
         isAuth: state.auth.isAuth
     }
 }
@@ -24,8 +23,7 @@ let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
 
 export const DialogsContainer = compose<ComponentType>(
     connect(mapStateToProps, {
-        AddMessageCallback: AddNewMessageActionCreator,
-        onChangeNewMessage: SendNewMassageActionCreator
+        SendMessage: SendMessageAC
     }),
     withAuthRedirect
 )(Dialogs)

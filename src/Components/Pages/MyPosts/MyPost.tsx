@@ -1,27 +1,29 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
 import {MyPostPagePropsType} from "./MyPostContainer";
+import {reduxForm} from "redux-form";
+import {FormDataType, MyPostForm} from "./myPostForm/MyPostForm";
 
 
 export const MyPost = (props: MyPostPagePropsType) => {
 
-    debugger
+    const AddPostFormRedux = reduxForm<FormDataType>({form: "PostForm"})(MyPostForm)
 
-    let onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updatePostText(event.currentTarget.value)
+
+    const addPost = (formData: FormDataType) => {
+        console.log(formData)
+        props.addPost(formData.postBody)
     }
+
     let postElements = props.posts.map(p => <Post key={p.id} id={p.id} value={p.value} like={p.like}/>)
 
     return (
 
         <div className={s.postsBlock}>
             <h2>my posts</h2>
-            <div><textarea onChange={onChange} value={props.newPostText}/></div>
-            <div>
-                <button onClick={props.addPost}>new posts</button>
-            </div>
 
+            <AddPostFormRedux onSubmit={addPost}/>
             <div className={s.posts}>
                 {postElements}
             </div>

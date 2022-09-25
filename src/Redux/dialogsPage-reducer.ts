@@ -1,12 +1,10 @@
-import {AddPostActionCreator, ChangeNewPostActionCreator} from "./profilePage-reducer";
+import {AddPostActionCreator} from "./profilePage-reducer";
 
 const SEND_MESSAGE = "SEND-MESSAGE"
-const CHANGE_MESSAGE_TEXT = "CHANGE_MESSAGE_TEXT"
+
 
 export type ActionTypeDialog = ReturnType<typeof AddPostActionCreator>
-    | ReturnType<typeof ChangeNewPostActionCreator>
-    | ReturnType<typeof SendNewMassageActionCreator>
-    | ReturnType<typeof AddNewMessageActionCreator>
+    | ReturnType<typeof SendMessageAC>
 
 export type dialogType = {
     id: number
@@ -19,7 +17,6 @@ export type messageType = {
 export type dialogPageType = {
     dialogs: Array<dialogType>
     messages: Array<messageType>
-    newMassageText: string
 }
 
 let initialState: dialogPageType = {
@@ -34,33 +31,24 @@ let initialState: dialogPageType = {
         {id: 1, text: "Hi"},
         {id: 2, text: "How are you?"},
         {id: 3, text: "Bye"}
-    ],
-    newMassageText: ""
+    ]
 }
 export const dialogsPageReducer = (state: dialogPageType = initialState, action: ActionTypeDialog) => {
     switch (action.type) {
         case SEND_MESSAGE: {
-            let StateCopy = {...state}
-            StateCopy.newMassageText = action.newMassageText;
-            return StateCopy
-        }
-        case CHANGE_MESSAGE_TEXT: {
             let newMessage: messageType = {
                 id: new Date().getTime(),
-                text: state.newMassageText,
+                text: action.newMessageBody,
             }
             let StateCopy = {...state, messages: [...state.messages]}
             StateCopy.messages.push(newMessage);
-            StateCopy.newMassageText = "";
             return StateCopy
         }
         default:
             return state
     }
 }
-export const AddNewMessageActionCreator = () => {
-    return {type: CHANGE_MESSAGE_TEXT} as const
+export const SendMessageAC = (newMessageBody:string) => {
+    return {type: SEND_MESSAGE ,newMessageBody: newMessageBody } as const
 }
-export const SendNewMassageActionCreator = (newMassageText: string) => {
-    return {type: SEND_MESSAGE, newMassageText: newMassageText} as const
-}
+
