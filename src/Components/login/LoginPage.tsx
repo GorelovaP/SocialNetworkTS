@@ -1,12 +1,18 @@
 import {FormDataType, LoginForm} from "./form/LoginForm";
 import {reduxForm} from "redux-form";
+import {UsersPagePropsType} from "./LoginContainer";
+import {Navigate} from "react-router-dom";
 
 
-export const LoginPage = () => {
+export const LoginPage = (props: UsersPagePropsType) => {
     const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
 
     const constSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.logIn(formData.email, formData.password, formData.rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Navigate to={"/profile"}/>
     }
 
     return (

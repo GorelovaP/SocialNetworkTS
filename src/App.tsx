@@ -11,7 +11,7 @@ import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./Components/Users/UsersContainer";
 import {PagesContainer} from "./Components/Pages/PagesContainer";
 import {HeaderContainer} from "./Components/Header/HeaderContainer";
-import {LoginPage} from "./Components/login/Login";
+import {LoginContainer} from "./Components/login/LoginContainer";
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
                     <Route path={"/users"} element={<UsersContainer/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>
-                    <Route path={"/login"} element={<LoginPage/>}/>
+                    <Route path={"/login"} element={<LoginContainer/>}/>
                 </Routes>
             </div>
             {/*<Mass/>*/}

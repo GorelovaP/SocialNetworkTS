@@ -91,4 +91,5 @@ export const UsersContainer = connect(mapStateToProps, {
     unfollowThunk: unfollowTC
     //автоматическое обертывание колбэками!!! == mapDispatchToProps
 })(UsersContainerClassComp)
+
 export type UsersPagePropsType = UsersPageType & mapDispatchToPropsType
