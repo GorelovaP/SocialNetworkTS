@@ -48,7 +48,7 @@ const FormControl: React.FC<CommonType> = ({input, meta, children, ...props}) =>
             <div>
                 {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+
         </div>
     )
 }

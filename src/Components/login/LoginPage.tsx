@@ -18,7 +18,7 @@ export const LoginPage = (props: UsersPagePropsType) => {
     return (
         <div>
             <h1>login</h1>
-            <LoginReduxForm onSubmit={constSubmit}/>
+            <LoginReduxForm error={props.error} onSubmit={constSubmit}/>
         </div>
     )
 }
