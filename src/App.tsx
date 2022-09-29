@@ -22,13 +22,13 @@ function App() {
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
+                    <Route path={'/socialNetworkTS'} element={<Navigate to="/login"/>}/>
                     <Route path={'/'} element={<Navigate to="/login"/>}/>
                     <Route path={"/dialogs"} element={<DialogsContainer/>}/>
 
                     <Route path="/profile" element={<PagesContainer/>}>
                         <Route path=":userId" element={<PagesContainer/>}/>
                     </Route>
-
                     <Route path={"/users"} element={<UsersContainer/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>

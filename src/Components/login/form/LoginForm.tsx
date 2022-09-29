@@ -10,8 +10,7 @@ import s from "../../common/formsControls/FormControls.module.css"
 export type FormDataType = {
     email: string,
     password: string
-    rememberMe: boolean,
-    error: string
+    rememberMe: boolean
 }
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (<div>
@@ -34,15 +33,13 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field component="input" type="checkbox" name={"rememberMe"}/> remember me
             </div>
-            <div className={s.formSomeError}>
-
+            <div className={s.formError}>
+                {props.error}
             </div>
             <div>
                 <button>Login</button>
             </div>
-            <div>
-                {!props.error ? <span>{props.error}</span> : ""}
-            </div>
+
         </form>
     </div>)
 }

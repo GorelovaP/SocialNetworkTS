@@ -5,6 +5,6 @@
 .formControl.error span {
     color: red;
 }
-.formSomeError{
+.formError{
     color: red;
 }

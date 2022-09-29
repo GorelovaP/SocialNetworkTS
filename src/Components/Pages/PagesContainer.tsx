@@ -36,7 +36,7 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
-            userId = 25315
+            userId = this.props.loggedUserId
         }
         this.props.getUsersProfile(userId)
         this.props.getStatus(userId)
@@ -57,7 +57,8 @@ let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
         isAuth: state.auth.isAuth,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        loggedUserId: state.auth.data.userId
     }
 }
 
@@ -70,7 +71,8 @@ type  mapDispatchToPropsType = {
 type mapStateToPropsType = {
     profile: profileType,
     isAuth?: boolean,
-    status: string
+    status: string,
+    loggedUserId: string | null
 }
 
 

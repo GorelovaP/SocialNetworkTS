@@ -5,7 +5,7 @@ import {ActionTypeProfilePage, profilePageReducer} from "./profilePage-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk"
 import {ActionTypeUser, usersReducer} from "./users-reducer";
 import {ActionTypeAuth, authReducer} from "./auth-reduсer";
-import {reducer as formReducer} from "redux-form";
+import {FormAction, reducer as formReducer} from "redux-form";
 
 export type RootReducerType = typeof reducer
 export type reduxStateType = ReturnType<RootReducerType>
@@ -25,5 +25,5 @@ export type AppActionsType = ActionTypeProfilePage & ActionTypeDialog & ActionTy
 // @ts-ignore
 window.store = store
 
-export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, AppActionsType>
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, AppActionsType | FormAction>
 
