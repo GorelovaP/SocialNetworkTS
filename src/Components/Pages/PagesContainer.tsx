@@ -10,8 +10,8 @@ import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "re
 
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {LoginContainer} from "../login/LoginContainer";
 
 
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
@@ -37,18 +37,22 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = this.props.loggedUserId
+            if (!userId) {
+                this.props.history.push("/login")
+            }
         }
         this.props.getUsersProfile(userId)
         this.props.getStatus(userId)
-
     }
 
-    render() {
 
-        return <>
-            <Pages {...this.props} profile={this.props.profile} status={this.props.status}
-                   updateStatus={this.props.updateStatus}/>
-        </>
+    render() {
+        return this.props.router.location.pathname === "/profile"
+            ? <LoginContainer/>
+            : <>
+                <Pages {...this.props} profile={this.props.profile} status={this.props.status}
+                       updateStatus={this.props.updateStatus}/>
+            </>
     }
 }
 
@@ -80,8 +84,7 @@ export const PagesContainer = compose<ComponentType>(
     connect(mapStateToProps, {
         getUsersProfile: getUsersProfileTC, getStatus: getStatusTC, updateStatus: updateStatusTC
     }),
-    withRouter,
-    withAuthRedirect
+    withRouter
 )(PagesContainerCC)
 
 export type PagesPagePropsType = mapStateToPropsType & mapDispatchToPropsType

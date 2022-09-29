@@ -70,13 +70,14 @@ export const getUserDataTC = () => {
 
     return (dispatch: Dispatch<ActionTypeAuth>) => {
 
-        AuthAPI.isAuthGET()
+      return AuthAPI.isAuthGET()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data
                     dispatch(setUserDataAC(id, email, login))
                 }
-            })
+            });
+
 
     }
 }

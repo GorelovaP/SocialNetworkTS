@@ -16,8 +16,6 @@ import {Preloader} from "../common/preloader/Preloader";
 
 
 class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
-
-
     componentDidMount() {
         this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
     }
@@ -31,7 +29,6 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
     setCurrentPage = (currentPage: number) => {
         this.props.setCurrentPage(currentPage)
         this.props.getUsersThunk(currentPage, this.props.pageSize)
-
     }
 
     render() {
@@ -89,7 +86,6 @@ export const UsersContainer = connect(mapStateToProps, {
     getUsersThunk: getUsersThunkCreator,
     followThunk: followTC,
     unfollowThunk: unfollowTC
-    //автоматическое обертывание колбэками!!! == mapDispatchToProps
 })(UsersContainerClassComp)
 
 export type UsersPagePropsType = UsersPageType & mapDispatchToPropsType
