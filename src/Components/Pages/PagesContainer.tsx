@@ -14,6 +14,7 @@ import {compose} from "redux";
 import {LoginContainer} from "../login/LoginContainer";
 
 
+
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
 
 export function withRouter<T>(Component: ComponentType<T>) {
@@ -38,7 +39,8 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
         if (!userId) {
             userId = this.props.loggedUserId
             if (!userId) {
-                this.props.history.push("/login")
+                this.props.router.location.pathname = "/login"
+
             }
         }
         this.props.getUsersProfile(userId)
