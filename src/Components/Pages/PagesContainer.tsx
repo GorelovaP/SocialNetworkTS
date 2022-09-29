@@ -11,7 +11,6 @@ import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "re
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
 import {compose} from "redux";
-import {LoginContainer} from "../login/LoginContainer";
 
 
 
@@ -49,12 +48,10 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
 
 
     render() {
-        return this.props.router.location.pathname === "/profile"
-            ? <LoginContainer/>
-            : <>
-                <Pages {...this.props} profile={this.props.profile} status={this.props.status}
-                       updateStatus={this.props.updateStatus}/>
-            </>
+        return <>
+            <Pages {...this.props} profile={this.props.profile} status={this.props.status}
+                   updateStatus={this.props.updateStatus}/>
+        </>
     }
 }
 
