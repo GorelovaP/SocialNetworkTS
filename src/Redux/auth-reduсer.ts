@@ -89,7 +89,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
                 if (data.resultCode === 0) {
                     dispatch(getUserDataTC())
                 } else {
-                    let message = data.data.messages.length > 0 ? data.data.messages[0] : "Check login or password"
+                    let message = data.messages.length > 0 ? data.messages[0] : "Check login or password"
                     dispatch(stopSubmit("login", {_error: message}))
                 }
                 //сделать позже капчу, если резалт код 10 !!!!!!!!!!!

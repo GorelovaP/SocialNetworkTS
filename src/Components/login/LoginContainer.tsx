@@ -8,7 +8,6 @@ const mapStateToProps = (state: reduxStateType): authInitialType => {
     return {
         data: state.auth.data,
         isAuth: state.auth.isAuth,
-        error: state.auth.error
     }
 }
 
