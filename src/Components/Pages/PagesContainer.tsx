@@ -11,6 +11,7 @@ import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "re
 // @ts-ignore
 import {RouteComponentProps} from 'react-router-dom';
 import {compose} from "redux";
+import {LoginContainer} from "../login/LoginContainer";
 
 
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
@@ -28,22 +29,16 @@ export function withRouter<T>(Component: ComponentType<T>) {
     return ComponentWithRouterProp;
 }// самодельный WithRouter
 
-
 type PathParamsType = { useId: number; }
 type CommonPropsType = RouteComponentProps<PathParamsType> & PagesPagePropsType // типизация для withRouter
 
 export class PagesContainerCC extends React.Component<CommonPropsType> {
-
-
     componentDidMount() {
-        console.log(this.props.router.location.pathname)
-
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = this.props.loggedUserId
             if (!userId) {
-                debugger
-                this.props.router.location.pathname = "/login"
+                this.props.history.push("/login")
             }
         }
         this.props.getUsersProfile(userId)
@@ -52,10 +47,12 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
 
 
     render() {
-        return <>
-            <Pages {...this.props} profile={this.props.profile} status={this.props.status}
-                   updateStatus={this.props.updateStatus}/>
-        </>
+        return this.props.router.location.pathname === "/profile"
+            ? <LoginContainer/>
+            : <>
+                <Pages {...this.props} profile={this.props.profile} status={this.props.status}
+                       updateStatus={this.props.updateStatus}/>
+            </>
     }
 }
 
