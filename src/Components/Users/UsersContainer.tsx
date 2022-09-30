@@ -13,6 +13,13 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
+import {
+    getCurrentPage, getFollowingInProgress, getIsFetching,
+    getPageSize,
+    getPaginatorPortion,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/users-selectors";
 
 
 class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
@@ -50,15 +57,27 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
     }
 }
 
+// let mapStateToProps = (state: reduxStateType): UsersPageType => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         paginatorPortion: state.usersPage.paginatorPortion,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
+
 let mapStateToProps = (state: reduxStateType): UsersPageType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        paginatorPortion: state.usersPage.paginatorPortion,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        paginatorPortion: getPaginatorPortion(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
