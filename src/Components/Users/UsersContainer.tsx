@@ -18,7 +18,7 @@ import {
     getPageSize,
     getPaginatorPortion,
     getTotalUsersCount,
-    getUsers
+    getUsersSuperSelector
 } from "../../Redux/users-selectors";
 
 
@@ -70,8 +70,9 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
 // }
 
 let mapStateToProps = (state: reduxStateType): UsersPageType => {
-    return {
-        users: getUsers(state),
+    return { //достаем данные при помощи селекторов(функции-обертки)
+        // users: getUsers(state),
+        users: getUsersSuperSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
