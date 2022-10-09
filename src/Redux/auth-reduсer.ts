@@ -1,11 +1,11 @@
 import {Dispatch} from "redux";
 import {AuthAPI} from "../api/api";
 import {AppThunkType} from "./redax-store";
-import {stopSubmit} from "redux-form";
 
 
 const SET_USER_DATA = "SET-USER-DATA"
 const RESET_USER_AUTH_DATA = "RESET-USER-AUTH-DATA"
+const SET_ERROR_MASSAGE = "SET-ERROR-MASSAGE"
 
 let initialState: authInitialType = {
     data: {
@@ -13,7 +13,8 @@ let initialState: authInitialType = {
         email: null,
         login: null
     },
-    isAuth: false
+    isAuth: false,
+    errorMassage: ""
 }
 export type authInitialType = {
     data: {
@@ -21,10 +22,14 @@ export type authInitialType = {
         email: string | null,
         login: string | null
     },
-    isAuth: boolean
+    isAuth: boolean,
+    errorMassage: string
 }
 
-export type ActionTypeAuth = ReturnType<typeof setUserDataAC> | ReturnType<typeof resetUserAuthDataAC>
+export type ActionTypeAuth =
+    ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof resetUserAuthDataAC>
+    | ReturnType<typeof setErrorMassageAC>
 
 export const authReducer = (state: authInitialType = initialState, action: ActionTypeAuth): authInitialType => {
     switch (action.type) {
@@ -36,14 +41,21 @@ export const authReducer = (state: authInitialType = initialState, action: Actio
             }
         }
         case RESET_USER_AUTH_DATA: {
-            debugger
             return {
                 data: {
                     userId: null,
                     email: null,
                     login: null
                 },
-                isAuth: false
+                isAuth: false,
+                errorMassage: ""
+            }
+        }
+        case SET_ERROR_MASSAGE: {
+            debugger
+            return {
+                ...state,
+                errorMassage: action.message
             }
         }
         default:
@@ -64,13 +76,16 @@ export const setUserDataAC = (userId: string | null, email: string | null,
 export const resetUserAuthDataAC = () => {
     return {type: RESET_USER_AUTH_DATA} as const
 }
+export const setErrorMassageAC = (message: string) => {
+    return {type: SET_ERROR_MASSAGE, message} as const
+}
 
 
 export const getUserDataTC = () => {
 
     return (dispatch: Dispatch<ActionTypeAuth>) => {
 
-      return AuthAPI.isAuthGET()
+        return AuthAPI.isAuthGET()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data
@@ -89,9 +104,14 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(getUserDataTC())
+                    dispatch(setErrorMassageAC(""))
                 } else {
+                    debugger
                     let message = data.messages.length > 0 ? data.messages[0] : "Check login or password"
-                    dispatch(stopSubmit("login", {_error: message}))
+                    dispatch(setErrorMassageAC(message))
+                    setTimeout(() => {
+                        dispatch(setErrorMassageAC(""))
+                    }, 7000)
                 }
                 //сделать позже капчу, если резалт код 10 !!!!!!!!!!!
             })

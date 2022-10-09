@@ -1,13 +1,12 @@
-import {FormDataType, LoginForm} from "./form/LoginForm";
-import {reduxForm} from "redux-form";
+import {dataType, LoginForm} from "./form/LoginForm";
 import {UsersPagePropsType} from "./LoginContainer";
 import {Navigate} from "react-router-dom";
 
 
 export const LoginPage = (props: UsersPagePropsType) => {
-    const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
 
-    const constSubmit = (formData: FormDataType) => {
+
+    const constSubmit = (formData: dataType) => {
         props.logIn(formData.email, formData.password, formData.rememberMe)
     }
 
@@ -18,7 +17,7 @@ export const LoginPage = (props: UsersPagePropsType) => {
     return (
         <div>
             <h1>login</h1>
-            <LoginReduxForm onSubmit={constSubmit}/>
+            <LoginForm sendData={constSubmit} message={props.errorMassage}/>
         </div>
     )
 }
