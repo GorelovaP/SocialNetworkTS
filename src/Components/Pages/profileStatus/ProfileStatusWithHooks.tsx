@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 
 type ProfileStatusPropsType = {
     status: string;
@@ -6,6 +6,11 @@ type ProfileStatusPropsType = {
 }
 
 export const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
+
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     let [editMode, setEditMode] = useState<boolean>(false)
     let [status, setStatus] = useState<string>(props.status)
 
