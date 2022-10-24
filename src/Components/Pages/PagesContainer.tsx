@@ -50,7 +50,8 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
     render() {
         return <>
             <Pages {...this.props} profile={this.props.profile} status={this.props.status}
-                   updateStatus={this.props.updateStatus}/>
+                   updateStatus={this.props.updateStatus}
+            isAuth={this.props.isAuth}/>
         </>
     }
 }

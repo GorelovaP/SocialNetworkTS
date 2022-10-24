@@ -1,27 +1,48 @@
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    list-style: none;
+    text-decoration: none;
     box-sizing: border-box;
     font-family: 'Bree Serif', serif;;
 }
 
+html, body {
+    height: 100%;
+}
+
+
+
+
+
+
 .app-wrapper {
     margin: auto;
     display: grid;
-    grid-template-areas:  "n c m";
+    grid-template-areas:  "n c";
     grid-template-rows: 1fr;
     /*grid-template-columns: 2fr 8fr 2fr;*/
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 12fr;
     min-height: 100vh;
 }
 
 
-.app-wrapper-content {
+.app-wrapper-area-content {
     grid-area: c;
-    background: #EEE0FF;
+    background: #1c3faa;
 }
 
-.app-wrapper-massage {
-    grid-area: m;
-    background: #EEE0FF;
+.main-container {
+    position: relative;
+    margin-top: 15px;
+    margin-right: 15px;
+    padding: 15px;
+    min-height: calc(100% - 15px);
+    border-radius: 40px 40px 0 0;
+    background: #f9fbff;
 }
+
+
+

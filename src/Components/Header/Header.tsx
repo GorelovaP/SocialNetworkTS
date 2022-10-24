@@ -1,20 +1,26 @@
 import React from 'react';
 import s from './Header.module.css';
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {AuthPropsType} from "./HeaderContainer";
+import {PATH} from "../../routes/PagesRouters";
+
 
 export const Header = (props: AuthPropsType) => {
-
+    let navigate = useNavigate()
+    const goToLogin = () => {
+        navigate(PATH.LOGIN)
+    }
 
     return (<header className={s.header}>
-        <img
-            src="https://w7.pngwing.com/pngs/743/334/png-transparent-wildfire-flame-organization-others-orange-computer-logo.png"
-            alt="Logo"/>
-        <div className={s.loginBlock}>
-            {props.isAuth ? <div>
-                {props.login}
-                <button onClick={props.logOut}>Log out</button>
-            </div> : <NavLink to={"/login"}> Login</NavLink>}
+
+        {props.isAuth ? <div className={s.right}>
+            {props.login}
+            <button className={s.styledLogBtn} onClick={props.logOut}>Log out</button>
+        </div> : <div className={s.right}>
+            <button className={s.styledLogBtn} onClick={goToLogin}>Login</button>
         </div>
+        }
+
+
     </header>);
 }

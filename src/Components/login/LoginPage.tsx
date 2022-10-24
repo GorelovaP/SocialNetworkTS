@@ -1,6 +1,8 @@
 import {dataType, LoginForm} from "./form/LoginForm";
 import {UsersPagePropsType} from "./LoginContainer";
 import {Navigate} from "react-router-dom";
+import s from "./Login.module.css"
+import {PATH} from "../../routes/PagesRouters";
 
 
 export const LoginPage = (props: UsersPagePropsType) => {
@@ -11,13 +13,16 @@ export const LoginPage = (props: UsersPagePropsType) => {
     }
 
     if (props.isAuth) {
-        return <Navigate to={"/profile"}/>
+        return <Navigate to={PATH.PROFILE}/>
     }
 
     return (
-        <div>
-            <h1>login</h1>
-            <LoginForm sendData={constSubmit} message={props.errorMassage}/>
+        <div className={s.loginMAinWrapper}>
+            <div className={s.loginContainer }>
+                <h1>login</h1>
+                <LoginForm sendData={constSubmit} message={props.errorMassage}/>
+            </div>
         </div>
+
     )
 }

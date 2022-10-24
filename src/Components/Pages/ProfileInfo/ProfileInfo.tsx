@@ -2,6 +2,8 @@ import React from 'react';
 import {profileType} from "../../../Redux/profilePage-reducer";
 import {Preloader} from "../../common/preloader/Preloader";
 import {ProfileStatus} from "../profileStatus/ProfileStatus";
+import avatar from "../../assets/images/profile.png"
+import s from "./ProfileInfo.module.css"
 
 
 type ProfileInfoType = {
@@ -21,10 +23,13 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 <img
                     src={props.profile.photos.large !== null
                         ? props.profile.photos.large
-                        : "https://static4.depositphotos.com/1001944/371/i/600/depositphotos_3717756-stock-photo-fire-isolated-over-black-background.jpg"}
-                    alt="Картинка"/>
+                        : avatar }
+                    alt="Avatar"
+                    className={s.avatar}
+                />
             </div>
-            <div><ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+            <div>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
                 <br/>
             </div>
 

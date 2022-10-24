@@ -1,10 +1,13 @@
 
 .formControl.error input, .formControl.error textarea {
     border: 2px solid red;
+    position: absolute;
 }
 .formControl.error span {
     color: red;
 }
 .formError{
     color: red;
+    position: absolute;
+    transform: translate(0, -20px);
 }

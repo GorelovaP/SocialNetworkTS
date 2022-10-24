@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from "react";
+import {BsFillPencilFill} from "react-icons/bs";
 
 type ProfileStatusPropsType = {
     status: string;
@@ -30,7 +31,6 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
             editMode: false
         })
         this.props.updateStatus(this.state.status)
-
         //setState - асинхронный
     }
 
@@ -55,10 +55,10 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                 {!this.state.editMode &&
                 <div>
                         <span onDoubleClick={() => {
-                            console.log("fghj")
                             this.activateEditMode()
                         }}>
                             {this.props.status || "----"}
+                             <BsFillPencilFill/>
                         </span>
                 </div>
                 }
@@ -69,11 +69,10 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                         autoFocus={true}
                         onBlur={() => this.deactivateEditMode()}
                         value={this.state.status}
-                        type="text"/>
+                        type="text"
+                    />
                 </div>
                 }
-
-
             </div>
         )
     }

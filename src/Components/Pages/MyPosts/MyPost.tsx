@@ -6,27 +6,33 @@ import {reduxForm} from "redux-form";
 import {FormDataType, MyPostForm} from "./myPostForm/MyPostForm";
 
 
-export const MyPost = (props: MyPostPagePropsType) => {
+export class MyPost extends React.Component<MyPostPagePropsType> {
+    render() {
 
-    const AddPostFormRedux = reduxForm<FormDataType>({form: "PostForm"})(MyPostForm)
+        const AddPostFormRedux = reduxForm<FormDataType>({form: "PostForm"})(MyPostForm)
 
 
-    const addPost = (formData: FormDataType) => {
-        console.log(formData)
-        props.addPost(formData.postBody)
-    }
+        const addPost = (formData: FormDataType) => {
+            this.props.addPost(formData.postBody)
+        }
 
-    let postElements = props.posts.map(p => <Post key={p.id} id={p.id} value={p.value} like={p.like}/>)
+        let postElements = this.props.posts.map(p => <Post key={p.id} id={p.id} value={p.value} like={p.like}/>)
 
-    return (
+        let name
+        if(this.props.profile){
+             name = this.props.profile.fullName
+        }
 
-        <div className={s.postsBlock}>
-            <h2>my posts</h2>
+        return (
 
-            <AddPostFormRedux onSubmit={addPost}/>
-            <div className={s.posts}>
-                {postElements}
+            <div className={s.postsBlock}>
+                <h2> {name} posts</h2>
+
+                <AddPostFormRedux onSubmit={addPost}/>
+                <div className={s.posts}>
+                    {postElements}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }

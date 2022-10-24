@@ -3,20 +3,14 @@ import './App.css';
 import React, {ComponentType} from 'react';
 
 import {Nav} from "./Components/Nav/Nav";
-import {Navigate, Route, Routes} from 'react-router-dom'
-import {Settings} from "./Components/Settings/Settings";
-import {Music} from "./Components/Music/Music";
-
-import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./Components/Users/UsersContainer";
-import {PagesContainer, withRouter} from "./Components/Pages/PagesContainer";
-import {HeaderContainer} from "./Components/Header/HeaderContainer";
-import {LoginContainer} from "./Components/login/LoginContainer";
+import {withRouter} from "./Components/Pages/PagesContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initialiseAppTC} from "./Redux/app-reduсer";
 import {reduxStateType} from "./Redux/redax-store";
 import {Preloader} from "./Components/common/preloader/Preloader";
+import {PagesRouters} from "./routes/PagesRouters";
+import {HeaderContainer} from "./Components/Header/HeaderContainer";
 
 
 class App extends React.Component<appPropsType> {
@@ -28,22 +22,15 @@ class App extends React.Component<appPropsType> {
         debugger
         return !this.props.initialised ? <Preloader/> : (
             <div className='app-wrapper'>
-                <HeaderContainer/>
                 <Nav/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path={'/socialNetworkTS'} element={<Navigate to="/login"/>}/>
+                <div className='app-wrapper-area-content'>
+                    <div className="main-container">
 
-                        <Route path={"/dialogs"} element={<DialogsContainer/>}/>
+                            <HeaderContainer/>
+                            <PagesRouters/>
 
-                        <Route path="/profile" element={<PagesContainer/>}>
-                            <Route path=":userId" element={<PagesContainer/>}/>
-                        </Route>
-                        <Route path={"/users"} element={<UsersContainer/>}/>
-                        <Route path={"/music"} element={<Music/>}/>
-                        <Route path={"/settings"} element={<Settings/>}/>
-                        <Route path={"/login"} element={<LoginContainer/>}/>
-                    </Routes>
+
+                    </div>
                 </div>
             </div>
         );

@@ -1,12 +1,12 @@
 .nav_area {
     grid-area: n;
-    background: #EEE0FF;
+    background: #1c3faa;
 }
 
 .nav_container {
     position: sticky;
     top: 0;
-    background: #ffffff;
+    background: #1c3faa;
     min-height: 100vh;
     border-radius: 0 50px 50px 0;
     padding: 90px 60px;
@@ -19,9 +19,17 @@
 .logo {
     font-family: 'Titan One', cursive;
     font-size: 2rem;
-    color: #464646;
-    padding-bottom: 90px;
+    color: #DADADA;
     padding-left: 10px;
+    margin-bottom: 20px;
+}
+.logo::after{
+    content: "";
+    margin-top: 20px;
+    display: block;
+    width: 140%;
+    height: 2px;
+    background-color: #5268ac;
 }
 
 

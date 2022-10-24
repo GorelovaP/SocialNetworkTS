@@ -1,5 +1,6 @@
 import React from "react";
 import s from "../../common/formsControls/FormControls.module.css"
+import style from "./LoginForm.module.css"
 import {useFormik} from "formik";
 
 // InjectedFormProps пропс, которые приходят из контейнерной компоненты
@@ -51,21 +52,21 @@ export const LoginForm = (props: LoginFormPropsType) => {
     return (<div>
         <form name="login" onSubmit={formik.handleSubmit}>
             <div>
+                <label className={style.label}>Email</label>
                 <input type="text"
-                       placeholder={"Email"}
+                       placeholder={"type here your email..."}
+                       className={style.styledInput}
                        {...formik.getFieldProps("email")}
-                    // name="email"
-                    // onBlur={formik.handleBlur}
-                    // onChange={formik.handleChange}
-                    // value={formik.values.email}
                 />
                 {formik.touched.email && formik.errors.email &&
                 <div className={s.formError}>{formik.errors.email}</div>}
             </div>
             <div>
+                <label className={style.label}>Password</label>
                 <input
                     type="password"
-                    placeholder={"Password"}
+                    className={style.styledInput}
+                    placeholder={"type here your password..."}
                     {...formik.getFieldProps("password")}
                 />
                 {formik.touched.password && formik.errors.password &&
@@ -75,11 +76,12 @@ export const LoginForm = (props: LoginFormPropsType) => {
                 <label> Remember me
                     <input type={"checkbox"}
                            {...formik.getFieldProps("rememberMe")}
+                        className={style.checkBox}
                            checked={formik.values.rememberMe}/>
                 </label>
             </div>
             <div>
-                <button type={"submit"}>Login</button>
+                <button className={style.submitBtn} type={"submit"}>Login</button>
             </div>
             {props.message.length > 0 && <div className={s.formError}> {props.message}</div>}
         </form>

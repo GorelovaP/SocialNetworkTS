@@ -6,7 +6,6 @@ import React from "react";
 }
 export const Message = (props: MessageType) => {
 
-
     return (
         <div>
             <div className={s.message}>{props.text}</div>
