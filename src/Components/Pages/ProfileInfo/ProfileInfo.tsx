@@ -1,10 +1,7 @@
 import React from 'react';
 import {profileType} from "../../../Redux/profilePage-reducer";
 import {Preloader} from "../../common/preloader/Preloader";
-import {ProfileStatus} from "../profileStatus/ProfileStatus";
-import avatar from "../../assets/images/profile.png"
 import s from "./ProfileInfo.module.css"
-
 
 type ProfileInfoType = {
     profile: profileType
@@ -18,21 +15,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         return <Preloader/>
     }
     return (
-        <div>
-            <div>
-                <img
-                    src={props.profile.photos.large !== null
-                        ? props.profile.photos.large
-                        : avatar }
-                    alt="Avatar"
-                    className={s.avatar}
-                />
-            </div>
-            <div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
-                <br/>
-            </div>
-
+        <div className={s.profileInfo}>
+            <h3 className={s.info}>Info</h3>
             <div>
                 <span>fullName:</span>
                 <span>{props.profile.fullName}</span>
@@ -86,8 +70,6 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                         <span>mainLink:</span>
                         <span>{props.profile.contacts.mainLink !== null ? props.profile.contacts.mainLink : "-"}</span>
                     </div>
-
-
                 </div>
             </div>
         </div>

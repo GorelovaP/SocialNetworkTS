@@ -1,9 +1,59 @@
 .pagesContainer {
-    padding: 45px 50px;
+    padding: 20px;
 }
 
+.profileImageArea{
+    background: #ffffff;
+    border-radius: 20px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+.largeImgArea{
+    position: relative;
+    display: flex;
+    height: 270px;
+
+}
+.largeImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    border-radius: 20px 20px 0 0;
+}
+.avatarArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar{
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.nameArea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.fullName{
+    margin: 40px 0 5px 0;
+}
 .pagesContainer__logo {
     font-family: 'Titan One', cursive;
     font-size: 2rem;
     color: #464646;
+}
+.mainInformationArea{
+    display: flex;
+    flex-direction: row;
 }

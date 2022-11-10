@@ -10,12 +10,13 @@
     width: 90px;
     background: rgba(40, 136, 252, 0.8);
     border-radius: 20px;
-    color: #DADADA;
+    color: #ffffff;
     margin-left: 10px;
 }
 
 .styledLogBtn:hover {
     background: rgba(28, 63, 170, 1);
+    color: white;
 }
 .header:after{
     content: "";

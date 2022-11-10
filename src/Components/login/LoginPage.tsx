@@ -18,9 +18,13 @@ export const LoginPage = (props: UsersPagePropsType) => {
 
     return (
         <div className={s.loginMAinWrapper}>
-            <div className={s.loginContainer }>
+            <div className={s.loginContainer}>
                 <h1>login</h1>
                 <LoginForm sendData={constSubmit} message={props.errorMassage}/>
+            </div>
+            <div className={s.testData}>
+                <p>Test account data: Email: free@samuraijs.com Password: free</p>
+
             </div>
         </div>
 

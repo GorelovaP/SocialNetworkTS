@@ -1,6 +1,12 @@
-.postsBlock{
-padding: 10px;
+.postsBlock {
+    width: 50%;
+    margin-top: 20px;
+    margin-right: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
 }
-.posts{
+
+.posts {
     margin-top: 10px;
 }

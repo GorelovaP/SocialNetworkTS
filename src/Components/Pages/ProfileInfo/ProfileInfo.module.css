@@ -1,7 +1,10 @@
-.discriptionBlock{
-    padding: 10px;
+.profileInfo {
+    width: 50%;
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
 }
-.avatar{
-    width: 200px;
-    height: 200px;
+.info{
+    color: #1c3faa;
 }

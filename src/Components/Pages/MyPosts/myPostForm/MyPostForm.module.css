@@ -1,0 +1,7 @@
+.field{
+    background: rgba(218, 218, 218, 0.2);
+    border-radius: 20px;
+    width: 100%;
+    resize: none;
+    padding: 10px 15px;
+}
