@@ -1,20 +1,31 @@
 import React from 'react';
 
 import s from './Post.module.css';
-import {postType} from "../../../../Redux/profilePage-reducer";
+import avatar from "../../../assets/images/profile.png";
+import {AiTwotoneHeart} from "react-icons/ai";
 
 
-export const Post = (props: postType) => {
+type PropsType = {
+    id: number
+    value: string
+    like: number
+    img: string | null
+}
+
+export const Post = (props: PropsType) => {
+
+    let avatarka = props.img ? props.img : avatar
     return (
 
         <div className={s.item}>
-            <img src="https://avatarko.ru/img/kartinka/7/kot_6768.jpg" alt="Avatarka"/>
-            <span>{props.value}</span>
-            <div>
-                <span>
-                    {"dfdfk" + props.like}
-                </span>
+            <div className={s.itemArea}>
+                <img className={s.avatar} src={avatarka} alt="Avatarka"/>
+                <span className={s.text}> {props.value}</span>
             </div>
+            <span className={s.like}>
+                    <AiTwotoneHeart className={s.likeIcon}/>
+                {props.like}
+                </span>
         </div>
 
     );

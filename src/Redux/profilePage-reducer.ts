@@ -10,7 +10,7 @@ const SET_STATUS = "SET-STATUS"
 let initialState: profilePageType = {
     posts: [
         {id: 1, value: "Post 1", like: 21},
-        {id: 2, value: "This is 2 post", like: 44}
+        {id: 2, value: "This is 2 post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", like: 44}
     ],
     profile: null,
     status: ""
@@ -67,11 +67,9 @@ export const profilePageReducer = (state: profilePageType = initialState, action
             return StateCopy
         }
         case SET_USER_PAGE: {
-            debugger
             return {...state, profile: action.page}
         }
         case SET_STATUS: {
-            debugger
             return {...state, status: action.status}
         }
 

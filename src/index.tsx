@@ -3,7 +3,7 @@ import React from "react";
 import reportWebVitals from './reportWebVitals';
 
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
+import { HashRouter} from 'react-router-dom';
 import {store} from "./Redux/redax-store";
 import {Provider} from 'react-redux';
 import {AppContainer} from "./App";
@@ -12,12 +12,12 @@ import {AppContainer} from "./App";
 // After
 
 
-ReactDOM.render(<BrowserRouter>
+ReactDOM.render(<HashRouter>
     <Provider store={store}>
         <AppContainer/>
     </Provider>
 
-</BrowserRouter>, document.getElementById('root'));
+</HashRouter>, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change

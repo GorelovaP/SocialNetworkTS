@@ -48,7 +48,6 @@ export const Paginator = (props: PaginatorPropsType) => {
                         key={p}
                         onClick={() => {
                             props.setCurrentItem(p)
-                            console.log(portionNumber)
                         }}
                         className={`${s.page} ${props.currentItem === p ? s.selectedPage : ''}`}>{p}</span>
                 }
@@ -62,7 +61,6 @@ export const Paginator = (props: PaginatorPropsType) => {
                 } else {
                     setPortionNumber(portionNumber + 1)
                     setLeftDisable(false)
-                    console.log(portionNumber)
                 }
             }}>+
         </button>

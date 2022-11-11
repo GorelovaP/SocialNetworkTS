@@ -52,7 +52,6 @@ export const authReducer = (state: authInitialType = initialState, action: Actio
             }
         }
         case SET_ERROR_MASSAGE: {
-            debugger
             return {
                 ...state,
                 errorMassage: action.message
@@ -106,7 +105,6 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
                     dispatch(getUserDataTC())
                     dispatch(setErrorMassageAC(""))
                 } else {
-                    debugger
                     let message = data.messages.length > 0 ? data.messages[0] : "Check login or password"
                     dispatch(setErrorMassageAC(message))
                     setTimeout(() => {
@@ -120,11 +118,9 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
 }
 
 export const logoutTC = () => {
-    debugger
     return (dispatch: Dispatch<ActionTypeAuth>) => {
         AuthAPI.logOut()
             .then(data => {
-                debugger
                 if (data.resultCode === 0) {
                     dispatch(resetUserAuthDataAC())
                 }

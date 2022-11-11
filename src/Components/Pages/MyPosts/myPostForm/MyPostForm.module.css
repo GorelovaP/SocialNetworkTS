@@ -1,7 +1,21 @@
-.field{
+.field {
     background: rgba(218, 218, 218, 0.2);
     border-radius: 20px;
     width: 100%;
     resize: none;
     padding: 10px 15px;
+}
+
+.btnArea {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.submitBtn {
+    position: relative;
+    padding: 10px;
+    background: rgba(40, 136, 252, 0.8);
+    border-radius: 20px;
+    color: #ffffff;
 }

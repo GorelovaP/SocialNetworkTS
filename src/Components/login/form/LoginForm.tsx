@@ -42,7 +42,6 @@ export const LoginForm = (props: LoginFormPropsType) => {
             return errors
         },
         onSubmit: values => {
-            console.log(values)
             // dispatch(loginTC(values))
             props.sendData(values)
             formik.resetForm();

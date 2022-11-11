@@ -7,8 +7,10 @@ import {RiMessage3Fill, RiSettings4Fill} from "react-icons/ri";
 import {SiApplemusic} from "react-icons/si";
 import {FaRegStarHalf} from "react-icons/fa";
 
-
-export const Nav = () => {
+type PropsType={
+    userId: string | null
+}
+export const Nav = (props: PropsType) => {
     const match = useMatch('/:routeKey');
 
     return (<nav className={s.nav_area}>
@@ -17,7 +19,7 @@ export const Nav = () => {
                     <FaRegStarHalf /> SkyChat</div>
                 <div className={`${s.item} ${match?.params.routeKey === "pages" ? s.active : undefined}`}>
                     <BsPersonCircle className={s.item__icon}/>
-                    <NavLink to={"/profile"}>Profile</NavLink>
+                    <NavLink to={"/profile/" + props.userId}>Profile</NavLink>
                 </div>
 
                 <div className={`${s.item} ${match?.params.routeKey === "users" ? s.active : undefined}`}>

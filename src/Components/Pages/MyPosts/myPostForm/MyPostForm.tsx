@@ -1,7 +1,7 @@
 import React from "react";
 import {Field, InjectedFormProps} from "redux-form";
 import {maxLengthCreator, required} from "../../../../utils/validators";
-import { Textarea } from "../../../common/formsControls/FormsControls";
+import {Textarea} from "../../../common/formsControls/FormsControls";
 import s from "./MyPostForm.module.css"
 
 
@@ -17,15 +17,15 @@ export const MyPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => 
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={ Textarea}
+                <Field component={Textarea}
                        name="postBody"
-                       placeholder={"Enter your post"}
+                       placeholder={"What's Your Mind ?"}
                        validate={[required, maxLength2000]}
                        className={s.field}
                 />
             </div>
-            <div>
-                <button>Add new posts</button>
+            <div className={s.btnArea}>
+                <button type={"submit"} className={s.submitBtn}>Add new posts</button>
             </div>
         </form>
     )

@@ -17,6 +17,7 @@ export type PageSPagesType = {
     status: string,
     updateStatus: (status: string) => void
     isAuth: boolean
+    loggedUserId: number
 }
 
 
@@ -46,10 +47,9 @@ export const Pages = (props: PageSPagesType) => {
                     />
                 </div>
                 <div className={s.avatarArea}>
-
                     <div className={s.nameArea}>
                         <h2 className={s.fullName}>{props.profile !== null && props.profile.fullName}</h2>
-                        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={userId} loggedUserId={props.loggedUserId}/>
                     </div>
                 </div>
             </div>

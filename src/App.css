@@ -6,28 +6,23 @@
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
-    font-family: 'Bree Serif', serif;;
+    font-family: 'Bree Serif', serif;
 }
 
 html, body {
+    position: relative;
     height: 100%;
+    width: 100%;
 }
-
-
-
-
-
 
 .app-wrapper {
     margin: auto;
     display: grid;
+    min-height: 100%;
     grid-template-areas:  "n c";
     grid-template-rows: 1fr;
-    /*grid-template-columns: 2fr 8fr 2fr;*/
     grid-template-columns: 2fr 12fr;
-    min-height: 100vh;
 }
-
 
 .app-wrapper-area-content {
     grid-area: c;

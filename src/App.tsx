@@ -19,17 +19,13 @@ class App extends React.Component<appPropsType> {
     }
 
     render() {
-        debugger
         return !this.props.initialised ? <Preloader/> : (
             <div className='app-wrapper'>
-                <Nav/>
+                <Nav userId={this.props.userId}/>
                 <div className='app-wrapper-area-content'>
                     <div className="main-container">
-
-                            <HeaderContainer/>
-                            <PagesRouters/>
-
-
+                        <HeaderContainer/>
+                        <PagesRouters/>
                     </div>
                 </div>
             </div>
@@ -43,9 +39,11 @@ type MapDispatchToProps = {
 }
 type MapStateToPropsType = {
     initialised: boolean
+    userId: string | null
 }
 const mapStateToProps = (state: reduxStateType) => ({
-    initialised: state.app.initialized
+    initialised: state.app.initialized,
+    userId: state.auth.data.userId
 })
 
 export const AppContainer = compose<ComponentType>(

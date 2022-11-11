@@ -17,7 +17,6 @@ export type ActionTypeApp = ReturnType<typeof setInitialisedSuccessAC>
 export const appReducer = (state: appInitialType = initialState, action: ActionTypeApp): appInitialType => {
     switch (action.type) {
         case SET_INITIALISED: {
-            debugger
             return {
                 ...state,
                 initialized: true
@@ -36,10 +35,8 @@ export const setInitialisedSuccessAC = () => {
 
 export const initialiseAppTC = (): AppThunkType => {
     return (dispatch) => {
-        debugger
         let promise = dispatch(getUserDataTC())
         promise.then(() => {
-            debugger
             dispatch(setInitialisedSuccessAC())
         })
     }

@@ -5,6 +5,8 @@ import s from "./Status.module.css"
 type ProfileStatusPropsType = {
     status: string;
     updateStatus: (status: string) => void
+    userId?: string
+    loggedUserId: number
 }
 
 type StateType = {
@@ -49,34 +51,52 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         }
     }
 
+
     render() {
-        return (
-            <div>
-                {!this.state.editMode &&
-                <div>
-                        <h3 className={s.status} onDoubleClick={() => {
-                            this.activateEditMode()
-                        }}>
-                            {this.props.status || "----"}
-                             <BsFillPencilFill/>
-                        </h3>
-                </div>
+        let userId
+        if (this.props.userId) {
+            userId = +this.props.userId
+        }
+
+
+        return (<>
+                {
+                    userId !== this.props.loggedUserId ?
+                        <div>
+                            <h3 className={s.status}>
+                                {this.props.status || "----"}
+                            </h3>
+                        </div>
+                        :
+                        <div>
+                            {!this.state.editMode &&
+                            <div>
+                                <h3 className={s.status} onDoubleClick={() => {
+                                    this.activateEditMode()
+                                }}>
+                                    {this.props.status || "----"}
+                                    <BsFillPencilFill/>
+                                </h3>
+                            </div>
+                            }
+                            {this.state.editMode &&
+                            <div>
+                                <input
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeStatus(e.currentTarget.value)}
+                                    autoFocus={true}
+                                    onBlur={() => this.deactivateEditMode()}
+                                    value={this.state.status}
+                                    type="text"
+                                    className={s.status}
+                                />
+                            </div>
+                            }
+                        </div>
                 }
-                {this.state.editMode &&
-                <div>
-                    <input
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeStatus(e.currentTarget.value)}
-                        autoFocus={true}
-                        onBlur={() => this.deactivateEditMode()}
-                        value={this.state.status}
-                        type="text"
-                        className={s.status}
-                    />
-                </div>
-                }
-            </div>
+            </>
         )
     }
+
 }
 
 

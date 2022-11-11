@@ -13,8 +13,8 @@ import {RouteComponentProps} from 'react-router-dom';
 import {compose} from "redux";
 
 
-
 type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
+
 
 export function withRouter<T>(Component: ComponentType<T>) {
     function ComponentWithRouterProp(props: T & WithRouterType) {
@@ -32,7 +32,9 @@ export function withRouter<T>(Component: ComponentType<T>) {
 type PathParamsType = { useId: number; }
 type CommonPropsType = RouteComponentProps<PathParamsType> & PagesPagePropsType // типизация для withRouter
 
+
 export class PagesContainerCC extends React.Component<CommonPropsType> {
+
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
@@ -46,12 +48,19 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
         this.props.getStatus(userId)
     }
 
+    componentDidUpdate(prevProps: Readonly<CommonPropsType>) {
+        if (prevProps.router.params.userId !== this.props.router.params.userId) {
+            this.props.getUsersProfile(this.props.router.params.userId)
+            this.props.getStatus(this.props.router.params.userId)
+        }
+    }
 
     render() {
         return <>
             <Pages {...this.props} profile={this.props.profile} status={this.props.status}
+                   loggedUserId={this.props.loggedUserId}
                    updateStatus={this.props.updateStatus}
-            isAuth={this.props.isAuth}/>
+                   isAuth={this.props.isAuth}/>
         </>
     }
 }

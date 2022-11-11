@@ -16,15 +16,18 @@ export class MyPost extends React.Component<MyPostPagePropsType> {
             this.props.addPost(formData.postBody)
         }
 
-        let postElements = this.props.posts.map(p => <Post key={p.id} id={p.id} value={p.value} like={p.like}/>)
-
+        let postElements = this.props.posts.map(p =>
+            <Post key={p.id}
+                  id={p.id}
+                  value={p.value}
+                  like={p.like}
+                  img={this.props.profile && this.props.profile.photos.small }/>)
         let name
-        if(this.props.profile){
-             name = this.props.profile.fullName
+        if (this.props.profile) {
+            name = this.props.profile.fullName
         }
 
         return (
-
             <div className={s.postsBlock}>
                 <h2> {name} posts</h2>
 
