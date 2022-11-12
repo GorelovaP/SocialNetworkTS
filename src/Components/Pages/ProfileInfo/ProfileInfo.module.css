@@ -1,4 +1,5 @@
 .profileInfo {
+    position: relative;
     width: 50%;
     margin-top: 20px;
     background: #ffffff;
@@ -7,4 +8,53 @@
 }
 .info{
     color: #1c3faa;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.pencil{
+    cursor: pointer;
+}
+.infoArea{
+   display: flex;
+    flex-wrap: wrap;
+}
+.block{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+.label{
+    margin-right: 5px;
+    font-weight: 600;
+}
+.submitBtn{
+    padding: 10px;
+    height: 40px;
+    width: 90px;
+    background: rgba(40, 136, 252, 0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    margin-left: 10px;
+}
+.submitBtn:hover {
+    background: rgba(28, 63, 170, 1);
+    color: white;
+}
+
+.styledInput{
+    max-width: 100%;
+    padding: 16px 10px;
+    height: 35px;
+    border: none;
+    border-bottom: 2px solid  rgba(0, 0, 0, 0.5); ;
+    margin-bottom: 10px;
+    background: rgba(218, 218, 218, 0.2);
+}
+
+.styledInput::placeholder{
+    color: rgba(0, 0, 0, 0.5);
+    padding-left: 9px;
 }

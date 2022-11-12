@@ -33,12 +33,16 @@ export const ProfileAPI = {
     getUsersProfileGET(userId: number) {
         return instance.get(`profile/${userId}`).then(response => response.data)
     },
-    getStatusUserProfileStatus(userId: number){
+    getStatusUserProfileStatus(userId: number) {
         return instance.get(`profile/status/${userId}`).then(response => response.data)
     },
-    updateStatus(status: string){
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status}).then(response => response.data)
+    },
+    updateProfileInformation(data:ProfileInfoType) {
+        return instance.put(`profile`, {...data}).then(response => response.data)
     }
+
 }
 
 
@@ -46,17 +50,32 @@ export const AuthAPI = {
     isAuthGET() {
         return instance.get(`auth/me`).then(response => response.data)
     },
-    logIn (email: string, password: string, rememberMe?: boolean ){
+    logIn(email: string, password: string, rememberMe?: boolean) {
         if (!rememberMe) rememberMe = false
 
-        return instance.post(`auth/login`, {email, password,rememberMe}).then(response => response.data)
+        return instance.post(`auth/login`, {email, password, rememberMe}).then(response => response.data)
     },
-    logOut () {
+    logOut() {
 
         return instance.delete(`auth/login`).then(response => response.data)
     },
 }
 
 
-
-
+export type ProfileInfoType = {
+    userId: number
+    AboutMe: string
+    lookingForAJob:boolean
+    LookingForAJobDescription: string
+    FullName: string
+    contacts: {
+        github?: string
+        instagram?:string
+        vk?: string
+        facebook?: string
+        twitter?: string
+        website?: string
+        youtube?: string
+        mainLink?: string
+    }
+}

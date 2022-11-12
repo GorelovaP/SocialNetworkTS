@@ -55,7 +55,8 @@ export const Pages = (props: PageSPagesType) => {
             </div>
             <div className={s.mainInformationArea}>
                 <MyPostContainer/>
-                <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                { props.profile != null && <ProfileInfo profile={props.profile} status={props.status} loggedUserId={props.loggedUserId}/>}
+
             </div>
         </div>
     );
