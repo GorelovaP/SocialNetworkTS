@@ -30,6 +30,9 @@
     margin-right: 5px;
     font-weight: 600;
 }
+.error{
+    color: red;
+}
 .submitBtn{
     padding: 10px;
     height: 40px;

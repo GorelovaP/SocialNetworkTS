@@ -177,7 +177,6 @@ export const updateStatusTC = (status: string) => {
 export const updateProfileInformationTC = (date: ProfileInfoType): AppThunkType => {
 
     return (dispatch) => {
-        console.log(date)
         ProfileAPI.updateProfileInformation(date).then(data => {
             if (data.resultCode === 0) {
                 debugger

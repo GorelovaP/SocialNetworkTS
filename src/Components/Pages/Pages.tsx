@@ -49,13 +49,15 @@ export const Pages = (props: PageSPagesType) => {
                 <div className={s.avatarArea}>
                     <div className={s.nameArea}>
                         <h2 className={s.fullName}>{props.profile !== null && props.profile.fullName}</h2>
-                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={userId} loggedUserId={props.loggedUserId}/>
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={userId}
+                                       loggedUserId={props.loggedUserId}/>
                     </div>
                 </div>
             </div>
             <div className={s.mainInformationArea}>
                 <MyPostContainer/>
-                { props.profile != null && <ProfileInfo profile={props.profile} status={props.status} loggedUserId={props.loggedUserId}/>}
+                {props.profile != null && props.profile.fullName !== "" &&
+                <ProfileInfo profile={props.profile} status={props.status} loggedUserId={props.loggedUserId}/>}
 
             </div>
         </div>
