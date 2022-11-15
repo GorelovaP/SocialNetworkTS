@@ -1,4 +1,4 @@
-import {AddPostActionCreator, postType, profileType} from "../../../Redux/profilePage-reducer";
+import {AddPostAC, postType, profileType} from "../../../Redux/profilePage-reducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {reduxStateType} from "../../../Redux/redax-store";
@@ -27,7 +27,7 @@ type  mapDispatchToPropsType = {
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         addPost: (postBody: string) => {
-            dispatch(AddPostActionCreator(postBody))
+            dispatch(AddPostAC(postBody))
         }
     }
 

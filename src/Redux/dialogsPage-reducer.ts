@@ -1,9 +1,9 @@
-import {AddPostActionCreator} from "./profilePage-reducer";
+import {AddPostAC} from "./profilePage-reducer";
 
 const SEND_MESSAGE = "SEND-MESSAGE"
 
 
-export type ActionTypeDialog = ReturnType<typeof AddPostActionCreator>
+export type ActionTypeDialog = ReturnType<typeof AddPostAC>
     | ReturnType<typeof SendMessageAC>
 
 export type dialogType = {

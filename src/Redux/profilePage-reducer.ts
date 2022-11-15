@@ -8,6 +8,7 @@ const ADD_POST = "ADD-POST"
 const SET_USER_PAGE = "SET-USER-PAGE"
 const SET_STATUS = "SET-STATUS"
 const CHANGE_PROFILE_INFO = "CHANGE_PROFILE_INFO"
+const DELETE_POST = "DELETE_POST"
 
 let initialState: profilePageType = {
     posts: [
@@ -75,11 +76,12 @@ export type postType = {
     value: string
     like: number
 }
-export type ActionTypeProfilePage = ReturnType<typeof AddPostActionCreator>
+export type ActionTypeProfilePage = ReturnType<typeof AddPostAC>
     | ReturnType<typeof SendMessageAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof changeProfileInfoAC>
+    | ReturnType<typeof deletePostAC>
 
 export const profilePageReducer = (state: profilePageType = initialState, action: ActionTypeProfilePage) => {
     switch (action.type) {
@@ -92,6 +94,9 @@ export const profilePageReducer = (state: profilePageType = initialState, action
             let StateCopy = {...state, posts: [...state.posts]}
             StateCopy.posts.unshift(newPosts);
             return StateCopy
+        }
+        case DELETE_POST: {
+            return {...state, posts: state.posts.filter(p => p.id != action.postId)}
         }
         case SET_USER_PAGE: {
             return {...state, profile: action.page}
@@ -130,19 +135,22 @@ export const profilePageReducer = (state: profilePageType = initialState, action
     }
 
 }
-export const AddPostActionCreator = (postBody: string) => {
-    return {type: ADD_POST, postBody: postBody} as const
+export const AddPostAC = (postBody: string) => {
+    return {type: ADD_POST, postBody} as const
+}
+export const deletePostAC = (postId: number) => {
+    return {type: DELETE_POST, postId} as const
 }
 
 export const setUserProfileAC = (page: any) => {
-    return {type: SET_USER_PAGE, page: page} as const
+    return {type: SET_USER_PAGE, page} as const
 }
 export const setStatusAC = (status: string) => {
-    return {type: SET_STATUS, status: status} as const
+    return {type: SET_STATUS, status} as const
 }
 export const changeProfileInfoAC = (date: ProfileInfoType) => {
     debugger
-    return {type: CHANGE_PROFILE_INFO, date: date} as const
+    return {type: CHANGE_PROFILE_INFO, date} as const
 }
 
 export const getUsersProfileTC = (userId: number) => {
