@@ -24,10 +24,10 @@ export const Users = (props: UsersType) => {
         <div className={s.usersContainer}>
 
             <h2 className={s.usersContainer__logo}>Users</h2>
-            <div className={s.actionBlock}> поиск, по региону и т д</div>
             <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
                        paginatorPortion={props.paginatorPortion} setCurrentItem={props.setCurrentPage}
                        currentItem={props.currentPage}/>
+
             <div className={s.usersBlock}>
                 {
                     props.users.map(
@@ -41,16 +41,18 @@ export const Users = (props: UsersType) => {
                                 </div>
 
                                 <div className={s.usersBlock__user__name}>{u.name}</div>
-                                <div>{u.status}</div>
+                                <div className={s.usersBlock__user__status}>{u.status}</div>
 
                                 <div>
                                     {u.followed
                                         ? <button disabled={props.followingInProgress
                                             .some(id => id === u.id)}
+                                                  className={s.unfollow}
                                                   onClick={() => {
                                                       props.unfollowThunk(u.id)
                                                   }}>Unfollow</button> :
                                         <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                                className={s.follow}
                                                 onClick={() => {
                                                     props.followThunk(u.id)
                                                 }}> Follow </button>

@@ -75,7 +75,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                                     this.activateEditMode()
                                 }}>
                                     {this.props.status || "----"}
-                                    <BsFillPencilFill/>
+                                    <BsFillPencilFill className={s.icon}/>
                                 </h3>
                             </div>
                             }

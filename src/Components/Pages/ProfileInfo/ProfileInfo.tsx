@@ -67,18 +67,19 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 
     return (
         <div className={s.profileInfo}>
-            <h3 className={s.info}>Info{!isChange &&
-            <BsFillPencilFill onClick={() => setIsChange(true)} className={s.pencil}/>}</h3>
+            <h3 className={s.info}>Info
+                {!isChange && props.profile.userId === props.loggedUserId &&
+                <BsFillPencilFill onClick={() => setIsChange(true)} className={s.pencil}/>}</h3>
             <form name="info" onSubmit={formik.handleSubmit}>
                 <div className={s.infoArea}>
                     <div className={s.block}>
                         <span className={s.label}>FullName:</span>
-
                         {isChange ? <> <input type="text"
                                               className={s.styledInput}
                                               {...formik.getFieldProps("fullName")}
                         />
-                            {formik.errors.fullName && formik.touched.fullName ? (<span className={s.error}>{formik.errors.fullName}</span>
+                            {formik.errors.fullName && formik.touched.fullName ? (
+                                <span className={s.error}>{formik.errors.fullName}</span>
                             ) : null}
                         </> : <span>{profileChange!.fullName}</span>}
                     </div>
@@ -89,7 +90,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                                    className={s.styledInput}
                                    {...formik.getFieldProps("aboutMe")}
                             />
-                            {formik.errors.aboutMe && formik.touched.aboutMe ? (<span className={s.error}>{formik.errors.aboutMe}</span>
+                            {formik.errors.aboutMe && formik.touched.aboutMe ? (
+                                <span className={s.error}>{formik.errors.aboutMe}</span>
                             ) : null} </> : <span>{profileChange!.aboutMe !== "" ? profileChange!.aboutMe : "-"}</span>}
                     </div>
                     <div className={s.block}>

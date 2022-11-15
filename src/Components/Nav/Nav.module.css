@@ -23,7 +23,8 @@
     padding-left: 10px;
     margin-bottom: 20px;
 }
-.logo::after{
+
+.logo::after {
     content: "";
     margin-top: 20px;
     display: block;
@@ -31,7 +32,6 @@
     height: 2px;
     background-color: #5268ac;
 }
-
 
 .item a {
     color: #DADADA;;
@@ -52,44 +52,10 @@
 }
 
 .active {
-    /* Created with https://www.css-gradient.com */
-    background: rgba(225, 186, 236, 1.0);
-    background: -webkit-linear-gradient(right, rgb(224, 235, 255), rgba(168, 209, 245, 1.0));
-    background: -moz-linear-gradient(right, rgb(225, 186, 236), rgba(168, 209, 245, 1.0));
-    background: linear-gradient(to left, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
+    background: #3e5cb7;
     border-radius: 5px;
 }
 
 .active a {
     color: white;
-}
-
-.PremiumBlock {
-    position: relative;
-    color: white;
-    text-decoration: none;
-    padding: 40px 10px;
-    font-size: 1.2rem;
-    line-height: 1.4em;
-    text-align: right;
-    margin-top: 90px;
-    background: rgba(225, 186, 236, 1.0);
-    background: -webkit-linear-gradient(right, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
-    background: -moz-linear-gradient(right, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
-    background: linear-gradient(to left, rgba(225, 186, 236, 1.0), rgba(168, 209, 245, 1.0));
-    min-height: 200px;
-    border-radius: 20px;
-}
-
-.PremiumBlock__img_star {
-    position: absolute;
-    height: 70px;
-    left: 25px;
-    bottom: 20px;
-}
-
-.PremiumBlock__img_arrow {
-    position: absolute;
-    bottom: 50px;
-    right: -5px;
 }

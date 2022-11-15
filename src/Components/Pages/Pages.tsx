@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import largeImg from "../assets/images/large.jpg"
@@ -10,6 +10,7 @@ import {Navigate, useParams} from "react-router-dom";
 import {PATH} from "../../routes/PagesRouters";
 import avatar from "../assets/images/profile.png";
 import {ProfileStatus} from "./profileStatus/ProfileStatus";
+import {MdPhotoCamera} from "react-icons/md";
 
 
 export type PageSPagesType = {
@@ -23,6 +24,18 @@ export type PageSPagesType = {
 
 export const Pages = (props: PageSPagesType) => {
     const {userId} = useParams()
+
+    const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
+            const file = e.target.files[0]
+            console.log('file: ', file)
+        }
+    };
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    const selectFileHandler = () => {
+        inputRef && inputRef.current?.click();
+    };
 
     if (!props.isAuth && userId === undefined) {
         return <Navigate to={PATH.LOGIN}/>
@@ -38,17 +51,30 @@ export const Pages = (props: PageSPagesType) => {
                          alt="largeImg"
                          className={s.largeImg}
                     />
-                    <img
-                        src={props.profile !== null && props.profile.photos.small !== null
-                            ? props.profile.photos.small
-                            : avatar}
-                        alt="Avatar"
-                        className={s.avatar}
-                    />
+                    {props.profile.userId == props.loggedUserId && <button className={s.largeImageBtn}>Change</button>}
+                    <div className={s.avatarWrapper}>
+                        <img
+                            src={props.profile.photos.small !== null
+                                ? props.profile.photos.small
+                                : avatar}
+                            alt="Avatar"
+                            className={s.avatar}
+                        />
+                        {props.profile.userId == props.loggedUserId && <div className={s.smallImgBtnArea}>
+                            <button className={s.smallImgBtn} onClick={selectFileHandler}><MdPhotoCamera color="white"/>
+                            </button>
+                            <input
+                                style={{display: 'none'}}
+                                ref={inputRef}
+                                type="file"
+                                onChange={uploadHandler}
+                            />
+                        </div>}
+                    </div>
                 </div>
                 <div className={s.avatarArea}>
                     <div className={s.nameArea}>
-                        <h2 className={s.fullName}>{props.profile !== null && props.profile.fullName}</h2>
+                        <h2 className={s.fullName}>{props.profile.fullName}</h2>
                         <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={userId}
                                        loggedUserId={props.loggedUserId}/>
                     </div>
@@ -56,9 +82,8 @@ export const Pages = (props: PageSPagesType) => {
             </div>
             <div className={s.mainInformationArea}>
                 <MyPostContainer/>
-                {props.profile != null && props.profile.fullName !== "" &&
+                {props.profile.fullName !== "" &&
                 <ProfileInfo profile={props.profile} status={props.status} loggedUserId={props.loggedUserId}/>}
-
             </div>
         </div>
     );

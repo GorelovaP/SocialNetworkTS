@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import s from "../../Users/Users.module.css";
+import s from "./paginator.module.css";
 
 type PaginatorPropsType = {
     totalItemsCount: number;
@@ -7,7 +7,6 @@ type PaginatorPropsType = {
     paginatorPortion: number;
     setCurrentItem: (item: number) => void;
     currentItem: number;
-
 
 }
 export const Paginator = (props: PaginatorPropsType) => {
@@ -26,9 +25,9 @@ export const Paginator = (props: PaginatorPropsType) => {
     let [rightDisable, setRightDisable] = useState<boolean>(false)
 
 
-    return <div>
+    return <div className={s.paginator}>
 
-        <button disabled={leftDisable} onClick={() => {
+        <button className={s.controlBtn} disabled={leftDisable} onClick={() => {
             if (portionNumber === 2) {
                 setPortionNumber(portionNumber - 1)
                 setLeftDisable(true)
@@ -44,17 +43,18 @@ export const Paginator = (props: PaginatorPropsType) => {
         {pages
             .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
             .map(p => {
-                    return <span
+                    return <div
                         key={p}
                         onClick={() => {
                             props.setCurrentItem(p)
                         }}
-                        className={`${s.page} ${props.currentItem === p ? s.selectedPage : ''}`}>{p}</span>
+                        className={`${s.page} ${props.currentItem === p ? s.selectedPage : ''}`}>{p}</div>
                 }
             )}
 
         <button
             disabled={rightDisable}
+            className={s.controlBtn}
             onClick={() => {
                 if (portionNumber >= portionCount - 1) {
                     setRightDisable(true)

@@ -1,0 +1,38 @@
+.paginator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.page {
+    display: inline-block;
+    background: #dadada;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 25px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+    background: #1c3faa;
+    color: white;
+}
+
+.controlBtn {
+    border-radius: 5px;
+    font-size: 20px;
+    vertical-align: middle;
+    width: 25px;
+    background: #b1b1b1;
+    cursor: pointer;
+}
+
+.controlBtn:disabled {
+    background: #e7e7e7;
+    cursor: auto;
+}
+

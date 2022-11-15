@@ -7,33 +7,36 @@ import {RiMessage3Fill, RiSettings4Fill} from "react-icons/ri";
 import {SiApplemusic} from "react-icons/si";
 import {FaRegStarHalf} from "react-icons/fa";
 
-type PropsType={
+type PropsType = {
     userId: string | null
 }
 export const Nav = (props: PropsType) => {
+    const matchUserId = useMatch('/:routeKey/:userId');
     const match = useMatch('/:routeKey');
-
+    console.log(match?.params.routeKey)
     return (<nav className={s.nav_area}>
             <div className={s.nav_container}>
                 <div className={s.logo}>
-                    <FaRegStarHalf /> SkyChat</div>
-                <div className={`${s.item} ${match?.params.routeKey === "pages" ? s.active : undefined}`}>
+                    <FaRegStarHalf/> SkyChat
+                </div>
+                <div className={`${s.item} ${matchUserId?.params.userId == props.userId ? s.active : undefined}`}>
                     <BsPersonCircle className={s.item__icon}/>
                     <NavLink to={"/profile/" + props.userId}>Profile</NavLink>
                 </div>
 
-                <div className={`${s.item} ${match?.params.routeKey === "users" ? s.active : undefined}`}>
-                    <HiUsers className={s.item__icon} />
+                <div
+                    className={`${s.item} ${match?.params.routeKey === "users" || matchUserId?.params.userId != props.userId ? s.active : undefined}`}>
+                    <HiUsers className={s.item__icon}/>
                     <NavLink to={"/users"}>Find users</NavLink>
                 </div>
 
                 <div className={`${s.item} ${match?.params.routeKey === "dialogs" ? s.active : undefined}`}>
-                   <RiMessage3Fill className={s.item__icon}/>
+                    <RiMessage3Fill className={s.item__icon}/>
                     <NavLink to={"/dialogs"}>Massages</NavLink>
                 </div>
 
                 <div className={`${s.item} ${match?.params.routeKey === "music" ? s.active : undefined}`}>
-                <SiApplemusic className={s.item__icon} />
+                    <SiApplemusic className={s.item__icon}/>
                     <NavLink to={"/music"}>Music</NavLink>
                 </div>
 

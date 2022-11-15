@@ -1,14 +1,22 @@
-import {AddPostActionCreator, profilePageType} from "../../../Redux/profilePage-reducer";
+import {AddPostActionCreator, postType, profileType} from "../../../Redux/profilePage-reducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {reduxStateType} from "../../../Redux/redax-store";
 import {Dispatch} from "redux";
 
-let mapStateToProps = (state: reduxStateType): profilePageType => {
+type mapStateToPropsType = {
+    posts: Array<postType>
+    profile: profileType
+    status: string
+    loggedUserId: string | null,
+}
+
+let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        loggedUserId: state.auth.data.userId
     }
 
 }
@@ -26,4 +34,4 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 }
 export let MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)
 
-export type MyPostPagePropsType = mapDispatchToPropsType & profilePageType
+export type MyPostPagePropsType = mapDispatchToPropsType & mapStateToPropsType

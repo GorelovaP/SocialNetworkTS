@@ -90,7 +90,7 @@ export const profilePageReducer = (state: profilePageType = initialState, action
                 like: 33
             }
             let StateCopy = {...state, posts: [...state.posts]}
-            StateCopy.posts.push(newPosts);
+            StateCopy.posts.unshift(newPosts);
             return StateCopy
         }
         case SET_USER_PAGE: {
