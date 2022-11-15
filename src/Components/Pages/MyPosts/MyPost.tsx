@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
 import {MyPostPagePropsType} from "./MyPostContainer";
@@ -6,7 +6,11 @@ import {reduxForm} from "redux-form";
 import {FormDataType, MyPostForm} from "./myPostForm/MyPostForm";
 
 
-export class MyPost extends React.Component<MyPostPagePropsType> {
+export class MyPost extends PureComponent<MyPostPagePropsType> {
+
+    // shouldComponentUpdate(nextProps: Readonly<MyPostPagePropsType>, nextState: Readonly<{}>): boolean {
+    //     return nextProps != this.props || nextState != this.state
+    // }
 
     render() {
 

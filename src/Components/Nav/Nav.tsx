@@ -13,7 +13,7 @@ type PropsType = {
 export const Nav = (props: PropsType) => {
     const matchUserId = useMatch('/:routeKey/:userId');
     const match = useMatch('/:routeKey');
-    console.log(match?.params.routeKey)
+
     return (<nav className={s.nav_area}>
             <div className={s.nav_container}>
                 <div className={s.logo}>
@@ -25,7 +25,7 @@ export const Nav = (props: PropsType) => {
                 </div>
 
                 <div
-                    className={`${s.item} ${match?.params.routeKey === "users" || matchUserId?.params.userId != props.userId ? s.active : undefined}`}>
+                    className={`${s.item} ${match?.params.routeKey === "users" && matchUserId?.params.userId != props.userId ? s.active : undefined}`}>
                     <HiUsers className={s.item__icon}/>
                     <NavLink to={"/users"}>Find users</NavLink>
                 </div>
