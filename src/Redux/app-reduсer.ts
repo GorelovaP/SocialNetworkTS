@@ -2,7 +2,7 @@ import {AppThunkType} from "./redax-store";
 import {getUserDataTC} from "./auth-reduсer";
 
 
-const SET_INITIALISED = "SET-INITIALISED"
+const SET_INITIALISED = "APP/SET-INITIALISED"
 
 
 let initialState: appInitialType = {
@@ -34,11 +34,13 @@ export const setInitialisedSuccessAC = () => {
 
 
 export const initialiseAppTC = (): AppThunkType => {
-    return (dispatch) => {
-        let promise = dispatch(getUserDataTC())
-        promise.then(() => {
+    return async (dispatch) => {
+        try {
+            await dispatch(getUserDataTC())
             dispatch(setInitialisedSuccessAC())
-        })
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

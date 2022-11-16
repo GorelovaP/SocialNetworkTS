@@ -1,6 +1,6 @@
 import {AddPostAC} from "./profilePage-reducer";
 
-const SEND_MESSAGE = "SEND-MESSAGE"
+const SEND_MESSAGE = "DIALOG/SEND-MESSAGE"
 
 
 export type ActionTypeDialog = ReturnType<typeof AddPostAC>

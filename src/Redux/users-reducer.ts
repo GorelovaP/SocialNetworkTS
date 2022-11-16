@@ -2,13 +2,13 @@ import {FollowAPI, UsersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
-const SET_USERS = "SET-USERS"
-const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
-const SET_TOTAL_COUNT = "SET-TOTAL-COUNT"
-const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
-const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS"
+const FOLLOW = "USERS/FOLLOW"
+const UNFOLLOW = "USERS/UNFOLLOW"
+const SET_USERS = "USERS/SET-USERS"
+const SET_CURRENT_PAGE = "USERS/SET-CURRENT-PAGE"
+const SET_TOTAL_COUNT = "USERS/SET-TOTAL-COUNT"
+const TOGGLE_IS_FETCHING = "USERS/TOGGLE-IS-FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "USERS/TOGGLE-IS-FOLLOWING-PROGRESS"
 
 export type ActionTypeUser = ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
@@ -137,45 +137,62 @@ export const toggleFollowingProgressAC = (userId: number, isFetching: boolean) =
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 
-    return (dispatch: Dispatch<ActionTypeUser>) => {
+    return async (dispatch: Dispatch<ActionTypeUser>) => {
+        try {
+            dispatch(setToggleIsFetchingAC(true))
 
-        dispatch(setToggleIsFetchingAC(true))
-
-        UsersAPI.getUsers(currentPage, pageSize).then(data => {
+            let data = await UsersAPI.getUsers(currentPage, pageSize)
             dispatch(setToggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
-        })
-        setTimeout(() => dispatch(setToggleIsFetchingAC(false)), 400)
+
+        } catch (err) {
+
+        } finally {
+            setTimeout(() => dispatch(setToggleIsFetchingAC(false)), 400)
+        }
     }
+
 }
 
 export const followTC = (userId: number) => {
 
-    return (dispatch: Dispatch<ActionTypeUser>) => {
-        dispatch(toggleFollowingProgressAC(userId, true))
+    return async (dispatch: Dispatch<ActionTypeUser>) => {
+        try {
+            dispatch(toggleFollowingProgressAC(userId, true))
 
-        FollowAPI.followUsersPOST(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(followAC(userId))
-                }
-                dispatch(toggleFollowingProgressAC(userId, false))
-            })
+            let data = await FollowAPI.followUsersPOST(userId)
+
+            if (data.resultCode === 0) {
+                dispatch(followAC(userId))
+            }
+
+        } catch (err) {
+
+        } finally {
+            dispatch(toggleFollowingProgressAC(userId, false))
+        }
+
     }
 }
 
 export const unfollowTC = (userId: number) => {
 
-    return (dispatch: Dispatch<ActionTypeUser>) => {
-        dispatch(toggleFollowingProgressAC(userId, true))
+    return async (dispatch: Dispatch<ActionTypeUser>) => {
+        try {
+            dispatch(toggleFollowingProgressAC(userId, true))
+            let data = await FollowAPI.unfollowUsersDELETE(userId)
+            if (data.resultCode === 0) {
+                dispatch(unfollowAC(userId))
+            }
 
-        FollowAPI.unfollowUsersDELETE(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(unfollowAC(userId))
-                }
-                dispatch(toggleFollowingProgressAC(userId, false))
-            })
+        } catch (err) {
+
+        } finally {
+            dispatch(toggleFollowingProgressAC(userId, false))
+        }
+
+
     }
 }
+

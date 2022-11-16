@@ -3,9 +3,9 @@ import {AuthAPI} from "../api/api";
 import {AppThunkType} from "./redax-store";
 
 
-const SET_USER_DATA = "SET-USER-DATA"
-const RESET_USER_AUTH_DATA = "RESET-USER-AUTH-DATA"
-const SET_ERROR_MASSAGE = "SET-ERROR-MASSAGE"
+const SET_USER_DATA = "AUTH/SET-USER-DATA"
+const RESET_USER_AUTH_DATA = "AUTH/RESET-USER-AUTH-DATA"
+const SET_ERROR_MASSAGE = "AUTH/SET-ERROR-MASSAGE"
 
 let initialState: authInitialType = {
     data: {
@@ -82,49 +82,54 @@ export const setErrorMassageAC = (message: string) => {
 
 export const getUserDataTC = () => {
 
-    return (dispatch: Dispatch<ActionTypeAuth>) => {
+    return async (dispatch: Dispatch<ActionTypeAuth>) => {
+        try {
+            let data = await AuthAPI.isAuthGET()
 
-        return AuthAPI.isAuthGET()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data
-                    dispatch(setUserDataAC(id, email, login))
-                }
-            });
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data
+                dispatch(setUserDataAC(id, email, login))
+            }
+        } catch (err) {
 
+        }
 
     }
 }
+
 export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunkType => {
 
-    return (dispatch) => {
-
-        AuthAPI.logIn(email, password, rememberMe)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(getUserDataTC())
+    return async (dispatch) => {
+        try {
+            let data = await AuthAPI.logIn(email, password, rememberMe)
+            if (data.resultCode === 0) {
+                dispatch(getUserDataTC())
+                dispatch(setErrorMassageAC(""))
+            } else {
+                let message = data.messages.length > 0 ? data.messages[0] : "Check login or password"
+                dispatch(setErrorMassageAC(message))
+                setTimeout(() => {
                     dispatch(setErrorMassageAC(""))
-                } else {
-                    let message = data.messages.length > 0 ? data.messages[0] : "Check login or password"
-                    dispatch(setErrorMassageAC(message))
-                    setTimeout(() => {
-                        dispatch(setErrorMassageAC(""))
-                    }, 7000)
-                }
-                //сделать позже капчу, если резалт код 10 !!!!!!!!!!!
-            })
+                }, 7000)
+            }
+            //сделать позже капчу, если резалт код 10 !!!!!!!!!!!
+        } catch (err) {
 
+        }
     }
 }
 
 export const logoutTC = () => {
-    return (dispatch: Dispatch<ActionTypeAuth>) => {
-        AuthAPI.logOut()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(resetUserAuthDataAC())
-                }
-            })
+    return async (dispatch: Dispatch<ActionTypeAuth>) => {
+        try {
+            let data = await AuthAPI.logOut()
 
+            if (data.resultCode === 0) {
+                dispatch(resetUserAuthDataAC())
+            }
+
+        } catch (err) {
+
+        }
     }
 }

@@ -4,11 +4,11 @@ import {ProfileAPI, ProfileInfoType} from "../api/api";
 import {AppThunkType} from "./redax-store";
 
 
-const ADD_POST = "ADD-POST"
-const SET_USER_PAGE = "SET-USER-PAGE"
-const SET_STATUS = "SET-STATUS"
-const CHANGE_PROFILE_INFO = "CHANGE_PROFILE_INFO"
-const DELETE_POST = "DELETE_POST"
+const ADD_POST = "PROFILE/ADD-POST"
+const SET_USER_PAGE = "PROFILE/SET-USER-PAGE"
+const SET_STATUS = "PROFILE/SET-STATUS"
+const CHANGE_PROFILE_INFO = "PROFILE/CHANGE_PROFILE_INFO"
+const DELETE_POST = "PROFILE/DELETE_POST"
 
 let initialState: profilePageType = {
     posts: [
@@ -155,41 +155,51 @@ export const changeProfileInfoAC = (date: ProfileInfoType) => {
 
 export const getUsersProfileTC = (userId: number) => {
 
-    return (dispatch: Dispatch<ActionTypeProfilePage>) => {
-
-        ProfileAPI.getUsersProfileGET(userId).then(data => {
+    return async (dispatch: Dispatch<ActionTypeProfilePage>) => {
+        try {
+            let data = await ProfileAPI.getUsersProfileGET(userId)
             dispatch(setUserProfileAC(data))
-        })
+        } catch (err) {
+
+        }
     }
+
 }
 export const getStatusTC = (userId: number) => {
 
-    return (dispatch: Dispatch<ActionTypeProfilePage>) => {
-
-        ProfileAPI.getStatusUserProfileStatus(userId).then(data => {
+    return async (dispatch: Dispatch<ActionTypeProfilePage>) => {
+        try {
+            let data = await ProfileAPI.getStatusUserProfileStatus(userId)
             dispatch(setStatusAC(data))
-        })
+        } catch (err) {
+
+        }
     }
 }
 export const updateStatusTC = (status: string) => {
 
-    return (dispatch: Dispatch<ActionTypeProfilePage>) => {
-
-        ProfileAPI.updateStatus(status).then(data => {
+    return async (dispatch: Dispatch<ActionTypeProfilePage>) => {
+        try {
+            let data = await ProfileAPI.updateStatus(status)
             if (data.resultCode === 0) {
                 dispatch(setStatusAC(status))
             }
-        })
+        } catch (err) {
+
+        }
+
     }
 }
 export const updateProfileInformationTC = (date: ProfileInfoType): AppThunkType => {
 
-    return (dispatch) => {
-        ProfileAPI.updateProfileInformation(date).then(data => {
+    return async (dispatch) => {
+        try {
+            let data = await ProfileAPI.updateProfileInformation(date)
             if (data.resultCode === 0) {
-                debugger
                 dispatch(changeProfileInfoAC(date))
             }
-        })
+        } catch (err) {
+
+        }
     }
 }

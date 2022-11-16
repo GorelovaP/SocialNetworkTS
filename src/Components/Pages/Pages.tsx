@@ -37,7 +37,7 @@ export const Pages = (props: PageSPagesType) => {
         inputRef && inputRef.current?.click();
     };
 
-    if (!props.isAuth && userId === undefined) {
+    if (!props.isAuth && userId == "null") {
         return <Navigate to={PATH.LOGIN}/>
     }
 

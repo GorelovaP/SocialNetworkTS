@@ -19,13 +19,14 @@ export const Nav = (props: PropsType) => {
                 <div className={s.logo}>
                     <FaRegStarHalf/> SkyChat
                 </div>
-                <div className={`${s.item} ${matchUserId?.params.userId == props.userId ? s.active : undefined}`}>
+                <div
+                    className={`${s.item} ${matchUserId?.params.userId == props.userId && matchUserId?.params.userId != undefined ? s.active : undefined}`}>
                     <BsPersonCircle className={s.item__icon}/>
                     <NavLink to={"/profile/" + props.userId}>Profile</NavLink>
                 </div>
 
                 <div
-                    className={`${s.item} ${match?.params.routeKey === "users" && matchUserId?.params.userId != props.userId ? s.active : undefined}`}>
+                    className={`${s.item} ${match?.params.routeKey === "users" || (matchUserId?.params.userId != props.userId && matchUserId?.params.userId != undefined) ? s.active : undefined}`}>
                     <HiUsers className={s.item__icon}/>
                     <NavLink to={"/users"}>Find users</NavLink>
                 </div>

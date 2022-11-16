@@ -24,7 +24,8 @@ import {
 
 class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsersThunk(currentPage, pageSize)
     }
 
     Follow = (userId: number) => {
@@ -34,8 +35,9 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
         this.props.unfollow(userId)
     }
     setCurrentPage = (currentPage: number) => {
+        const {pageSize} = this.props
         this.props.setCurrentPage(currentPage)
-        this.props.getUsersThunk(currentPage, this.props.pageSize)
+        this.props.getUsersThunk(currentPage, pageSize)
     }
 
     render() {
@@ -56,18 +58,6 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
         </>
     }
 }
-
-// let mapStateToProps = (state: reduxStateType): UsersPageType => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         paginatorPortion: state.usersPage.paginatorPortion,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
 
 let mapStateToProps = (state: reduxStateType): UsersPageType => {
     return { //достаем данные при помощи селекторов(функции-обертки)
