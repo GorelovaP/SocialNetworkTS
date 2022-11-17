@@ -22,4 +22,5 @@ export const LoginContainer = connect(mapStateToProps, {
     logOut: logoutTC
 })(LoginPage)
 
+export default LoginContainer
 export type UsersPagePropsType = authInitialType & mapDispatchToPropsType

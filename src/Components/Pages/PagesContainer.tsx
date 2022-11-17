@@ -88,12 +88,12 @@ type mapStateToPropsType = {
     loggedUserId: string | null
 }
 
-
-export const PagesContainer = compose<ComponentType>(
+const PagesContainer = compose<ComponentType>(
     connect(mapStateToProps, {
         getUsersProfile: getUsersProfileTC, getStatus: getStatusTC, updateStatus: updateStatusTC
     }),
     withRouter
 )(PagesContainerCC)
 
+export default PagesContainer
 export type PagesPagePropsType = mapStateToPropsType & mapDispatchToPropsType

@@ -9,7 +9,7 @@ import {ComponentType} from "react";
 
 type mapStateToPropsType = dialogPageType & { isAuth: boolean }
 type mapDispatchPropsType = {
-    SendMessage: (newMessageBody:string) => void,
+    SendMessage: (newMessageBody: string) => void,
     onChangeNewMessage: (newMassageText: string) => void
 }
 let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
@@ -21,11 +21,12 @@ let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
 }
 
 
-export const DialogsContainer = compose<ComponentType>(
+const DialogsContainer = compose<ComponentType>(
     connect(mapStateToProps, {
         SendMessage: SendMessageAC
     }),
     withAuthRedirect
 )(Dialogs)
 
+export default DialogsContainer
 export type DialogPagePropsType = mapStateToPropsType & mapDispatchPropsType

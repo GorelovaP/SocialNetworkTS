@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-export const Music = () =>
-{
-    return(
+const Music = () => {
+    return (
         <div>
-Music
+            Music
         </div>
-          );
+    );
 }
+export default Music
