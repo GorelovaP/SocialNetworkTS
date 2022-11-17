@@ -1,19 +1,33 @@
 {
   "files": {
-    "main.css": "/SocialNetworkTS/static/css/main.215b6039.css",
-    "main.js": "/SocialNetworkTS/static/js/main.c92753bf.js",
+    "main.css": "/SocialNetworkTS/static/css/main.a2db6fbf.css",
+    "main.js": "/SocialNetworkTS/static/js/main.ca5c8fe1.js",
+    "static/css/472.143f9340.chunk.css": "/SocialNetworkTS/static/css/472.143f9340.chunk.css",
+    "static/js/472.a5728576.chunk.js": "/SocialNetworkTS/static/js/472.a5728576.chunk.js",
+    "static/js/682.0ceedd82.chunk.js": "/SocialNetworkTS/static/js/682.0ceedd82.chunk.js",
+    "static/css/531.35df014f.chunk.css": "/SocialNetworkTS/static/css/531.35df014f.chunk.css",
+    "static/js/531.3074edcb.chunk.js": "/SocialNetworkTS/static/js/531.3074edcb.chunk.js",
+    "static/js/869.5cdbbe62.chunk.js": "/SocialNetworkTS/static/js/869.5cdbbe62.chunk.js",
+    "static/js/647.7023a711.chunk.js": "/SocialNetworkTS/static/js/647.7023a711.chunk.js",
     "static/js/496.1016fad7.chunk.js": "/SocialNetworkTS/static/js/496.1016fad7.chunk.js",
     "static/media/preLoader.gif": "/SocialNetworkTS/static/media/preLoader.464a6fdaf15e5c365e61.gif",
     "static/media/large.jpg": "/SocialNetworkTS/static/media/large.8a964bc2ab26f63787c7.jpg",
     "static/media/profile.png": "/SocialNetworkTS/static/media/profile.fa4e2f5e1d20f61585a8.png",
     "static/media/standardIcon.png": "/SocialNetworkTS/static/media/standardIcon.d4825946683a3a0f4eb3.png",
     "index.html": "/SocialNetworkTS/index.html",
-    "main.215b6039.css.map": "/SocialNetworkTS/static/css/main.215b6039.css.map",
-    "main.c92753bf.js.map": "/SocialNetworkTS/static/js/main.c92753bf.js.map",
+    "main.a2db6fbf.css.map": "/SocialNetworkTS/static/css/main.a2db6fbf.css.map",
+    "main.ca5c8fe1.js.map": "/SocialNetworkTS/static/js/main.ca5c8fe1.js.map",
+    "472.143f9340.chunk.css.map": "/SocialNetworkTS/static/css/472.143f9340.chunk.css.map",
+    "472.a5728576.chunk.js.map": "/SocialNetworkTS/static/js/472.a5728576.chunk.js.map",
+    "682.0ceedd82.chunk.js.map": "/SocialNetworkTS/static/js/682.0ceedd82.chunk.js.map",
+    "531.35df014f.chunk.css.map": "/SocialNetworkTS/static/css/531.35df014f.chunk.css.map",
+    "531.3074edcb.chunk.js.map": "/SocialNetworkTS/static/js/531.3074edcb.chunk.js.map",
+    "869.5cdbbe62.chunk.js.map": "/SocialNetworkTS/static/js/869.5cdbbe62.chunk.js.map",
+    "647.7023a711.chunk.js.map": "/SocialNetworkTS/static/js/647.7023a711.chunk.js.map",
     "496.1016fad7.chunk.js.map": "/SocialNetworkTS/static/js/496.1016fad7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.215b6039.css",
-    "static/js/main.c92753bf.js"
+    "static/css/main.a2db6fbf.css",
+    "static/js/main.ca5c8fe1.js"
   ]
 }
