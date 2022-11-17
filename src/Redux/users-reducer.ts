@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 const FOLLOW = "USERS/FOLLOW"
 const UNFOLLOW = "USERS/UNFOLLOW"
 const SET_USERS = "USERS/SET-USERS"
-const SET_CURRENT_PAGE = "USERS/SET-CURRENT-PAGE"
+const SET_CURRENT_PAGE_AND_PORTION = "USERS/SET-CURRENT-PAGE-AND-PORTION"
 const SET_TOTAL_COUNT = "USERS/SET-TOTAL-COUNT"
 const TOGGLE_IS_FETCHING = "USERS/TOGGLE-IS-FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "USERS/TOGGLE-IS-FOLLOWING-PROGRESS"
@@ -13,7 +13,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = "USERS/TOGGLE-IS-FOLLOWING-PROGRESS"
 export type ActionTypeUser = ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setCurrentPageAndPortionAC>
     | ReturnType<typeof setTotalUsersCountAC>
     | ReturnType<typeof setToggleIsFetchingAC>
     | ReturnType<typeof toggleFollowingProgressAC>
@@ -23,7 +23,8 @@ export type UsersPageType = {
     users: Array<userType>
     pageSize: number
     totalUsersCount: number
-    currentPage: number
+    currentPage: number,
+    currentPortion: number,
     paginatorPortion: number,
     isFetching: boolean,
     followingInProgress: number[]
@@ -48,6 +49,7 @@ let initialState: UsersPageType = {
     pageSize: 8,
     totalUsersCount: 0,
     currentPage: 1,
+    currentPortion:1,
     paginatorPortion: 10,
     isFetching: false,
     followingInProgress: []
@@ -80,9 +82,9 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case SET_USERS: {
             return {...state, users: [...action.users]}
         }
-        case SET_CURRENT_PAGE: {
+        case SET_CURRENT_PAGE_AND_PORTION: {
             return {
-                ...state, currentPage: action.currentPage
+                ...state, currentPage: action.currentPage, currentPortion: action.currentPortion
             }
         }
         case SET_TOTAL_COUNT : {
@@ -112,25 +114,25 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
 
 
 export const followAC = (userId: number) => {
-    return {type: FOLLOW, userId: userId} as const
+    return {type: FOLLOW, userId} as const
 }
 export const unfollowAC = (userId: number) => {
-    return {type: UNFOLLOW, userId: userId} as const
+    return {type: UNFOLLOW, userId} as const
 }
 export const setUsersAC = (users: userType[]) => {
-    return {type: SET_USERS, users: users} as const
+    return {type: SET_USERS, users} as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
-    return {type: SET_CURRENT_PAGE, currentPage: currentPage} as const
+export const setCurrentPageAndPortionAC = (currentPage: number, currentPortion: number) => {
+    return {type: SET_CURRENT_PAGE_AND_PORTION, currentPage, currentPortion} as const
 }
 export const setTotalUsersCountAC = (totalUsersCount: number) => {
-    return {type: SET_TOTAL_COUNT, totalUsersCount: totalUsersCount} as const
+    return {type: SET_TOTAL_COUNT, totalUsersCount} as const
 }
 export const setToggleIsFetchingAC = (isFetching: boolean) => {
-    return {type: TOGGLE_IS_FETCHING, isFetching: isFetching} as const
+    return {type: TOGGLE_IS_FETCHING, isFetching} as const
 }
 export const toggleFollowingProgressAC = (userId: number, isFetching: boolean) => {
-    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, userId: userId, isFetching: isFetching} as const
+    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, userId, isFetching} as const
 }
 
 //type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>

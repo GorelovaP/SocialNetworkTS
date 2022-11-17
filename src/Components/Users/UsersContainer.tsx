@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import {
     followAC, followTC, getUsersThunkCreator,
-    setCurrentPageAC, setToggleIsFetchingAC,
+    setCurrentPageAndPortionAC, setToggleIsFetchingAC,
     setTotalUsersCountAC,
     setUsersAC, toggleFollowingProgressAC,
     unfollowAC, unfollowTC,
@@ -14,7 +14,7 @@ import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 import {
-    getCurrentPage, getFollowingInProgress, getIsFetching,
+    getCurrentPage, getCurrentPortion, getFollowingInProgress, getIsFetching,
     getPageSize,
     getPaginatorPortion,
     getTotalUsersCount,
@@ -34,11 +34,12 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
     Unfollow = (userId: number) => {
         this.props.unfollow(userId)
     }
-    setCurrentPage = (currentPage: number) => {
+    setCurrentPageAndPortion = (currentPage: number, portionNumber: number) => {
         const {pageSize} = this.props
-        this.props.setCurrentPage(currentPage)
+        this.props.setCurrentPageAndPortion(currentPage, portionNumber)
         this.props.getUsersThunk(currentPage, pageSize)
     }
+
 
     render() {
         return <>
@@ -47,8 +48,9 @@ class UsersContainerClassComp extends React.Component<UsersPagePropsType> {
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 paginatorPortion={this.props.paginatorPortion}
-                setCurrentPage={this.setCurrentPage}
+                setCurrentPageAndPortion={this.setCurrentPageAndPortion}
                 currentPage={this.props.currentPage}
+                currentPortion={this.props.currentPortion}
                 users={this.props.users}
 
                 followThunk={this.props.followThunk}
@@ -64,6 +66,7 @@ let mapStateToProps = (state: reduxStateType): UsersPageType => {
         // users: getUsers(state),
         users: getUsersSuperSelector(state),
         pageSize: getPageSize(state),
+        currentPortion: getCurrentPortion(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         paginatorPortion: getPaginatorPortion(state),
@@ -77,7 +80,7 @@ type  mapDispatchToPropsType =
         follow: (userId: number) => void,
         unfollow: (userId: number) => void,
         setUsers: (users: userType[]) => void,
-        setCurrentPage: (currentPage: number) => void,
+        setCurrentPageAndPortion: (currentPage: number, portionNumber: number) => void,
         setTotalUsersCount: (totalUsersCount: number) => void,
         setToggleIsFetching: (isFetching: boolean) => void,
         getUsersThunk: (currentPage: number, pageSize: number) => void
@@ -89,7 +92,7 @@ export const UsersContainer = connect(mapStateToProps, {
     follow: followAC,
     unfollow: unfollowAC,
     setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
+    setCurrentPageAndPortion: setCurrentPageAndPortionAC,
     setTotalUsersCount: setTotalUsersCountAC,
     setToggleIsFetching: setToggleIsFetchingAC,
     setToggleFollowingProgress: toggleFollowingProgressAC,

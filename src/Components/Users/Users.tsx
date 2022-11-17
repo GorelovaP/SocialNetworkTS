@@ -9,8 +9,9 @@ type UsersType = {
     totalUsersCount: number;
     pageSize: number;
     paginatorPortion: number;
-    setCurrentPage: (page: number) => void;
+    setCurrentPageAndPortion: (page: number, portionNumber: number) => void;
     currentPage: number;
+    currentPortion: number;
     users: Array<userType>;
     followingInProgress: number[];
     followThunk: (userId: number) => void
@@ -24,8 +25,8 @@ export const Users = (props: UsersType) => {
 
             <h2 className={s.usersContainer__logo}>Users</h2>
             <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
-                       paginatorPortion={props.paginatorPortion} setCurrentItem={props.setCurrentPage}
-                       currentItem={props.currentPage}/>
+                       paginatorPortion={props.paginatorPortion} setCurrentItem={props.setCurrentPageAndPortion}
+                       currentItem={props.currentPage} currentPortion={props.currentPortion}/>
 
             <div className={s.usersBlock}>
                 {

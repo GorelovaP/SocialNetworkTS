@@ -15,6 +15,9 @@ export const getTotalUsersCount = (state: reduxStateType) => {
 export const getCurrentPage = (state: reduxStateType) => {
     return state.usersPage.currentPage
 }
+export const getCurrentPortion = (state: reduxStateType) => {
+    return state.usersPage.currentPortion
+}
 export const getPaginatorPortion = (state: reduxStateType) => {
     return state.usersPage.paginatorPortion
 }
