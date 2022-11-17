@@ -19,16 +19,18 @@ export type PageSPagesType = {
     updateStatus: (status: string) => void
     isAuth: boolean
     loggedUserId: number
+    savePhoto: (file: File) => void
 }
 
 
 export const Pages = (props: PageSPagesType) => {
+
     const {userId} = useParams()
 
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             const file = e.target.files[0]
-            console.log('file: ', file)
+            props.savePhoto(file)
         }
     };
     const inputRef = useRef<HTMLInputElement>(null)
@@ -51,7 +53,6 @@ export const Pages = (props: PageSPagesType) => {
                          alt="largeImg"
                          className={s.largeImg}
                     />
-                    {props.profile.userId == props.loggedUserId && <button className={s.largeImageBtn}>Change</button>}
                     <div className={s.avatarWrapper}>
                         <img
                             src={props.profile.photos.small !== null
@@ -65,6 +66,7 @@ export const Pages = (props: PageSPagesType) => {
                             </button>
                             <input
                                 style={{display: 'none'}}
+                                accept=".jpg,.jpeg,.png"
                                 ref={inputRef}
                                 type="file"
                                 onChange={uploadHandler}

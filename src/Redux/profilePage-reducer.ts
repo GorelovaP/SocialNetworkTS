@@ -9,6 +9,7 @@ const SET_USER_PAGE = "PROFILE/SET-USER-PAGE"
 const SET_STATUS = "PROFILE/SET-STATUS"
 const CHANGE_PROFILE_INFO = "PROFILE/CHANGE_PROFILE_INFO"
 const DELETE_POST = "PROFILE/DELETE_POST"
+const CHANGE_PHOTO = "PROFILE/CHANGE-PHOTO"
 
 let initialState: profilePageType = {
     posts: [
@@ -60,7 +61,7 @@ export type profileType = {
     fullName: string,
     userId: number,
     photos: {
-        small: string,
+        small: string
         large: string
     }
 }
@@ -82,6 +83,7 @@ export type ActionTypeProfilePage = ReturnType<typeof AddPostAC>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof changeProfileInfoAC>
     | ReturnType<typeof deletePostAC>
+    | ReturnType<typeof changePhotoAC>
 
 export const profilePageReducer = (state: profilePageType = initialState, action: ActionTypeProfilePage) => {
     switch (action.type) {
@@ -104,8 +106,10 @@ export const profilePageReducer = (state: profilePageType = initialState, action
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case CHANGE_PHOTO: {
+            return {...state, profile: {...state.profile, photos: {...action.photos}}}
+        }
         case CHANGE_PROFILE_INFO: {
-            debugger
             let profileInfo = {
                 aboutMe: action.date.AboutMe,
                 contacts: {
@@ -149,8 +153,10 @@ export const setStatusAC = (status: string) => {
     return {type: SET_STATUS, status} as const
 }
 export const changeProfileInfoAC = (date: ProfileInfoType) => {
-    debugger
     return {type: CHANGE_PROFILE_INFO, date} as const
+}
+export const changePhotoAC = (photos: File) => {
+    return {type: CHANGE_PHOTO, photos} as const
 }
 
 export const getUsersProfileTC = (userId: number) => {
@@ -187,9 +193,10 @@ export const updateStatusTC = (status: string) => {
         } catch (err) {
 
         }
-
     }
 }
+
+
 export const updateProfileInformationTC = (date: ProfileInfoType): AppThunkType => {
 
     return async (dispatch) => {
@@ -197,6 +204,18 @@ export const updateProfileInformationTC = (date: ProfileInfoType): AppThunkType 
             let data = await ProfileAPI.updateProfileInformation(date)
             if (data.resultCode === 0) {
                 dispatch(changeProfileInfoAC(date))
+            }
+        } catch (err) {
+
+        }
+    }
+}
+export const savePhotoTC = (photo: File): AppThunkType => {
+    return async (dispatch) => {
+        try {
+            let data = await ProfileAPI.savePhoto(photo)
+            if (data.resultCode === 0) {
+                dispatch(changePhotoAC(data.data.photos))
             }
         } catch (err) {
 

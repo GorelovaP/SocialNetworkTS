@@ -39,8 +39,15 @@ export const ProfileAPI = {
     updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status}).then(response => response.data)
     },
-    updateProfileInformation(data:ProfileInfoType) {
+    updateProfileInformation(data: ProfileInfoType) {
         return instance.put(`profile`, {...data}).then(response => response.data)
+    },
+    savePhoto(photo: File) {
+        console.log(photo)
+        let formData = new FormData();
+        formData.append("image", photo)
+
+        return instance.put(`profile/photo`, formData).then(response => response.data)
     }
 
 }
@@ -65,12 +72,12 @@ export const AuthAPI = {
 export type ProfileInfoType = {
     userId: number
     AboutMe: string
-    lookingForAJob:boolean
+    lookingForAJob: boolean
     LookingForAJobDescription: string
     FullName: string
     contacts: {
         github?: string
-        instagram?:string
+        instagram?: string
         vk?: string
         facebook?: string
         twitter?: string

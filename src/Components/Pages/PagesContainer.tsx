@@ -3,7 +3,13 @@ import {connect} from "react-redux";
 
 import React, {ComponentType} from "react";
 import {Pages} from "./Pages";
-import {getStatusTC, getUsersProfileTC, profileType, updateStatusTC} from "../../Redux/profilePage-reducer";
+import {
+    getStatusTC,
+    getUsersProfileTC,
+    profileType,
+    savePhotoTC,
+    updateStatusTC
+} from "../../Redux/profilePage-reducer";
 
 
 import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
@@ -57,7 +63,9 @@ export class PagesContainerCC extends React.Component<CommonPropsType> {
 
     render() {
         return <>
-            <Pages {...this.props} profile={this.props.profile} status={this.props.status}
+            <Pages {...this.props} profile={this.props.profile}
+                   status={this.props.status}
+                   savePhoto={this.props.savePhoto}
                    loggedUserId={this.props.loggedUserId}
                    updateStatus={this.props.updateStatus}
                    isAuth={this.props.isAuth}/>
@@ -79,6 +87,7 @@ type  mapDispatchToPropsType = {
     getUsersProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
 }
 
 type mapStateToPropsType = {
@@ -90,7 +99,7 @@ type mapStateToPropsType = {
 
 const PagesContainer = compose<ComponentType>(
     connect(mapStateToProps, {
-        getUsersProfile: getUsersProfileTC, getStatus: getStatusTC, updateStatus: updateStatusTC
+        getUsersProfile: getUsersProfileTC, getStatus: getStatusTC, updateStatus: updateStatusTC, savePhoto: savePhotoTC
     }),
     withRouter
 )(PagesContainerCC)
