@@ -8,16 +8,19 @@ import {useFormik} from "formik";
 type LoginFormPropsType = {
     sendData: (data: dataType) => void
     message: string
+    captcha: string
 }
 export type dataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha?: string
 }
 type FormikErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
+    captcha?: string
 }
 export const LoginForm = (props: LoginFormPropsType) => {
 
@@ -25,7 +28,7 @@ export const LoginForm = (props: LoginFormPropsType) => {
         initialValues: {
             email: "",
             password: "",
-            rememberMe: false
+            rememberMe: false,
         },
         validate: (values) => {
             const errors: FormikErrorType = {}
@@ -42,9 +45,8 @@ export const LoginForm = (props: LoginFormPropsType) => {
             return errors
         },
         onSubmit: values => {
-            // dispatch(loginTC(values))
             props.sendData(values)
-            formik.resetForm();
+            // formik.resetForm();
         }
     })
 
@@ -75,14 +77,28 @@ export const LoginForm = (props: LoginFormPropsType) => {
                 <label> Remember me
                     <input type={"checkbox"}
                            {...formik.getFieldProps("rememberMe")}
-                        className={style.checkBox}
+                           className={style.checkBox}
                            checked={formik.values.rememberMe}/>
                 </label>
             </div>
+            {props.captcha && <div className={s.captchaArea}>
+                <img src={props.captcha} alt={"captcha"}/>
+            </div>}
+            {props.captcha && <>
+                <label className={style.label}>Сaptcha</label>
+                <input
+                    type="text"
+                    className={style.styledInput}
+                    placeholder={"type here captcha"}
+                    required={true}
+                    {...formik.getFieldProps("captcha")}
+                />
+            </>}
             <div>
                 <button className={style.submitBtn} type={"submit"}>Login</button>
             </div>
-            {props.message.length > 0 && <div className={s.formError}> {props.message}</div>}
+            {props.message.length > 0 && <div className={s.formMainError}> {props.message}</div>}
+
         </form>
     </div>)
 }

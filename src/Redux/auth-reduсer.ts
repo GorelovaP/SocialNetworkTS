@@ -1,11 +1,12 @@
 import {Dispatch} from "redux";
-import {AuthAPI} from "../api/api";
+import {AuthAPI, SecurityAPI} from "../api/api";
 import {AppThunkType} from "./redax-store";
 
 
 const SET_USER_DATA = "AUTH/SET-USER-DATA"
 const RESET_USER_AUTH_DATA = "AUTH/RESET-USER-AUTH-DATA"
 const SET_ERROR_MASSAGE = "AUTH/SET-ERROR-MASSAGE"
+const SET_CAPTCHA = "AUTH/SET-CAPTCHA"
 
 let initialState: authInitialType = {
     data: {
@@ -14,7 +15,8 @@ let initialState: authInitialType = {
         login: null
     },
     isAuth: false,
-    errorMassage: ""
+    errorMassage: "",
+    captcha: ""
 }
 export type authInitialType = {
     data: {
@@ -24,12 +26,14 @@ export type authInitialType = {
     },
     isAuth: boolean,
     errorMassage: string
+    captcha: string
 }
 
 export type ActionTypeAuth =
     ReturnType<typeof setUserDataAC>
     | ReturnType<typeof resetUserAuthDataAC>
     | ReturnType<typeof setErrorMassageAC>
+    | ReturnType<typeof setCaptchaAC>
 
 export const authReducer = (state: authInitialType = initialState, action: ActionTypeAuth): authInitialType => {
     switch (action.type) {
@@ -48,7 +52,13 @@ export const authReducer = (state: authInitialType = initialState, action: Actio
                     login: null
                 },
                 isAuth: false,
-                errorMassage: ""
+                errorMassage: "",
+                captcha: ""
+            }
+        }
+        case SET_CAPTCHA: {
+            return {
+                ...state, captcha: action.captcha
             }
         }
         case SET_ERROR_MASSAGE: {
@@ -78,6 +88,9 @@ export const resetUserAuthDataAC = () => {
 export const setErrorMassageAC = (message: string) => {
     return {type: SET_ERROR_MASSAGE, message} as const
 }
+export const setCaptchaAC = (captcha: string) => {
+    return {type: SET_CAPTCHA, captcha} as const
+}
 
 
 export const getUserDataTC = () => {
@@ -97,21 +110,26 @@ export const getUserDataTC = () => {
     }
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunkType => {
+export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: string): AppThunkType => {
 
     return async (dispatch) => {
         try {
-            let data = await AuthAPI.logIn(email, password, rememberMe)
+            let data = await AuthAPI.logIn(email, password, rememberMe, captcha)
             if (data.resultCode === 0) {
                 dispatch(getUserDataTC())
                 dispatch(setErrorMassageAC(""))
             } else {
+                if (data.resultCode === 10) {
+                    dispatch(getCaptchaTC())
+                }
                 let message = data.messages.length > 0 ? data.messages[0] : "Check login or password"
                 dispatch(setErrorMassageAC(message))
                 setTimeout(() => {
                     dispatch(setErrorMassageAC(""))
                 }, 7000)
             }
+
+
             //сделать позже капчу, если резалт код 10 !!!!!!!!!!!
         } catch (err) {
 
@@ -128,6 +146,18 @@ export const logoutTC = () => {
                 dispatch(resetUserAuthDataAC())
             }
 
+        } catch (err) {
+
+        }
+    }
+}
+
+export const getCaptchaTC = () => {
+    return async (dispatch: Dispatch<ActionTypeAuth>) => {
+        try {
+            let data = await SecurityAPI.getCaptchaURL()
+            const captcha = data.data.url
+            dispatch(setCaptchaAC(captcha))
         } catch (err) {
 
         }

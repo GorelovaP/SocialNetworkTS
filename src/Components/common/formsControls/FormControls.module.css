@@ -2,11 +2,21 @@
 .formControl.error input, .formControl.error textarea {
     border: 2px solid red;
 }
+
 .formControl.error span {
     color: red;
 }
-.formError{
+
+.formError, .formMainError {
     color: red;
     position: absolute;
+}
+
+.formError {
     transform: translate(0, -20px);
+}
+.captchaArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

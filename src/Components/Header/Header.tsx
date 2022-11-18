@@ -11,11 +11,17 @@ export const Header = (props: AuthPropsType) => {
         navigate(PATH.LOGIN)
     }
 
+    const logOut = async () => {
+        await props.logOut()
+        navigate(PATH.LOGIN)
+    }
+
+
     return (<header className={s.header}>
 
         {props.isAuth ? <div className={s.right}>
             {props.login}
-            <button className={s.styledLogBtn} onClick={props.logOut}>Log out</button>
+            <button className={s.styledLogBtn} onClick={logOut}>Log out</button>
         </div> : <div className={s.right}>
             <button className={s.styledLogBtn} onClick={goToLogin}>Login</button>
         </div>

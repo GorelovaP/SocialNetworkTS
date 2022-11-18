@@ -5,7 +5,7 @@ import s from "./Status.module.css"
 type ProfileStatusPropsType = {
     status: string;
     updateStatus: (status: string) => void
-    userId?: string
+    userId?: number
     loggedUserId: number
 }
 
@@ -22,7 +22,6 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     }
 
     activateEditMode() {
-        debugger
         this.setState({
             editMode: true
         })//setState - асинхронный
@@ -53,15 +52,11 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
 
 
     render() {
-        let userId
-        if (this.props.userId) {
-            userId = +this.props.userId
-        }
 
 
         return (<>
                 {
-                    userId !== this.props.loggedUserId ?
+                    this.props.userId !== this.props.loggedUserId ?
                         <div>
                             <h3 className={s.status}>
                                 {this.props.status || "----"}

@@ -39,7 +39,7 @@ export const Pages = (props: PageSPagesType) => {
         inputRef && inputRef.current?.click();
     };
 
-    if (!props.isAuth && userId == "null") {
+    if (!props.isAuth && (userId == "null" || !userId)) {
         return <Navigate to={PATH.LOGIN}/>
     }
 
@@ -61,7 +61,7 @@ export const Pages = (props: PageSPagesType) => {
                             alt="Avatar"
                             className={s.avatar}
                         />
-                        {props.profile.userId == props.loggedUserId && <div className={s.smallImgBtnArea}>
+                        {props.profile.userId === props.loggedUserId && <div className={s.smallImgBtnArea}>
                             <button className={s.smallImgBtn} onClick={selectFileHandler}><MdPhotoCamera color="white"/>
                             </button>
                             <input
@@ -77,7 +77,7 @@ export const Pages = (props: PageSPagesType) => {
                 <div className={s.avatarArea}>
                     <div className={s.nameArea}>
                         <h2 className={s.fullName}>{props.profile.fullName}</h2>
-                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={userId}
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={props.profile.userId}
                                        loggedUserId={props.loggedUserId}/>
                     </div>
                 </div>

@@ -43,10 +43,8 @@ export const ProfileAPI = {
         return instance.put(`profile`, {...data}).then(response => response.data)
     },
     savePhoto(photo: File) {
-        console.log(photo)
         let formData = new FormData();
         formData.append("image", photo)
-
         return instance.put(`profile/photo`, formData).then(response => response.data)
     }
 
@@ -57,15 +55,20 @@ export const AuthAPI = {
     isAuthGET() {
         return instance.get(`auth/me`).then(response => response.data)
     },
-    logIn(email: string, password: string, rememberMe?: boolean) {
+    logIn(email: string, password: string, rememberMe?: boolean, captcha?: string) {
         if (!rememberMe) rememberMe = false
 
-        return instance.post(`auth/login`, {email, password, rememberMe}).then(response => response.data)
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha}).then(response => response.data)
     },
     logOut() {
-
         return instance.delete(`auth/login`).then(response => response.data)
     },
+}
+
+export const SecurityAPI = {
+    getCaptchaURL() {
+        return instance.get(`security/get-captcha-url`)
+    }
 }
 
 

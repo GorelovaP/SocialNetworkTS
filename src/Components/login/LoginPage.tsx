@@ -9,22 +9,21 @@ export const LoginPage = (props: UsersPagePropsType) => {
 
 
     const constSubmit = (formData: dataType) => {
-        props.logIn(formData.email, formData.password, formData.rememberMe)
+        props.logIn(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if (props.isAuth) {
-        return <Navigate to={PATH.PROFILE}/>
+        return <Navigate to={PATH.PROFILE + `/${props.data.userId}`}/>
     }
 
     return (
         <div className={s.loginMAinWrapper}>
             <div className={s.loginContainer}>
                 <h1>login</h1>
-                <LoginForm sendData={constSubmit} message={props.errorMassage}/>
+                <LoginForm sendData={constSubmit} message={props.errorMassage} captcha={props.captcha}/>
             </div>
             <div className={s.testData}>
                 <p>Test account data: Email: free@samuraijs.com Password: free</p>
-
             </div>
         </div>
 

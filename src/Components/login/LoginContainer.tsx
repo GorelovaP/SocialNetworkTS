@@ -8,12 +8,14 @@ const mapStateToProps = (state: reduxStateType): authInitialType => {
     return {
         data: state.auth.data,
         isAuth: state.auth.isAuth,
-        errorMassage: state.auth.errorMassage
+        errorMassage: state.auth.errorMassage,
+        captcha: state.auth.captcha
+
     }
 }
 
 type  mapDispatchToPropsType = {
-    logIn: (email: string, password: string, rememberMe: boolean) => void
+    logIn: (email: string, password: string, rememberMe: boolean, captcha?: string) => void
     logOut: () => void;
 }
 
