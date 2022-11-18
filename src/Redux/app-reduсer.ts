@@ -3,16 +3,19 @@ import {getUserDataTC} from "./auth-reduсer";
 
 
 const SET_INITIALISED = "APP/SET-INITIALISED"
+const SET_APP_ERROR = "APP/SET-APP-ERROR"
 
 
 let initialState: appInitialType = {
-    initialized: false
+    initialized: false,
+    error: ""
 }
 export type appInitialType = {
     initialized: boolean
+    error: string
 }
 
-export type ActionTypeApp = ReturnType<typeof setInitialisedSuccessAC>
+export type ActionTypeApp = ReturnType<typeof setInitialisedSuccessAC> | ReturnType<typeof setAppErrorAC>
 
 export const appReducer = (state: appInitialType = initialState, action: ActionTypeApp): appInitialType => {
     switch (action.type) {
@@ -20,6 +23,12 @@ export const appReducer = (state: appInitialType = initialState, action: ActionT
             return {
                 ...state,
                 initialized: true
+            }
+        }
+        case SET_APP_ERROR: {
+            return {
+                ...state,
+                error: action.error
             }
         }
         default:
@@ -31,6 +40,9 @@ export const appReducer = (state: appInitialType = initialState, action: ActionT
 export const setInitialisedSuccessAC = () => {
     return {type: SET_INITIALISED} as const
 }
+export const setAppErrorAC = (error: string) => {
+    return {type: SET_APP_ERROR, error} as const
+}
 
 
 export const initialiseAppTC = (): AppThunkType => {
@@ -39,7 +51,7 @@ export const initialiseAppTC = (): AppThunkType => {
             await dispatch(getUserDataTC())
             dispatch(setInitialisedSuccessAC())
         } catch (err) {
-            console.log(err)
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }

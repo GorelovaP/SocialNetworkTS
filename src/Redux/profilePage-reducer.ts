@@ -1,7 +1,7 @@
 import {SendMessageAC} from "./dialogsPage-reducer";
-import {Dispatch} from "redux";
 import {ProfileAPI, ProfileInfoType} from "../api/api";
 import {AppThunkType} from "./redax-store";
+import {setAppErrorAC} from "./app-reduсer";
 
 
 const ADD_POST = "PROFILE/ADD-POST"
@@ -10,6 +10,7 @@ const SET_STATUS = "PROFILE/SET-STATUS"
 const CHANGE_PROFILE_INFO = "PROFILE/CHANGE_PROFILE_INFO"
 const DELETE_POST = "PROFILE/DELETE_POST"
 const CHANGE_PHOTO = "PROFILE/CHANGE-PHOTO"
+const SET_ISCHANGED_INFORMATION = "PROFILE/SET-ISCHANGED-INFORMATION"
 
 let initialState: profilePageType = {
     posts: [
@@ -39,9 +40,11 @@ let initialState: profilePageType = {
         photos: {
             small: "",
             large: ""
-        }
+        },
+        isChanged: false
     },
-    status: ""
+    status: "",
+
 }
 
 export type profileType = {
@@ -63,7 +66,8 @@ export type profileType = {
     photos: {
         small: string
         large: string
-    }
+    },
+    isChanged: boolean
 }
 
 
@@ -84,6 +88,7 @@ export type ActionTypeProfilePage = ReturnType<typeof AddPostAC>
     | ReturnType<typeof changeProfileInfoAC>
     | ReturnType<typeof deletePostAC>
     | ReturnType<typeof changePhotoAC>
+    | ReturnType<typeof setIsChangedInformationAC>
 
 export const profilePageReducer = (state: profilePageType = initialState, action: ActionTypeProfilePage) => {
     switch (action.type) {
@@ -106,10 +111,16 @@ export const profilePageReducer = (state: profilePageType = initialState, action
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case SET_ISCHANGED_INFORMATION: {
+            return {
+                ...state, profile: {...state.profile, isChanged: action.isChanged}
+            }
+        }
         case CHANGE_PHOTO: {
             return {...state, profile: {...state.profile, photos: {...action.photos}}}
         }
-        case CHANGE_PROFILE_INFO: {
+        case
+        CHANGE_PROFILE_INFO: {
             let profileInfo = {
                 aboutMe: action.date.AboutMe,
                 contacts: {
@@ -155,43 +166,49 @@ export const setStatusAC = (status: string) => {
 export const changeProfileInfoAC = (date: ProfileInfoType) => {
     return {type: CHANGE_PROFILE_INFO, date} as const
 }
+export const setIsChangedInformationAC = (isChanged: boolean) => {
+    return {type: SET_ISCHANGED_INFORMATION, isChanged} as const
+}
 export const changePhotoAC = (photos: File) => {
     return {type: CHANGE_PHOTO, photos} as const
 }
 
-export const getUsersProfileTC = (userId: number) => {
+export const getUsersProfileTC = (userId: number): AppThunkType => {
 
-    return async (dispatch: Dispatch<ActionTypeProfilePage>) => {
+    return async (dispatch) => {
         try {
             let data = await ProfileAPI.getUsersProfileGET(userId)
             dispatch(setUserProfileAC(data))
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 
 }
-export const getStatusTC = (userId: number) => {
+export const getStatusTC = (userId: number): AppThunkType => {
 
-    return async (dispatch: Dispatch<ActionTypeProfilePage>) => {
+    return async (dispatch) => {
         try {
             let data = await ProfileAPI.getStatusUserProfileStatus(userId)
             dispatch(setStatusAC(data))
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }
-export const updateStatusTC = (status: string) => {
+export const updateStatusTC = (status: string): AppThunkType => {
 
-    return async (dispatch: Dispatch<ActionTypeProfilePage>) => {
+    return async (dispatch) => {
         try {
             let data = await ProfileAPI.updateStatus(status)
             if (data.resultCode === 0) {
                 dispatch(setStatusAC(status))
             }
+            if (data.resultCode === 1) {
+                dispatch(setAppErrorAC(data.messages.length > 0 ? data.messages[0] : "Something went wrong..."))
+            }
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }
@@ -204,9 +221,14 @@ export const updateProfileInformationTC = (date: ProfileInfoType): AppThunkType 
             let data = await ProfileAPI.updateProfileInformation(date)
             if (data.resultCode === 0) {
                 dispatch(changeProfileInfoAC(date))
+                dispatch(setIsChangedInformationAC(false))
+            }
+            if (data.resultCode === 1) {
+                dispatch(setAppErrorAC(data.messages.length > 0 ? data.messages[0] : "Something went wrong..."))
+                dispatch(setIsChangedInformationAC(true))
             }
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }
@@ -217,8 +239,11 @@ export const savePhotoTC = (photo: File): AppThunkType => {
             if (data.resultCode === 0) {
                 dispatch(changePhotoAC(data.data.photos))
             }
+            if (data.resultCode === 1) {
+                dispatch(setAppErrorAC(data.messages.length > 0 ? data.messages[0] : "Something went wrong..."))
+            }
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }

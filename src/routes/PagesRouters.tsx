@@ -29,7 +29,7 @@ export const PagesRouters = () => {
             <Route path={'/socialNetworkTS'} element={<Navigate to="/login"/>}/>
             <Route path={PATH.DIALOGS}
                    element={<DialogsContainer/>}/>
-            <Route path={PATH.PROFILE} element={<PagesContainer/>}>
+            <Route path={PATH.PROFILE}>
                 <Route path=":userId" element={<PagesContainer/>}/>
             </Route>
             <Route path={PATH.USERS} element={<UsersContainer/>}/>

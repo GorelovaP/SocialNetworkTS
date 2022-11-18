@@ -10,7 +10,6 @@ const mapStateToProps = (state: reduxStateType): authInitialType => {
         isAuth: state.auth.isAuth,
         errorMassage: state.auth.errorMassage,
         captcha: state.auth.captcha
-
     }
 }
 

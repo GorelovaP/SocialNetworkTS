@@ -1,5 +1,6 @@
 import {FollowAPI, UsersAPI} from "../api/api";
-import {Dispatch} from "redux";
+import {setAppErrorAC} from "./app-reduсer";
+import {AppThunkType} from "./redax-store";
 
 
 const FOLLOW = "USERS/FOLLOW"
@@ -49,7 +50,7 @@ let initialState: UsersPageType = {
     pageSize: 8,
     totalUsersCount: 0,
     currentPage: 1,
-    currentPortion:1,
+    currentPortion: 1,
     paginatorPortion: 10,
     isFetching: false,
     followingInProgress: []
@@ -137,9 +138,9 @@ export const toggleFollowingProgressAC = (userId: number, isFetching: boolean) =
 
 //type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): AppThunkType => {
 
-    return async (dispatch: Dispatch<ActionTypeUser>) => {
+    return async (dispatch) => {
         try {
             dispatch(setToggleIsFetchingAC(true))
 
@@ -149,7 +150,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
             dispatch(setTotalUsersCountAC(data.totalCount))
 
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         } finally {
             setTimeout(() => dispatch(setToggleIsFetchingAC(false)), 400)
         }
@@ -157,9 +158,9 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 
 }
 
-export const followTC = (userId: number) => {
+export const followTC = (userId: number): AppThunkType => {
 
-    return async (dispatch: Dispatch<ActionTypeUser>) => {
+    return async (dispatch) => {
         try {
             dispatch(toggleFollowingProgressAC(userId, true))
 
@@ -168,9 +169,12 @@ export const followTC = (userId: number) => {
             if (data.resultCode === 0) {
                 dispatch(followAC(userId))
             }
+            if (data.resultCode === 1) {
+                dispatch(setAppErrorAC(data.messages.length > 0 ? data.messages[0] : "Something went wrong..."))
+            }
 
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         } finally {
             dispatch(toggleFollowingProgressAC(userId, false))
         }
@@ -178,18 +182,21 @@ export const followTC = (userId: number) => {
     }
 }
 
-export const unfollowTC = (userId: number) => {
+export const unfollowTC = (userId: number): AppThunkType => {
 
-    return async (dispatch: Dispatch<ActionTypeUser>) => {
+    return async (dispatch) => {
         try {
             dispatch(toggleFollowingProgressAC(userId, true))
             let data = await FollowAPI.unfollowUsersDELETE(userId)
             if (data.resultCode === 0) {
                 dispatch(unfollowAC(userId))
             }
+            if (data.resultCode === 1) {
+                dispatch(setAppErrorAC(data.messages.length > 0 ? data.messages[0] : "Something went wrong..."))
+            }
 
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         } finally {
             dispatch(toggleFollowingProgressAC(userId, false))
         }

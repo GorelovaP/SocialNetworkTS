@@ -28,7 +28,8 @@ let state: profilePageType = {
         photos: {
             small: "",
             large: ""
-        }
+        },
+        isChanged:false
     },
     status: ""
 }

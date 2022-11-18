@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {AuthAPI, SecurityAPI} from "../api/api";
 import {AppThunkType} from "./redax-store";
+import {ActionTypeApp, setAppErrorAC} from "./app-reduсer";
 
 
 const SET_USER_DATA = "AUTH/SET-USER-DATA"
@@ -128,38 +129,38 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
                     dispatch(setErrorMassageAC(""))
                 }, 7000)
             }
-
-
-            //сделать позже капчу, если резалт код 10 !!!!!!!!!!!
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }
 
 export const logoutTC = () => {
-    return async (dispatch: Dispatch<ActionTypeAuth>) => {
+    return async (dispatch: Dispatch<ActionTypeAuth | ActionTypeApp>) => {
         try {
             let data = await AuthAPI.logOut()
 
             if (data.resultCode === 0) {
                 dispatch(resetUserAuthDataAC())
             }
+            if (data.resultCode === 1) {
+                dispatch(setAppErrorAC(data.messages.length > 0 ? data.messages[0] : "Something went wrong..."))
+            }
 
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }
 
 export const getCaptchaTC = () => {
-    return async (dispatch: Dispatch<ActionTypeAuth>) => {
+    return async (dispatch: Dispatch<ActionTypeAuth | ActionTypeApp>) => {
         try {
             let data = await SecurityAPI.getCaptchaURL()
             const captcha = data.data.url
             dispatch(setCaptchaAC(captcha))
         } catch (err) {
-
+            dispatch(setAppErrorAC('Something went wrong...'))
         }
     }
 }

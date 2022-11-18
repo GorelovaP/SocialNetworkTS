@@ -6,7 +6,7 @@ import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
 import {ActionTypeUser, usersReducer} from "./users-reducer";
 import {ActionTypeAuth, authReducer} from "./auth-reduсer";
 import {FormAction, reducer as formReducer} from "redux-form";
-import {appReducer} from "./app-reduсer";
+import {ActionTypeApp, appReducer} from "./app-reduсer";
 
 export type RootReducerType = typeof reducer
 export type reduxStateType = ReturnType<RootReducerType>
@@ -28,7 +28,7 @@ export const store = createStore(reducer, composeEnhancers(
 
 //export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));
 
-export type AppActionsType = ActionTypeProfilePage & ActionTypeDialog & ActionTypeUser & ActionTypeAuth
+export type AppActionsType = ActionTypeProfilePage | ActionTypeDialog | ActionTypeUser | ActionTypeAuth | ActionTypeApp
 // @ts-ignore
 window.store = store
 

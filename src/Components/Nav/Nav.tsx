@@ -22,7 +22,7 @@ export const Nav = (props: PropsType) => {
                 <div
                     className={`${s.item} ${matchUserId?.params.userId == props.userId && matchUserId?.params.userId != undefined ? s.active : undefined}`}>
                     <BsPersonCircle className={s.item__icon}/>
-                    <NavLink to={"/profile/" + props.userId}>Profile</NavLink>
+                    <NavLink to={props.userId ? "/profile/" + props.userId : "/login"}>Profile</NavLink>
                 </div>
 
                 <div
@@ -33,7 +33,7 @@ export const Nav = (props: PropsType) => {
 
                 <div className={`${s.item} ${match?.params.routeKey === "dialogs" ? s.active : undefined}`}>
                     <RiMessage3Fill className={s.item__icon}/>
-                    <NavLink to={"/dialogs"}>Massages</NavLink>
+                    <NavLink to={props.userId ? "/dialogs" : "/login"}>Massages</NavLink>
                 </div>
 
                 <div className={`${s.item} ${match?.params.routeKey === "music" ? s.active : undefined}`}>
