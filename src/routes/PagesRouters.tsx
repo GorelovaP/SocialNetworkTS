@@ -12,7 +12,7 @@ const Music = lazy(() => import("../Components/Music/Music"));
 
 
 export const PATH = {
-    DIALOGS: "/dialogs/*",
+    DIALOGS: "/dialogs",
     PROFILE: "/profile",
     USERS: "/users",
     MUSIC: "/music",
@@ -27,8 +27,9 @@ export const PagesRouters = () => {
         <Routes>
             <Route path={'/'} element={<Navigate to="/login"/>}/>
             <Route path={'/socialNetworkTS'} element={<Navigate to="/login"/>}/>
-            <Route path={PATH.DIALOGS}
-                   element={<DialogsContainer/>}/>
+            <Route path={PATH.DIALOGS} element={<DialogsContainer/>}>
+                <Route path=":userId" element={<DialogsContainer/>}/>
+            </Route>
             <Route path={PATH.PROFILE}>
                 <Route path=":userId" element={<PagesContainer/>}/>
             </Route>

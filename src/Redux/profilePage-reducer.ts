@@ -96,7 +96,7 @@ export const profilePageReducer = (state: profilePageType = initialState, action
             let newPosts: postType = {
                 id: new Date().getTime(),
                 value: action.postBody,
-                like: 33
+                like: 0
             }
             let StateCopy = {...state, posts: [...state.posts]}
             StateCopy.posts.unshift(newPosts);
@@ -156,7 +156,6 @@ export const AddPostAC = (postBody: string) => {
 export const deletePostAC = (postId: number) => {
     return {type: DELETE_POST, postId} as const
 }
-
 export const setUserProfileAC = (page: any) => {
     return {type: SET_USER_PAGE, page} as const
 }

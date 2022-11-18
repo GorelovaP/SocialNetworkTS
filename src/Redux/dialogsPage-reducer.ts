@@ -13,6 +13,7 @@ export type dialogType = {
 export type messageType = {
     id: number
     text: string
+    my?: boolean
 }
 export type dialogPageType = {
     dialogs: Array<dialogType>
@@ -30,7 +31,6 @@ let initialState: dialogPageType = {
     messages: [
         {id: 1, text: "Hi"},
         {id: 2, text: "How are you?"},
-        {id: 3, text: "Bye"}
     ]
 }
 export const dialogsPageReducer = (state: dialogPageType = initialState, action: ActionTypeDialog) => {
@@ -39,6 +39,7 @@ export const dialogsPageReducer = (state: dialogPageType = initialState, action:
             let newMessage: messageType = {
                 id: new Date().getTime(),
                 text: action.newMessageBody,
+                my: true
             }
             let StateCopy = {...state, messages: [...state.messages]}
             StateCopy.messages.push(newMessage);
@@ -48,7 +49,7 @@ export const dialogsPageReducer = (state: dialogPageType = initialState, action:
             return state
     }
 }
-export const SendMessageAC = (newMessageBody:string) => {
-    return {type: SEND_MESSAGE ,newMessageBody: newMessageBody } as const
+export const SendMessageAC = (newMessageBody: string) => {
+    return {type: SEND_MESSAGE, newMessageBody: newMessageBody} as const
 }
 

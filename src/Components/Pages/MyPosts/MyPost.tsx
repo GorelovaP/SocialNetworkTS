@@ -23,7 +23,9 @@ export class MyPost extends PureComponent<MyPostPagePropsType> {
                   id={p.id}
                   value={p.value}
                   like={p.like}
-                  img={this.props.profile && this.props.profile.photos.small }/>)
+                  img={this.props.profile && this.props.profile.photos.small}
+                  isMyProfile={this.props.profile.userId == +this.props.loggedUserId!}
+            />)
         let name
         if (this.props.profile) {
             name = this.props.profile.fullName

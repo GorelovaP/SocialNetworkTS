@@ -26,12 +26,13 @@ export const Nav = (props: PropsType) => {
                 </div>
 
                 <div
-                    className={`${s.item} ${match?.params.routeKey === "users" || (matchUserId?.params.userId != props.userId && matchUserId?.params.userId != undefined) ? s.active : undefined}`}>
+                    className={`${s.item} ${match?.params.routeKey === "users" || (matchUserId?.params.userId != props.userId && matchUserId?.params.routeKey === "profile") ? s.active : undefined}`}>
                     <HiUsers className={s.item__icon}/>
                     <NavLink to={"/users"}>Find users</NavLink>
                 </div>
 
-                <div className={`${s.item} ${match?.params.routeKey === "dialogs" ? s.active : undefined}`}>
+                <div
+                    className={`${s.item} ${match?.params.routeKey === "dialogs" || (matchUserId?.params.routeKey === "dialogs" && matchUserId?.params.userId) ? s.active : undefined}`}>
                     <RiMessage3Fill className={s.item__icon}/>
                     <NavLink to={props.userId ? "/dialogs" : "/login"}>Massages</NavLink>
                 </div>

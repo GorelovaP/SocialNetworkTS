@@ -1,11 +1,24 @@
-.dialogs{
-display: grid;
-grid-template-columns: 3fr 5fr;
+.dialogs {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
-.dialogs_items{
-    padding: 10px;
 
+.dialogs_items {
+    width: 100%;
+    background: #1c3faa;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px 0;
 }
-.massages{
+
+.massagesArea, .hintArea {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.massages {
     padding: 10px;
 }
+
