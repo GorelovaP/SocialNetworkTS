@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/90.a0b4eb50.chunk.js","mappings":"gIASA,UATiB,WACb,OACI,0BACG,qCAKV,C","sources":["components/error/ErrorPage.tsx"],"sourcesContent":["const ErrorPage =()=>{\r\n    return(\r\n        <div>\r\n           <h1>\r\n               OOOOPs!\r\n           </h1>\r\n        </div>\r\n    )\r\n}\r\nexport default ErrorPage"],"names":[],"sourceRoot":""}

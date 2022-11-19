@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkputsamyrai=self.webpackChunkputsamyrai||[]).push([[90],{7090:function(s,u,e){e.r(u);var n=e(184);u.default=function(){return(0,n.jsx)("div",{children:(0,n.jsx)("h1",{children:"OOOOPs!"})})}}}]);
+//# sourceMappingURL=90.a0b4eb50.chunk.js.map

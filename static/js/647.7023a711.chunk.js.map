@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/647.7023a711.chunk.js","mappings":"yIAUA,UAPc,WACV,OACI,kCAIP,C","sources":["Components/Music/Music.tsx"],"sourcesContent":["import React from 'react';\r\n\r\n\r\nconst Music = () => {\r\n    return (\r\n        <div>\r\n            Music\r\n        </div>\r\n    );\r\n}\r\nexport default Music"],"names":[],"sourceRoot":""}

@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/802.31d1d33b.chunk.js","mappings":"gLAGaA,EAAW,WACpB,OAAO,4CAGV,EACD,W","sources":["components/settings/Settings.tsx"],"sourcesContent":["import React from 'react';\r\n\r\n\r\nexport const Settings = () =>{\r\n    return(<div>\r\n         In progress ...\r\n    </div>);\r\n}\r\nexport default Settings\r\n"],"names":["Settings"],"sourceRoot":""}
