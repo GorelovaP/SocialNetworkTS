@@ -31,7 +31,7 @@ This is a Social Network SKYCHAT API - https://social-network.samuraijs.com/docs
 - Formik
 - REST API
 - Redux-form
-- module css
+- Module css
 
 <hr/>
 
