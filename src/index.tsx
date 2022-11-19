@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 
 import ReactDOM from 'react-dom';
 import { HashRouter} from 'react-router-dom';
-import {store} from "./Redux/redax-store";
+import {store} from "./redux/redax-store";
 import {Provider} from 'react-redux';
 import {AppContainer} from "./App";
 

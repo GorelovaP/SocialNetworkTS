@@ -5,7 +5,7 @@ import largeImg from "../assets/images/large.jpg"
 
 import s from "./Pages.module.css"
 import {MyPostContainer} from "./MyPosts/MyPostContainer";
-import {profileType} from "../../Redux/profilePage-reducer";
+import {profileType} from "../../redux/profilePage-reducer";
 import {Navigate, useParams} from "react-router-dom";
 import {PATH} from "../../routes/PagesRouters";
 import avatar from "../assets/images/profile.png";

@@ -1,4 +1,4 @@
-import {reduxStateType} from "../../Redux/redax-store";
+import {reduxStateType} from "../../redux/redax-store";
 import {connect} from "react-redux";
 
 import {
@@ -9,7 +9,7 @@ import {
     unfollowAC, unfollowTC,
     UsersPageType,
     userType
-} from "../../Redux/users-reducer";
+} from "../../redux/users-reducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
@@ -19,7 +19,7 @@ import {
     getPaginatorPortion,
     getTotalUsersCount,
     getUsersSuperSelector
-} from "../../Redux/users-selectors";
+} from "../../redux/users-selectors";
 
 
 class UsersContainerClassComp extends React.Component<UsersPagePropsType> {

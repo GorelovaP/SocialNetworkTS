@@ -1,6 +1,6 @@
-import {SendMessageAC, dialogPageType} from "../../Redux/dialogsPage-reducer";
+import {SendMessageAC, dialogPageType} from "../../redux/dialogsPage-reducer";
 import {Dialogs} from "./Dialogs";
-import {reduxStateType} from "../../Redux/redax-store";
+import {reduxStateType} from "../../redux/redax-store";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";

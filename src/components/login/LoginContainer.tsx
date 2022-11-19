@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {reduxStateType} from "../../Redux/redax-store";
-import {authInitialType, loginTC, logoutTC} from "../../Redux/auth-reduсer";
+import {reduxStateType} from "../../redux/redax-store";
+import {authInitialType, loginTC, logoutTC} from "../../redux/auth-reduсer";
 import {LoginPage} from "./LoginPage";
 
 

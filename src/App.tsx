@@ -2,16 +2,16 @@ import './App.css';
 
 import React, {ComponentType} from 'react';
 
-import {Nav} from "./Components/Nav/Nav";
-import {withRouter} from "./Components/Pages/PagesContainer";
+import {Nav} from "./components/nav/Nav";
+import {withRouter} from "./components/pages/PagesContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {initialiseAppTC, setAppErrorAC} from "./Redux/app-reduсer";
-import {reduxStateType} from "./Redux/redax-store";
-import {Preloader} from "./Components/common/preloader/Preloader";
+import {initialiseAppTC, setAppErrorAC} from "./redux/app-reduсer";
+import {reduxStateType} from "./redux/redax-store";
+import {Preloader} from "./components/common/preloader/Preloader";
 import {PagesRouters} from "./routes/PagesRouters";
-import {HeaderContainer} from "./Components/Header/HeaderContainer";
-import {SnackBar} from "./Components/common/snackBar/SnackBar";
+import {HeaderContainer} from "./components/header/HeaderContainer";
+import {SnackBar} from "./components/common/snackBar/SnackBar";
 
 
 class App extends React.Component<appPropsType> {

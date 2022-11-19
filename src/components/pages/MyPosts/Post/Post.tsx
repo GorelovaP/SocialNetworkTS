@@ -4,8 +4,8 @@ import s from './Post.module.css';
 import avatar from "../../../assets/images/profile.png";
 import {AiFillDelete, AiTwotoneHeart} from "react-icons/ai";
 import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../../../Redux/redax-store";
-import {deletePostAC, putLikeAC} from "../../../../Redux/profilePage-reducer";
+import {AppDispatch} from "../../../../redux/redax-store";
+import {deletePostAC, putLikeAC} from "../../../../redux/profilePage-reducer";
 
 
 type PropsType = {

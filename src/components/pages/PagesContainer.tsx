@@ -1,4 +1,4 @@
-import {reduxStateType} from "../../Redux/redax-store";
+import {reduxStateType} from "../../redux/redax-store";
 import {connect} from "react-redux";
 
 import React, {ComponentType} from "react";
@@ -9,7 +9,7 @@ import {
     profileType,
     savePhotoTC,
     updateStatusTC
-} from "../../Redux/profilePage-reducer";
+} from "../../redux/profilePage-reducer";
 
 
 import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";

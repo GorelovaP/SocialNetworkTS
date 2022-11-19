@@ -3,14 +3,14 @@ import {
     profileType,
     setIsChangedInformationAC,
     updateProfileInformationTC
-} from "../../../Redux/profilePage-reducer";
+} from "../../../redux/profilePage-reducer";
 import {Preloader} from "../../common/preloader/Preloader";
 import s from "./ProfileInfo.module.css"
 import {BsFillPencilFill} from "react-icons/bs";
 import {useFormik} from "formik";
 import * as Yup from 'yup'
 import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../../Redux/redax-store";
+import {AppDispatch} from "../../../redux/redax-store";
 
 type ProfileInfoType = {
     profile: profileType

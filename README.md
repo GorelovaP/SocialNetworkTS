@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+<hr/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Projects Title:
 
-## Available Scripts
+Social Network SKYCHAT
 
-In the project directory, you can run:
+![putsamyrai](src/components/assets/images/skychat.png)
 
-### `yarn start`
+<hr/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About The Project:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This application is a social network for developers. 
 
-### `yarn test`
+This educational project has been implemented by using modern and outdated technologies (for example, class components).
+This approach has been chosen to gain a deeper understanding, how component lifecycle methods work,  and their differences with the use of hooks in functional components. This knowledge will help in rewriting old projects.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This application implements the function of login,the function of screening robots from people, changing profile data (avatars, personal information), adding posts, viewing other people's profiles, user subscription, imitating a chat and other features.
 
-### `yarn build`
+This is a Social Network SKYCHAT API - https://social-network.samuraijs.com/docs.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<hr/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Built With:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- Redux
+- Hooks
+- Class components
+- TypeScript
+- Formik
+- REST API
+- Redux-form
+- module css
 
-### `yarn eject`
+<hr/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Usage:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To use the project you need to register here  https://social-network.samuraijs.com/ or use test email and password in the application. There you will have a possibility to use all the features of the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<hr/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contact:
 
-## Learn More
+GorelovaP
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- LinkedIn: https://www.linkedin.com/in/polin%D0%B0-gorelova/
+- GitHub: https://github.com/GorelovaP
+- Email: gorelic2000p@gmail.com
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<hr/>
+
+## License:
+
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+<hr/>

@@ -1,4 +1,4 @@
-import s from "../../Users/Users.module.css";
+import s from "../../users/Users.module.css";
 import preLoader from "../../assets/images/preLoader.gif";
 import React from "react";
 
