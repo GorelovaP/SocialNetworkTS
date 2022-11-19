@@ -37,7 +37,7 @@ This is a Social Network SKYCHAT API - https://social-network.samuraijs.com/docs
 
 ## Usage:
 
-To use the project you need to register here  https://social-network.samuraijs.com/ or use test email and password in the application. There you will have a possibility to use all the features of the application.
+To use the project you need to register here  https://social-network.samuraijs.com/ or use test email and password in the application. Then you will have a possibility to use all features of the application.
 
 <hr/>
 
