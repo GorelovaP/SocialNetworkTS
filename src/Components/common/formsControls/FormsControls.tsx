@@ -16,7 +16,7 @@ type inputType = {
     name: string
     onBlur: (e: React.FocusEvent<any>) => void
     onChange: (e: React.ChangeEvent<any>) => void
-    onDragStart:  (e: React.DragEvent<any>) => void
+    onDragStart: (e: React.DragEvent<any>) => void
     onDrop: (e: React.DragEvent<any>) => void
     onFocus: (e: React.FocusEvent<any>) => void
     value: string
@@ -48,7 +48,7 @@ const FormControl: React.FC<CommonType> = ({input, meta, children, ...props}) =>
             <div>
                 {children}
             </div>
-
+            {hasError && <span> {meta.error} </span>}
         </div>
     )
 }

@@ -11,14 +11,16 @@ const CHANGE_PROFILE_INFO = "PROFILE/CHANGE_PROFILE_INFO"
 const DELETE_POST = "PROFILE/DELETE_POST"
 const CHANGE_PHOTO = "PROFILE/CHANGE-PHOTO"
 const SET_ISCHANGED_INFORMATION = "PROFILE/SET-ISCHANGED-INFORMATION"
+const PUT_LIKE = "PROFILE/PUT-LIKE"
 
 let initialState: profilePageType = {
     posts: [
-        {id: 1, value: "Post 1", like: 21},
+        {id: 1, value: "Post 1", like: 21, isLiked: false},
         {
             id: 2,
             value: "This is 2 post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            like: 44
+            like: 44,
+            isLiked: false
         }
     ],
     profile: {
@@ -80,6 +82,7 @@ export type postType = {
     id: number
     value: string
     like: number
+    isLiked: boolean
 }
 export type ActionTypeProfilePage = ReturnType<typeof AddPostAC>
     | ReturnType<typeof SendMessageAC>
@@ -89,14 +92,19 @@ export type ActionTypeProfilePage = ReturnType<typeof AddPostAC>
     | ReturnType<typeof deletePostAC>
     | ReturnType<typeof changePhotoAC>
     | ReturnType<typeof setIsChangedInformationAC>
+    | ReturnType<typeof putLikeAC>
 
 export const profilePageReducer = (state: profilePageType = initialState, action: ActionTypeProfilePage) => {
     switch (action.type) {
         case ADD_POST: {
+            if (action.postBody.length === 0 || action.postBody.trim().length === 0) {
+                return state
+            }
             let newPosts: postType = {
                 id: new Date().getTime(),
                 value: action.postBody,
-                like: 0
+                like: 0,
+                isLiked: false
             }
             let StateCopy = {...state, posts: [...state.posts]}
             StateCopy.posts.unshift(newPosts);
@@ -118,6 +126,20 @@ export const profilePageReducer = (state: profilePageType = initialState, action
         }
         case CHANGE_PHOTO: {
             return {...state, profile: {...state.profile, photos: {...action.photos}}}
+        }
+        case PUT_LIKE: {
+            return {
+                ...state, posts: state.posts.map(p => p.id === action.postId
+                    ?
+                    (p.isLiked ? {...p, isLiked: !p.isLiked, like: p.like - 1}
+                            : {
+                                ...p,
+                                isLiked: !p.isLiked,
+                                like: p.like + 1
+                            }
+                    )
+                    : p)
+            }
         }
         case
         CHANGE_PROFILE_INFO: {
@@ -155,6 +177,9 @@ export const AddPostAC = (postBody: string) => {
 }
 export const deletePostAC = (postId: number) => {
     return {type: DELETE_POST, postId} as const
+}
+export const putLikeAC = (postId: number) => {
+    return {type: PUT_LIKE, postId} as const
 }
 export const setUserProfileAC = (page: any) => {
     return {type: SET_USER_PAGE, page} as const

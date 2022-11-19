@@ -28,7 +28,7 @@
     color: rgba(70, 70, 70, 0.5);
 }
 
-.likeIcon:hover {
+.likeIcon:hover, .active {
     color: rgb(255, 145, 145);
 }
 

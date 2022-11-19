@@ -1,7 +1,7 @@
 import React from "react";
 import {Field, InjectedFormProps} from "redux-form";
 import {Textarea} from "../../common/formsControls/FormsControls";
-import {maxLengthCreator, minLengthCreator, required} from "../../../utils/validators";
+import {maxLengthCreator, minLengthCreator} from "../../../utils/validators";
 import s from "./dialogsForm.module.css"
 
 
@@ -19,7 +19,7 @@ export const DialogsForm: React.FC<InjectedFormProps<FormDataType>> = (props) =>
             <div className={s.fieldArea}>
                 <Field component={Textarea}
                        name="newMessageBody"
-                       validate={[minLength1, maxLength150, required]}
+                       validate={[minLength1, maxLength150]}
                        className={s.field}
                        placeholder={"Enter your message"}/>
             </div>

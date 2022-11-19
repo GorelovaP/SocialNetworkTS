@@ -15,6 +15,7 @@ export class MyPost extends PureComponent<MyPostPagePropsType> {
     render() {
 
         const AddPostFormRedux = reduxForm<FormDataType>({form: "PostForm"})(MyPostForm)
+
         const addPost = (formData: FormDataType) => {
             this.props.addPost(formData.postBody)
         }
@@ -24,6 +25,7 @@ export class MyPost extends PureComponent<MyPostPagePropsType> {
                   value={p.value}
                   like={p.like}
                   img={this.props.profile && this.props.profile.photos.small}
+                  isLiked={p.isLiked}
                   isMyProfile={this.props.profile.userId == +this.props.loggedUserId!}
             />)
         let name

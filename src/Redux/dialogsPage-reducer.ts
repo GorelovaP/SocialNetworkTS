@@ -36,6 +36,9 @@ let initialState: dialogPageType = {
 export const dialogsPageReducer = (state: dialogPageType = initialState, action: ActionTypeDialog) => {
     switch (action.type) {
         case SEND_MESSAGE: {
+            if (action.newMessageBody.length === 0 || action.newMessageBody.trim().length === 0) {
+                return state
+            }
             let newMessage: messageType = {
                 id: new Date().getTime(),
                 text: action.newMessageBody,

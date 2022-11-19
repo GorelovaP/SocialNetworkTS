@@ -30,7 +30,6 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 
     }, [])
     const setIsChange = () => {
-        debugger
         dispatch(setIsChangedInformationAC(true))
     }
 
@@ -126,7 +125,9 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                                     {formik.errors.website && formik.touched.website ? (
                                         <span className={s.error}>{formik.errors.website}</span>) : null}
                                 </> :
-                                <span>{profileChange!.contacts.website !== "" ? profileChange!.contacts.website : "-"}</span>}
+                                <span>{profileChange!.contacts.website !== "" ?
+                                    <a className={s.link}
+                                       href={profileChange!.contacts.website}>{profileChange!.contacts.website}</a> : "-"}</span>}
 
                         </div>
                         <div className={s.block}>
@@ -137,7 +138,9 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                                 /> {formik.errors.github && formik.touched.github ? (
                                     <span className={s.error}>{formik.errors.github}</span>) : null}
                                 </> :
-                                <span>{profileChange!.contacts.github !== "" ? profileChange!.contacts.github : "-"}</span>}
+                                <span>{profileChange!.contacts.github !== "" ?
+                                    <a className={s.link}
+                                       href={profileChange!.contacts.github}>{profileChange!.contacts.github}</a> : "-"}</span>}
                         </div>
                         <div className={s.block}>
                             <span className={s.label}>Instagram:</span>
@@ -147,7 +150,9 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                                 /> {formik.errors.instagram && formik.touched.instagram ? (
                                     <span className={s.error}>{formik.errors.instagram}</span>) : null}
                                 </> :
-                                <span>{profileChange!.contacts.instagram !== "" ? profileChange!.contacts.instagram : "-"}</span>}
+                                <span>{profileChange!.contacts.instagram !== "" ?
+                                    <a className={s.link}
+                                       href={profileChange!.contacts.instagram}>{profileChange!.contacts.instagram}</a> : "-"}</span>}
                         </div>
                     </div>
                 </div>

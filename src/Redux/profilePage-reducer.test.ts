@@ -2,11 +2,12 @@ import {AddPostAC, deletePostAC, profilePageReducer, profilePageType} from "./pr
 
 let state: profilePageType = {
     posts: [
-        {id: 1, value: "Post 1", like: 21},
+        {id: 1, value: "Post 1", like: 21,  isLiked: false},
         {
             id: 2,
             value: "This is 2 post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            like: 44
+            like: 44,
+            isLiked: false
         }
     ],
     profile: {
