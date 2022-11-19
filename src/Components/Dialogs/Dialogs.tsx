@@ -15,12 +15,22 @@ export const Dialogs = (props: DialogPagePropsType) => {
     const AddMessageFormRedux = reduxForm<FormDataType>({form: "dialogAddMessageForm"})(DialogsForm)
 
 
-    let dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
-    let messagesElements = props.messages.map(m => <Message key={m.id} text={m.text} my={m.my}/>)
+    const dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}
+                                                               messages={d.messages}/>)
+    const chDialog = props.dialogs.find(d => d.id === +userId!)
+    let messagesElements
+    if (chDialog) {
+        messagesElements = chDialog.messages.map(m => <Message key={m.id} text={m.text} my={m.my}/>)
+    }
+
 
     const onSubmitDialogFormSubmit = (formData: FormDataType) => {
-        props.SendMessage(formData.newMessageBody)
+        if (userId) {
+            props.SendMessage(userId, formData.newMessageBody)
+        }
+
     }
+
 
     return (<div className={s.dialogs}>
         <div className={s.dialogs_items}>

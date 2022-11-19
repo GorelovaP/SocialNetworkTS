@@ -9,13 +9,12 @@ import {ComponentType} from "react";
 
 type mapStateToPropsType = dialogPageType & { isAuth: boolean }
 type mapDispatchPropsType = {
-    SendMessage: (newMessageBody: string) => void,
+    SendMessage: (dialogId: string, newMessageBody: string) => void,
     onChangeNewMessage: (newMassageText: string) => void
 }
 let mapStateToProps = (state: reduxStateType): mapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
-        messages: state.dialogsPage.messages,
         isAuth: state.auth.isAuth
     }
 }
