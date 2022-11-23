@@ -26,7 +26,7 @@ This is a Social Network SKYCHAT API - https://social-network.samuraijs.com/docs
 - React
 - Redux
 - Hooks
-- Class components
+- Class and Functional components
 - TypeScript
 - Formik
 - REST API
